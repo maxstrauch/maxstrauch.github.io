@@ -18,4 +18,4 @@ Step three might now take some time. To let `dd` print the progress you simply n
 
 _Tip:_ use `ps ax | grep dd` to get the PID of the `dd` process and don't use the PID of the sudo process.
 
-_Tip 2:_ when your device is `/dev/disk#` use the command `sudo dd if=[image filename] of=/dev/rdisk# bs=1024`. This will enable a much higher transfer rate since you use the __r__aw disk `rdisk`. A BSD thing you need to know.
+_Tip 2:_ when your device is `/dev/disk#` use the command `sudo dd if=[image filename] of=/dev/rdisk# bs=1024`. This will enable a much higher transfer rate since you use the raw disk `rdisk`. A BSD thing you need to know.
