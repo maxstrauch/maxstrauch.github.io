@@ -6,7 +6,7 @@
       <ul>
       {% assign tags_list = site.tags %}  
           {% for tag in tags_list %} 
-            <li><a href="/tag/{{ tag[0] }}">{{ tag[0] | capitalize }} <span>{{ tag[1].size - 1 }}</span></a></li>
+            <li><a href="/tag/{{ tag[0] }}">{{ tag[0] | capitalize }} <span>{{ tag[1].size | minus: 1 }}</span></a></li>
           {% endfor %}
       {% assign tags_list = nil %}
       </ul>
