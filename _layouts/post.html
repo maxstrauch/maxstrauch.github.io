@@ -1,0 +1,30 @@
+---
+layout: post
+---
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+{% include head.html %}
+  <body>
+    <!-- Sidebar -->
+    {% include sidebar.html %}
+
+    <!-- The post -->
+    <div class="content">
+      <article itemid="{{ post.url | prepend: site.url }}" class="post" itemscope itemtype="http://schema.org/BlogPosting">
+          <header class="post-header">
+            <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+            <span class="post-meta">
+              Posted on <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date_to_string }}</time> in {% for tag in page.tags %} <a href="/tag/{{ tag }}">{{ tag }}</a>{% endfor %}.
+            </span>
+          </header>
+          <div class="post-content" itemprop="articleBody">
+            {{ content }}
+          </div>
+      </article>
+    </div>
+    
+    <!-- Page footer -->
+    {% include footer.html %}
+    <script src="/css/script.js" type="text/javascript" async></script>
+  </body>
+</html>

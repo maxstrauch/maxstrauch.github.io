@@ -1,0 +1,38 @@
+---
+layout: tagpage
+---
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+{% include head.html %}
+  <body>
+    <!-- Sidebar -->
+    {% include sidebar.html %}
+
+    <!-- The post -->
+    <div class="content">
+      <div class="eye-catcher">
+        <div class="sticky">
+          <header>
+            <h1>All posts by tag &quot;{{ page.tag }}&quot;</h1>
+          </header>
+          {{ content }}
+        </div>
+      </div>
+
+      {% if site.tags[page.tag] %}
+      <ul>
+          {% for post in site.tags[page.tag] %}
+            {% if post.url != page.url %}
+              <li><a href="{{ post.url }}/">{{ post.title }}</a> posted on <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date_to_string }}</time></li>
+              {% endif %}
+          {% endfor %}
+      </ul>
+      {% else %}
+      <p>There are no posts for this tag.</p>
+      {% endif %}
+    </div>
+    
+    <!-- Page footer -->
+    {% include footer.html %}
+  </body>
+</html>

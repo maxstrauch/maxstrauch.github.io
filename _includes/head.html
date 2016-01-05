@@ -1,0 +1,28 @@
+<head>
+	<link href="http://gmpg.org/xfn/11" rel="profile" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+	<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+	<meta name="description" content="{% if page.meta_description %}{{ page.meta_description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.meta_description }}{% endif %}" />
+	<meta name="keywords" content="{% if page.meta_keywords %}{{ page.meta_keywords | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.meta_keywords }}{% endif %}">
+	<meta name="robots" content="index,follow" />
+	<meta name="author" content="{{ site.meta_author }}" />
+	<link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}" />
+	<link rel="stylesheet" href="{{ "/css/syntax.css" | prepend: site.baseurl }}" />
+	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+	<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+	<link rel="icon" type="image/png" href="{{ "/css/favicon.png" | prepend: site.baseurl }}" />
+    <link rel="icon" type="image/x-icon" href="{{ "/css/favicon.ico" | prepend: site.baseurl }}" />
+    <script type="text/javascript">
+		window.onload = function() {
+		  var es = document.getElementsByClassName("magic");
+		  for (var i = 0; i < es.length; i++) {
+		    var a = document.createElement("a");
+		    a.href = "ma" + 'ilt' + 'o:' + (a.innerHTML = es[i].getAttribute("data-str").split('').reverse().join('').replace(/24/g, ''));
+		    es[i].innerHTML = '';
+		    es[i].appendChild(a);
+		  }
+		}
+	</script>
+</head>
