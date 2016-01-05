@@ -1,6 +1,6 @@
 # maxstrauch.github.io
 
-This is the repository of the web site hosted by GitHub on [maxstrauch.github.io](maxstrauch.github.io).
+This is the repository of the web site hosted by GitHub on [http://maxstrauch.github.io](http://maxstrauch.github.io).
 
 # License
 
