@@ -4,4 +4,4 @@ tag: linux
 permalink: tag/linux
 ---
 
-Linux is a versatile operating system which is available in much different distros. It is a really good server platform but does not make a good desktop operating system - to my opinion, too.
+Linux is a versatile operating system which is available in many different distros. It is a really good server platform but does not make a good desktop operating system - to my opinion, too.
