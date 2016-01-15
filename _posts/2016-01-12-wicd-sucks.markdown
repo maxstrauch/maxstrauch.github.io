@@ -12,7 +12,7 @@ How to resolve?
 
 <!--more-->
 
-Very simple plan - write a little shell script which does the job (and I love writing this script because the are specific designed to perform one special task):
+Very simple plan - write a little shell script which does the job (and I love writing shell scripts because they are designed to perform a special task):
 
 {% highlight bash %}
 #!/bin/sh
