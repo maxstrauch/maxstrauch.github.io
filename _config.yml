@@ -1,8 +1,6 @@
 # Site settings
 title: "maxmakes"
-description: >
-  A computer scientist's approach to woodworking, electronics, 
-  software development and much more.
+description: > A computer scientist's approach to electronics, software development and much more.
 baseurl: ""
 url: "http://localhost:4000" 
 
