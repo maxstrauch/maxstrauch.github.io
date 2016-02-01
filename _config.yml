@@ -13,7 +13,7 @@ excerpt_separator: "<!--more-->"
 gems: ['jekyll-paginate', 'jekyll-sitemap']
 
 # Meta data
-meta_description: 'An computer scientists approach to woodworking, electronics, software development and much more.'
+meta_description: 'An computer scientists approach to electronics, software development and much more.'
 meta_keywords: 'electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development'
 copyright_notice: '&copy; 2016. Theme &amp; content by Maximilian Strauch. Hosted by <a href="https://github.com/">GitHub</a>. Generated using <a href="https://jekyllrb.com/">Jekyll</a>.'
 meta_author: 'Maximilian Strauch'
