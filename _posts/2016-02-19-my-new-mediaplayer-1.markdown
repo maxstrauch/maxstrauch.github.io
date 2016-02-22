@@ -123,13 +123,13 @@ If you are finished with that your configuration file (located in `/storage/.con
 	  name  lircd.conf
 	  bits           16
 	  flags SPACE_ENC|CONST_LENGTH
-	  ...
+	# ...
 	      begin codes
 	          KEY_UP                   0xC03F
 	          KEY_DOWN                 0xB04F
 	          KEY_LEFT                 0xA857
 	          KEY_RIGHT                0xA05F
-	          ...
+	#         ...
 	      end codes
 	end remote
 
