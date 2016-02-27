@@ -71,7 +71,7 @@ What does this line do? First of all the `lirc-rpi` extension is loaded which en
 
 I bought the `TSOP4838` IR receiver on Ebay for little money. This model is very popular and works on 5V and also on 3.3V which is indeed useful for the Raspberry Pi and it's 5V intolerant pins. The datasheet for the IR receiver can be found [here](www.vishay.com/docs/82459/tsop48.pdf). The pinout is as follows (from the datasheet):
 
-![TSOP4838 pinout]({{ site.url }}/assets/tsop4838.png)
+![TSOP4838 pinout]({{ site.url }}/assets/tsop4838.jpg)
 
 Simply make the connections as indicated on the image at the top.
 
