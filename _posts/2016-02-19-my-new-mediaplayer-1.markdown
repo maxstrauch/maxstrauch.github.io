@@ -45,7 +45,7 @@ There are three objectives to tackle:
  2. Get an arbitrary IR remote working to replace mouse and keyboard. Since the A+ has only one USB port there is no place for other USB devices because the tumb drive with movies occupies this port
  3. Get rid of the overscan as depicted in the following (see the corners) -- __ALMOST CHECK:__ in the system configuration (System > Video not Appearance) there is a little tool to calibrate the screen and correct for this overscan by dragging the edges (top left and bottom right) of the screen to the correct locations with the mouse
 
-![Overscan issue with OpenELEC/Kodi]({{ site.url }}/assets/open-elec_overscan.jpg)
+![Overscan issue with OpenELEC/Kodi](/assets/open-elec_overscan.jpg)
 
 ## Solving problem 2: get the IR remote working
 
@@ -71,7 +71,7 @@ What does this line do? First of all the `lirc-rpi` extension is loaded which en
 
 I bought the `TSOP4838` IR receiver on Ebay for little money. This model is very popular and works on 5V and also on 3.3V which is indeed useful for the Raspberry Pi and it's 5V intolerant pins. The datasheet for the IR receiver can be found [here](www.vishay.com/docs/82459/tsop48.pdf). The pinout is as follows (from the datasheet):
 
-![TSOP4838 pinout]({{ site.url }}/assets/tsop4838.jpg)
+![TSOP4838 pinout](/assets/tsop4838.jpg)
 
 Simply make the connections as indicated on the image at the top.
 
