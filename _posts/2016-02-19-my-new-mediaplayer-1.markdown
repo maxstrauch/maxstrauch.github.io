@@ -8,7 +8,7 @@ Initially I didn't thought that this would be a post worth since Raspberry Pi + 
 
 My target was to get my Raspberry Pi A+ working and accepting commands from a very cute little IR remote (which I got at some point in time but I don't quite remeber). The following picture shows the basic setup I'm looking for.
 
-![A Raspberry Pi A+ and my IR remote]({{ site.url }}/assets/rpi_a+_with-ir.jpg)
+![A Raspberry Pi A+ and my IR remote](/assets/rpi_a+_with-ir.jpg)
 
 I decided to use __[OpenELEC](http://openelec.tv/)__ as a media center os rather than creating my own contraption. So I thought this is straight forward due to many documentation out there. But it turned out not to be that simple and in this post I'll explain how to set it up _correctly_ and _fast_.
 
