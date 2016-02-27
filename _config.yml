@@ -4,7 +4,7 @@ description: >
   A computer scientist's approach to electronics, 
   software development, making and much more.
 baseurl: ""
-url: "http://maxstrauch.github.io" 
+url: "http://maxstrauch.github.io/" 
 
 # Build settings
 markdown: kramdown
