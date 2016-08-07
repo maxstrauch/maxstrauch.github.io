@@ -1,7 +1,0 @@
----
-layout: tagpage
-tag: macos
-permalink: tag/macos
----
-
-Mac OS X is a really nice operating system. Back in 2008 I got my first Mac Book (white) which I really liked. But I used it with Windows XP and BootCamp. Later I discovered OS X and nowadays I can't think of any replacement since the BSD base and the "real" Terminal is very useful in contrast to Windows CMD.

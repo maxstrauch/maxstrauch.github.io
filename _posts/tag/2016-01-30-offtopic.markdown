@@ -1,7 +1,0 @@
----
-layout: tagpage
-tag: offtopic
-permalink: tag/offtopic
----
-
-Everything which does not (directly) relate to technology can be found here.

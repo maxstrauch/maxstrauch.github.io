@@ -1,0 +1,79 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A computer scientists approach to electronics, software development, making and much more." />
+        <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="Maximilian Strauch" />
+        <link rel="icon" type="image/png" href="../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+        <title>Writing Pi images</title>
+        <link href="../assets/style.css" rel="stylesheet" media="screen" />
+            </head>
+    <body>
+        <div id="content-wrap">
+        <div id="mh-backer">
+            <!-- Main header with menu -->
+            <header id="sh">
+                <div class="row">
+                    <h1><a href="../index.html"><img src="../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+
+                    <ul>
+                    						<li><a href="../index.html"><span>Projects</span></a></li>
+						<li><a href="../articles.html"><span>Articles</span></a></li>
+						<li><a href="../about.html"><span>About</span></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </header>
+
+            <!-- Header with title -->
+            <header class="ph">
+                <div class="row">
+                    <div class="ph-headline">
+                        <h1 id="h1-page">Writing Pi images on Mac OS X using <code>dd</code></h1>
+                        <hr />
+                    </div>
+                </div>
+                            </header>
+
+                    </div>
+        <main id="site-body" class="row">
+
+<p><span class="letterb">T</span>he commandline utility <code>dd</code> is a core tool which I use very often to achieve different things. Right now I’m writing an Raspberry Pi image to a SD card. The problem with <code>dd</code> is that it does not print any status information during runtime. And here comes the trap for young players: the trick using <code>dd -USR1 [pid]</code> does <strong>not</strong> print status information on Mac OS. <strong>It terminates <code>dd</code>!</strong></p>
+
+<p>Writing an image to an SD card on Mac OS is very simple assuming that you’ve opened the Terminal.app and stay in the directory where the image file is stored.</p>
+
+<p>
+<ol>
+  <li>Run <code>diskutil list</code> to get a list of all storage devices connected to your computer. Get the device name like <code>/dev/disk3</code> from the list - use the size of the device as identifying property.</li>
+  <li>Run <code>diskutil unmountDisk [device name]</code> to detach the device from the file system.</li>
+  <li>Use the command <code>sudo dd if=[image filename] of=[device name] bs=1024</code> to write the image to the sd card. Be aware of the fact that this command overwrites all contents of the SD card. So make sure that you’ve selected the right device name.</li>
+</ol>
+</p>
+
+<p>Step three might now take some time. To let <code>dd</code> print the progress you simply need to know this command: <code>sudo kill -SIGINFO [pid]</code>. That’s all it is! Simply replace <code>USR1</code> with <code>SIGINFO</code> and you’re back on track.</p>
+
+<p><em>Tip:</em> use <code>ps ax | grep dd</code> to get the PID of the <code>dd</code> process and don’t use the PID of the sudo process.</p>
+
+<p><em>Tip 2:</em> when your device is <code>/dev/disk#</code> use the command <code>sudo dd if=[image filename] of=/dev/rdisk# bs=1024</code>. This will enable a much higher transfer rate since you use the raw disk <code>rdisk</code>. A BSD thing you need to know.</p>
+
+    </main>
+    </div>
+        <footer id="site-footer">
+            <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
+            <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72191716-1', 'auto');
+            ga('send', 'pageview');
+            </script>
+        </footer>
+    </body>
+</html>

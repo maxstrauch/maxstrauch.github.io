@@ -1,0 +1,128 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A computer scientists approach to electronics, software development, making and much more." />
+        <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="Maximilian Strauch" />
+        <link rel="icon" type="image/png" href="../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+        <title>WICD sucks!</title>
+        <link href="../assets/style.css" rel="stylesheet" media="screen" />
+            </head>
+    <body>
+        <div id="content-wrap">
+        <div id="mh-backer">
+            <!-- Main header with menu -->
+            <header id="sh">
+                <div class="row">
+                    <h1><a href="../index.html"><img src="../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+
+                    <ul>
+                    						<li><a href="../index.html"><span>Projects</span></a></li>
+						<li><a href="../articles.html"><span>Articles</span></a></li>
+						<li><a href="../about.html"><span>About</span></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </header>
+
+            <!-- Header with title -->
+            <header class="ph">
+                <div class="row">
+                    <div class="ph-headline">
+                        <h1 id="h1-page">WICD sucks!</h1>
+                        <hr />
+                    </div>
+                </div>
+                            </header>
+
+                    </div>
+        <main id="site-body" class="row">
+
+<p><span class="letterb">I</span> always use a WLAN USB adapter on my <a href="https://www.raspberrypi.org/">Raspberry Pi</a> since the entire household is wireless. But when the WLAN goes temporary down and comes back on the standard configuration using <code class="highlighter-rouge">wpa_supplicant</code> will not reconnect until you reboot. But how to reboot without network connection? I know …</p>
+
+<p>While searching for an alternative I found <a href="https://en.wikipedia.org/wiki/Wicd">WICD</a> which is a nice utility with a really nice <code class="highlighter-rouge">curses</code> <a href="https://en.wikipedia.org/wiki/Text-based_user_interface">TUI</a>. So when I setup a Pi last weekend using Raspbian “wheezy” I tried it out. I messed around for more than two hours to get the WICD working but WICD and <code class="highlighter-rouge">wpa_supplicant</code> jammed each other.</p>
+
+<h1>How to resolve?</h1>
+
+<p>Very simple plan - write a little shell script which does the job (and I love writing shell scripts because they are designed to perform a special task):</p>
+
+
+<pre class="pre-like">
+#!/bin/sh
+
+NWN="YOUR-NETWORK-SSID"
+
+echo " *** WLAN connector *** "
+date
+
+WLAN0_ONLINE=$(ifconfig wlan0 | grep "inet addr" | wc -l)
+if [ "$WLAN0_ONLINE" -eq "1" ]; then
+        echo "wlan0 is connected:"
+        ifconfig wlan0 | grep "inet addr"
+else
+        echo "wlan0 not connected to WIFI $NWN"
+        echo "Is $NWN avialable?"
+        AVAIL=$(iwlist wlan0 scan | grep "$NWN" | wc -l)
+        echo "Found $AVAIL WLAN networks with SSID $NWN"
+        if [ "$AVAIL" -eq "1" ]; then
+                echo "Trying to connect to that network"
+                ifconfig wlan0 down
+                sleep 1
+                ifconfig wlan0 up
+                iwconfig wlan0 essid "$NWN"
+                service networking stop
+                service networking start
+                echo "Connection should be established"
+        else
+                echo "Nothing to do when $NWN unavailable"
+        fi
+fi
+</pre>
+
+
+<p>First of all: the script is really simple! It assumes that your WLAN device is connected on <code class="highlighter-rouge">wlan0</code> and that <code class="highlighter-rouge">/etc/network/interfaces</code> is configured correctly e.g. using <code class="highlighter-rouge">wpa_passphrase "YOUR-NETWORK-SSID"</code> to generate the <code class="highlighter-rouge">wpa-ssid</code> and <code class="highlighter-rouge">wpa-psk</code> string. The script could be improved with no doubt but hey: it works and that is important.</p>
+
+<p>To get this "daemon" working one needs a crontab entry which executes this script every once in a while:</p>
+
+<pre class="pre-like">$ crontab -e
+*/1 * * * * sudo /home/pi/scripts/wland.sh &gt;/dev/null 2&gt;&amp;1
+</pre>
+
+<p>Simply run it every minute and dump the output to the garbage bin. One certainly could remove all the <code class="highlighter-rouge">echo</code> statements in the script but for debugging I left them there and they don’t take up much performance.</p>
+
+<p>The script basically operates according to this scheme:</p>
+
+<ul class="content">
+  <li>Check if a WLAN connection is active. This can be done very simple by running <code class="highlighter-rouge">ifconfig wlan0</code> to get the state of the WLAN interface and then using <code class="highlighter-rouge">grab</code> to get the line which contains “inet addr”. This line is only present when the WLAN device has an IP address and is connected. So counting the lines (<code class="highlighter-rouge">wc -l</code>) of the grab result gives a boolean value if there is a WLAN connection.</li>
+  <li>If there is at least one line (although there won’t be more than one line since a device has only one IP address in general) returned we’re connected to the WLAN, everything fine, exit. If not, continue (or in the script: perform the else branch).</li>
+  <li>WLAN is not connected. Is it even available? Using <code class="highlighter-rouge">iwlist wlan0 scan</code> and then looking into the output and using the same method as before and grabbing the SSID of our network we can generate an other boolean value which indicates if the WLAN is available. This case is executed when the WLAN temporarily went down while the device was up.</li>
+  <li>If there is no WLAN with the right SSID we can exit because there is nothing to connect to. Otherwise we will try to connect to the WLAN.</li>
+  <li>Connecting to the WLAN is simply done by putting the device down and up, calling <code class="highlighter-rouge">iwconfig</code> and restarting the networking service. This is surely not a scientific founded approach - it’s a more an expierence based approach about what works best.</li>
+</ul>
+
+<p>And that’s it. It took me about 5 Minutes to write this script (okay, with testing and manpage research maybe 10 minutes) and it runs smoothly (until now). On the other side I messed over two hours with <a href="https://en.wikipedia.org/wiki/Wicd">WICD</a>. You can guess which method is my favorite …</p>
+
+<p>Side note: <a href="https://en.wikipedia.org/wiki/Wicd">WICD</a> works without any problems on Raspbian “Jessie” after one did <code class="highlighter-rouge">systemctl disable wpa_supplicant</code>.</p>
+
+
+    </main>
+    </div>
+        <footer id="site-footer">
+            <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
+            <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72191716-1', 'auto');
+            ga('send', 'pageview');
+            </script>
+        </footer>
+    </body>
+</html>

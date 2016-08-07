@@ -1,0 +1,224 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A computer scientists approach to electronics, software development, making and much more." />
+        <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="Maximilian Strauch" />
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>A Raspberry PI Media Player</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+            </head>
+    <body>
+        <div id="content-wrap">
+        <div id="mh-backer">
+            <!-- Main header with menu -->
+            <header id="sh">
+                <div class="row">
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+
+                    <ul>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </header>
+
+            <!-- Header with title -->
+            <header class="ph">
+                <div class="row">
+                    <div class="ph-headline">
+                        <h1 id="h1-page">My (new) mediaplayer</h1>
+                        <hr />
+                    </div>
+                </div>
+                            </header>
+
+                    </div>
+        <main id="site-body" class="row">
+
+<p><span class="letterb">I</span>nitially I didn’t thought that this would be a post worth since Raspberry Pi + media center is well documented. By now I know that there is many documentation available and this does not say anything about the quallity ;-)</p>
+
+<p>My target was to get my Raspberry Pi A+ working and accepting commands from a very cute little IR remote (which I got at some point in time but I don’t quite remeber). The following picture shows the basic setup I’m looking for.</p>
+
+<p class="img-container"><img src="rpi_a+_with-ir.jpg" alt="A Raspberry Pi A+ and my IR remote" /></p>
+
+<p>I decided to use <strong><a href="http://openelec.tv/">OpenELEC</a></strong> as a media center os rather than creating my own contraption. So I thought this is straight forward due to many documentation out there. But it turned out not to be that simple and in this post I’ll explain how to set it up <em>correctly</em> and <em>fast</em>.</p>
+
+
+<h1 id="background">Background</h1>
+
+<p>Quite some time ago I bought me a media player on Amazon. It is a simple Chinese-made <a href="https://www.youtube.com/watch?v=3im97Z7ceNI#t=137s">one-hung-low</a> construction which simply allows to attach an USB tumb drive and play back the files through an uggly GUI. But it worked quite good now for four to five years, I guess.</p>
+
+<p>"What's your intend?" Well, I like movies and I record broadcasts on TV using various methods. By now I have collected around 3000 TV broadcast records. To watch them I really need a simple way of playing the files back to HDMI to let my big telly display it. And therefore I purchased this nifty little device. Most of this 3000 records use an AVI codec (DX50) with MP3 audio and therefore the quality is <em>SD</em> (standard definition) which takes around 600 MB per 90 minutes.</p>
+
+<p>Recently I thought that the time has come to switch to HD. And there it happened: the media player has huge problems playing back those files which results in a movie consisting of really big pixels with a quallity even worse than SD.</p>
+
+<p>I concluded that this is the reason because of the lack of an proper hardware decoder or something else in the field of <em>lack of power</em>.</p>
+
+<p>Back in november of last year I bought a Raspberry Pi A+ (V1.1) but realized when I got it that it don’t has an ethernet port. So it was more or less useless for the intended action. But furtunately this media center problem arised and I had a new usage for it.</p>
+
+<h1 id="what-media-distro-should-i-choose">What media distro should I choose?</h1>
+
+<p>There is an awful lot of information on this topic in the internet available through <a href="https://www.google.com/?gws_rd=ssl#q=raspberry+pi+media+center+distro">a simple Google search</a>.</p>
+
+<p>I tested <a href="https://osmc.tv/">OSMC</a> but it didn’t work out-of-the box so I skipped it and continued with <a href="http://openelec.tv/">OpenELEC</a>. OpenELEC worked straight out-of-the box and played back files on my Raspberry Pi A+ really nice even though it hase only <code class="highlighter-rouge">256 MB</code> RAM and runs at <code class="highlighter-rouge">700 MHz</code>.</p>
+
+<p>Since this helped me out some evening I sticked with OpenELEC and I’ll use it in the following. The description in this post confers to the most recent version of OpenELEC:</p>
+
+<pre class="pre-like">OpenELEC v6.0.1
+MD5 (OpenELEC-RPi.arm-6.0.1.img) = 92d4c77d06c2172d1785253a80f0acf3
+</pre>
+
+<h1 id="whats-the-plan-master">What’s the plan master?</h1>
+
+<p>There are three objectives to tackle:</p>
+
+<ol>
+  <li>Find a solution to play back HD movies – <strong>CHECK: already achieved by using OpenELEC on the Raspberry Pi A+</strong></li>
+  <li>Get an arbitrary IR remote working to replace mouse and keyboard. Since the A+ has only one USB port there is no place for other USB devices because the tumb drive with movies occupies this port</li>
+  <li>Get rid of the overscan as depicted in the following (see the corners) – <strong>ALMOST CHECK:</strong> in the system configuration (System &gt; Video not Appearance) there is a little tool to calibrate the screen and correct for this overscan by dragging the edges (top left and bottom right) of the screen to the correct locations with the mouse</li>
+</ol>
+
+<p class="img-container"><img src="open-elec_overscan.jpg" alt="Overscan issue with OpenELEC/Kodi" id="img-1" /></p>
+
+<h1 id="solving-problem-2-get-the-ir-remote-working">Solving problem 2: get the IR remote working</h1>
+
+<p>In general: this is simpler than described in various guides around the web. I lost a lot of time following these guides. For me these steps worked quite nice:</p>
+
+<h1 id="a-download-and-write-image">(a) Download and write image</h1>
+
+<p>Download the current OpenELEC image file from <a href="http://openelec.tv/get-openelec">here</a> and burn it to your SD card. I got a very cheap 4GB Kingston card since the image is small and not much else is stored on it. For Mac users: you can follow <a href="/2016/01/05/dd-for-pi-images-on-macos.html">this</a> explanation to burn the image to the SD card.</p>
+
+<p>By the way: the default credentials for SSH are <code class="highlighter-rouge">root</code> as user name and <code class="highlighter-rouge">openelec</code> as password and you need to enable SSH either in the welcome wizard or in the system settings, because it’s disabled by default.</p>
+
+<h1 id="b-modify-the-configtxt">(b) Modify the <code class="highlighter-rouge">config.txt</code></h1>
+
+<p>To enable an IR receiver to be attached to the GPIO pins the driver software for that must be enabled. This is done by placing the following line</p>
+
+<pre class="pre-like">dtoverlay=lirc-rpi,gpio_in_pin=23
+</pre>
+
+<p>at the end of the <code class="highlighter-rouge">config.txt</code> file. For that you simply need to attach the SD card with OpenELEC to your computer and open it in an arbitrary file manager. The file <code class="highlighter-rouge">config.txt</code> will show up in the root directory of the card and can be edited using a simple text editor.</p>
+
+<p>What does this line do? First of all the <code class="highlighter-rouge">lirc-rpi</code> extension is loaded which enables the attachment of IR receivers and transmitters onto the Raspberry Pi. After that arguments for lirc are following. By default lirc uses GPIO Pin 18 for the receiver but this pin doesn’t work for me so I changed it to GPIO Pin 23. It might be worth to take a look on a pinout diagram like <a href="http://raspi.tv/wp-content/uploads/2014/07/Raspberry-Pi-GPIO-pinouts.png">this one</a> to find the physical location of the pin.</p>
+
+<h1 id="c-attach-the-ir-receiver-to-gpio-pins">(c) Attach the IR receiver to GPIO pins</h1>
+
+<p>I bought the <code class="highlighter-rouge">TSOP4838</code> IR receiver on Ebay for little money. This model is very popular and works on 5V and also on 3.3V which is indeed useful for the Raspberry Pi and it’s 5V intolerant pins. The datasheet for the IR receiver can be found <a href="www.vishay.com/docs/82459/tsop48.pdf">here</a>. The pinout is as follows (from the datasheet):</p>
+
+<p class="img-container"><img src="tsop4838.jpg" alt="TSOP4838 pinout" /></p>
+
+<p>Simply make the connections as indicated on the image at the top.</p>
+
+<h1 id="d-booting-time">(d) Booting time!</h1>
+
+<p>So boot up the Raspberry Pi with the OpenELEC SD card inserted and connected to the power (obviously) and connected to your LAN since we need to login via SSH.</p>
+
+<p>Follow the welcome wizard, enable SSH and logon. By now you have a clean terminal window open to get the IR receiver working.</p>
+
+<p>To confirm that everything worked just right you can enter <code class="highlighter-rouge">dmesg | grep lirc</code> and will become back:</p>
+
+<pre class="pre-like">[   11.288285] lirc_dev: IR Remote Control driver registered, major 245 
+[   11.340154] lirc_rpi: module is from the staging directory, the quality is unknown, you have been warned.
+[   12.253900] lirc_rpi: auto-detected active low receiver on GPIO pin 23
+[   12.254563] lirc_rpi lirc_rpi: lirc_dev: driver lirc_rpi registered at minor = 0
+[   12.254586] lirc_rpi: driver registered!
+[   14.170614] input: lircd as /devices/virtual/input/input2
+</pre>
+
+<p>Everything works, <strong>fine</strong>!</p>
+
+<h1 id="e-grab-your-ir-remote">(e) Grab your IR remote</h1>
+
+<p>First of all you need to kill all running lirc processes before you can configure your new remote. So use <code class="highlighter-rouge">killall lirc</code> and/or <code class="highlighter-rouge">ps ax | grep lirc</code> together with <code class="highlighter-rouge">kill [the pid]</code>.</p>
+
+<p>If you have any remaining lirc process running, an invocation of <code class="highlighter-rouge">irrecord</code> (everywhere with any filename as argument) will tell you this:</p>
+
+<pre class="pre-like">OpenELEC:~/.config # irrecord lircd.conf
+
+irrecord -  application for recording IR-codes for usage with lirc
+
+Copyright (C) 1998,1999 Christoph Bartelmus(lirc@bartelmus.de)
+
+irrecord: could not open /dev/lirc0
+irrecord: default_init(): Device or resource busy
+irrecord: could not init hardware (lircd running ? --&gt; close it, check permissions)
+</pre>
+
+<p>Also important: be sure to have the right permissions assigned to <code class="highlighter-rouge">/dev/lirc0</code>. I did a quick <code class="highlighter-rouge">chmod 0777 /dev/lirc0</code> to fix it.</p>
+
+<p>But from now on it’s simple: go to the configuration directory (<code class="highlighter-rouge">cd /storage/.config</code>) and invoke <code class="highlighter-rouge">irrecord lircd.conf</code>. There is a lot of instructions you need to read and accept (by pressing return) before the main process starts: pressing buttons on the remote, 160 times. Try to evenly distribute your presses across all keys on the remote. If this is finished you can assign the names and actions to the keys.</p>
+
+<p>Enter an action to be performed by the key. On <a href="http://www.ocinside.de/modding_en/linux_ir_irrecord_list/">this page</a> you can find a list of all available “codes” and <a href="http://kodi.wiki/view/Keyboard_controls">here</a> is a list of OpenELEC key shortcuts you might want to emulate by the IR remote. So the process is a little bit tedious: entering an action descriptor and pressing the key on the remote. I figured out that you can’t assign two action descriptors to the same IR key. In this case the first one (from the config file) will be taken.</p>
+
+<p>If you are finished with that your configuration file (located in <code class="highlighter-rouge">/storage/.config/lircd.conf</code>) might look like</p>
+
+<pre class="pre-like"># Please make this file available to others
+# ...
+
+begin remote
+  name  lircd.conf
+  bits           16
+  flags SPACE_ENC|CONST_LENGTH
+# ...
+      begin codes
+          KEY_UP                   0xC03F
+          KEY_DOWN                 0xB04F
+          KEY_LEFT                 0xA857
+          KEY_RIGHT                0xA05F
+#         ...
+      end codes
+end remote
+</pre>
+
+<p>and you don’t need to do anything more.</p>
+
+<p>Tip: I would recommend you to assign the follwing action descriptors: <code class="highlighter-rouge">KEY_UP</code>, <code class="highlighter-rouge">KEY_DOWN</code>, <code class="highlighter-rouge">KEY_LEFT</code>, <code class="highlighter-rouge">KEY_RIGHT</code>, <code class="highlighter-rouge">KEY_VOLUMEUP</code>, <code class="highlighter-rouge">KEY_VOLUMEDOWN</code>, <code class="highlighter-rouge">KEY_STOP</code>, <code class="highlighter-rouge">KEY_EXIT</code>, <code class="highlighter-rouge">KEY_OK</code>, <code class="highlighter-rouge">KEY_ENTER</code>, <code class="highlighter-rouge">KEY_INFO</code>, <code class="highlighter-rouge">KEY_M</code> (hide OSD menu), <code class="highlighter-rouge">KEY_HOME</code> (come back home to select function or shut down), <code class="highlighter-rouge">KEY_SPACE</code> (pause).</p>
+
+<h1 id="f-reboot-and-enjoy">(f) Reboot and enjoy!</h1>
+
+<p>Reboot the system (<code class="highlighter-rouge">shutdown -r now &amp;&amp; exit</code>) and enjoy the working remote control.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>OpenELEC works now with my IR remote. Navigation is not as simple as with a mouse but certainly possible. (I hope) I’ll familiarize with it. I’m facinated by the simplicity: power it on, attach the movie thumb drive and play the movie. I don’t need more.</p>
+
+<h1 id="further-reading">Further reading</h1>
+
+<p>If you like to have more information you can checkout these sources I found:</p>
+
+<ul class="content">
+  <li><a href="http://www.solihull-web-design.com/blog/how-setup-lirc-gpio-ir-remote-control-openelec-xbmckodi-raspberry-pi-1-and-2">The most helpful and detailed tutorial</a></li>
+  <li>OpenELEC wiki page with a guide <a href="http://wiki.openelec.tv/index.php?title=Guide_To_lirc_rpi_GPIO_Receiver">here</a> (simple and useful)</li>
+  <li>Another tutorial on lirc_rpi <a href="http://aron.ws/projects/lirc_rpi/">here</a></li>
+  <li>A German tutorial can be found <a href="https://oberguru.net/elektronik/raspberrypi/ir-raspberry-pi-openelec.html">here</a></li>
+  <li>Pinout of various Raspberry Pi’s: <a href="http://raspi.tv/wp-content/uploads/2014/07/Raspberry-Pi-GPIO-pinouts.png">B, A/B and B+</a>, <a href="https://www.raspberrypi.org/documentation/usage/gpio-plus-and-raspi2/">offical information on GPIO pins</a></li>
+</ul>
+
+
+<h1 id="update">Update (Aug 2016)</h1>
+<p>A short time after I created this contraption I was in charge of buying a new satellite (DVB-S2) receiver. I decided to buy a cheap one from Amazon - the <a href="https://www.amazon.de/dp/B0168ZZD4S" target="_blank">Xoro HRS 8660</a> - which comes with a media player. The first impression (from the ad) is: its a cheapie! But since I got it, it works really fine. And the media playback works also amazingly well. Therefore this project is resting in peace. Only every once in a while I use this contraption to playback files which won't playback on the Xoro due to some strange reasons.</p>
+
+    </main>
+    </div>
+        <footer id="site-footer">
+            <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
+            <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72191716-1', 'auto');
+            ga('send', 'pageview');
+            </script>
+        </footer>
+    </body>
+</html>
