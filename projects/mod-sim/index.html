@@ -1,0 +1,204 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A computer scientists approach to electronics, software development, making and much more." />
+        <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="Maximilian Strauch" />
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>Modeling & Simulation</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
+        <script type="text/javascript">
+            /**
+             * See http://genert.laal.ee/demo/simplbox/ for further information.
+             */
+            var preLoadIconOn = function () {
+                var newE = document.createElement("div"),
+                    newB = document.createElement("div");
+                    newE.setAttribute("id", "simplbox-loading");
+                    newE.appendChild(newB);
+                document.body.appendChild(newE);
+            },
+            preLoadIconOff = function () {
+                var elE = document.getElementById("simplbox-loading");
+                elE.parentNode.removeChild(elE);
+            },
+            overlayOn = function () {
+                var newA = document.createElement("div");
+                newA.setAttribute("id", "simplbox-overlay");
+                document.body.appendChild(newA);
+            },
+            overlayOff = function () {
+                var elA = document.getElementById("simplbox-overlay");
+                elA.parentNode.removeChild(elA);
+            },
+            closeButtonOn = function (base) {
+                var newE = document.createElement("div");
+                newE.setAttribute("id", "simplbox-close");
+                document.body.appendChild(newE);
+                newE = document.getElementById("simplbox-close");
+                base.API_AddEvent(newE, "click touchend", function () {
+                    base.API_RemoveImageElement();
+                    return false;
+                });
+            },
+            closeButtonOff = function () {
+                var elA = document.getElementById("simplbox-close");
+                elA.parentNode.removeChild(elA);
+            },
+            captionOn = function (base) {
+                var element = document.getElementById("simplbox-caption"),
+                    documentFragment = document.createDocumentFragment(),
+                    newElement = document.createElement("div"),
+                    newText = document.createTextNode(base.m_Alt);
+
+                if (element) {
+                    element.parentNode.removeChild(element);
+                }
+
+                newElement.setAttribute("id", "simplbox-caption");
+                newElement.appendChild(newText);
+                documentFragment.appendChild(newElement);
+                document.getElementsByTagName("body")[0].appendChild(documentFragment);
+            },
+            captionOff = function () {
+                var element = document.getElementById("simplbox-caption");
+                element.parentNode.removeChild(element);
+            };
+
+            // Init app
+            window.onload = function() {
+                var E = new SimplBox(document.querySelectorAll("[data-simplbox='gallery1']"), {
+                    quitOnDocumentClick: false,
+                    onStart: function () {
+                        overlayOn();
+                        closeButtonOn(E);
+                    },
+                    onEnd: function () {
+                        overlayOff();
+                        closeButtonOff();
+                        captionOff();
+                    },
+                    onImageLoadStart: function () {
+                        preLoadIconOn();
+                        captionOn(E);
+                    },
+                    onImageLoadEnd: function () {
+                        preLoadIconOff();
+                    }
+                });
+                E.init();
+            };
+        </script>
+            </head>
+    <body>
+        <div id="content-wrap">
+        <div id="mh-backer">
+            <!-- Main header with menu -->
+            <header id="sh">
+                <div class="row">
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+
+                    <ul>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </header>
+
+            <!-- Header with title -->
+            <header class="ph">
+                <div class="row">
+                    <div class="ph-headline">
+                        <h1 id="h1-page">Modeling & Simulation</h1>
+                        <hr />
+                    </div>
+                </div>
+                            </header>
+
+                    </div>
+        <main id="site-body" class="row">
+
+<ul class="toc">
+
+<li class="header">Table of Contents</li>
+<li class="anchor"><a href="#newton">Newton fractal</a></li>
+<li class="anchor"><a href="#wator">Wa-Tor simulation</a></li>
+<li class="anchor"><a href="#traffic">Traffic simulation</a></li>
+<li class="git"><a href="https://github.com/maxstrauch/newtonfractal" target="_blank">Git repo of Newton fractal</a></li>
+<li class="git second"><a href="https://github.com/maxstrauch/wator-traffic-simulation" target="_blank">Git repo of WaTor- &amp; Traffic simulation application</a></li>
+</ul>
+
+<p><span class="letterb">T</span>here are some mandatory programming &raquo;projects&laquo; for every computer scientist: a calculator, sorting algorithms and &raquo;numerical functions&laquo; - like faculty, the LCM (lowest common multiple) or GCD (greatest common divisor), the Fibonacci series and others. But another very popular project is <i>Conway's Game of Life</i> which comes from the field of cellular automaton.</p>
+
+<p>During my time at university I participated at a course which was about dealing with problem modeling and simulating the problems to study the behaviour. Although this was a math course it was very interesting. There we took a look at problems like the Google PageRank and eigenvalues, Fourier transform (FFT and DFT) and also at the models and simulations shown in the following. Because they were so exciting I implemented them as an application.</p>
+
+<h1><a name="newton"></a>Newton fractal</h1>
+
+<p>We all know Newton's method for finding approximations for roots of non-linear equations. When applying this method to complex numbers in the complex pane (cartesian coordinate system) and apply Newton's method to every point and color this point according to the root it converges to one gets really beautiful images (see screenshots below).</p>
+
+<p><b>The created application can be found in the Git repo <a href="https://github.com/maxstrauch/newtonfractal" target="_blank">here</a>.</b> It simply provides an input for the formula to &raquo;calculate&laquo; the image for and performs internally a numerical derivation since this was much easier to implement than a CAS system.</p>
+
+
+<div class="gallery-box">
+  <a href="screenshots/newton-1.png" data-simplbox="gallery1"><img src="screenshots/newton-1.jpg" alt="Screenshot of the Newton fractal application with an image for a given equation (bottom left)." /></a>
+
+  <a href="screenshots/newton-2.png" data-simplbox="gallery1"><img src="screenshots/newton-2.jpg" alt="On the top right side a preview is shown which can be used to navigate on bigger images by clicking at a specific region ..." /></a>
+
+  <a href="screenshots/newton-3.png" data-simplbox="gallery1"><img src="screenshots/newton-3.jpg" alt="... below that preview image all found roots are shown together with the assigned color." /></a>
+
+  <a href="screenshots/newton-4.png" data-simplbox="gallery1"><img src="screenshots/newton-4.jpg" alt="The controls at the bottom right are used to set the step size and interval size. Some calculation statistics are shown at the top (left)." /></a>
+
+  <a href="screenshots/newton-5.png" data-simplbox="gallery1"><img src="screenshots/newton-5.jpg" alt="A sample export with a low resolution." /></a>
+</div>
+
+
+<h1><a name="wator"></a>WaTor simulation</h1>
+
+<p>The Wa-Tor simulation is a predators and prey simulation much like Conway's Game of Life where an initial population of sharks and fishes developes over time. The development is based on rules (e.g. a fish moves randomly for every time step). It can be observed that those systems tend to arrive in stable states.</p>
+
+<p><b>The created application can be found in the Git repo <a href="https://github.com/maxstrauch/wator-traffic-simulation" target="_blank">here</a>.</b> The main user interface looks like:</p>
+
+<p class="img-container"><img src="screenshots/wator.png" alt="Screenshot of Wa-Tor simulation" title="Screenshot of Wa-Tor simulation" /><span class="caption">A screenshot of the developed Java application to simulate predators and prey evolution.</span></p>
+
+<p>The application is structured pretty simple: on the left the cyclic world is displayed which is divided into distinct cells. The right shows the controls (top) and statistics (bottom). Animals (fish or shark) can be placed manually or automatically based on a probability. If the simulation is started the rules are applied and the progres is shown. Here it can be seen that the ratio of fishes and sharkes oscillates initially but then flattens out to a stable relation.</p>
+
+
+<h1><a name="traffic"></a>Traffic simulation with the Nagel–Schreckenberg model</h1>
+
+<p>We also investigated the Nagel–Schreckenberg model which is a pretty cool tool: it allows to model traffic flow on highways (single-lane street) and motorways (multi-lane street) as a cellular automata and simulate them based on simple rules like &raquo;a car always accelerates&laquo;. It also considers thrifting which causes the velocity to be decreased based on a probabilistic model.</p>
+
+<p><b>The Git repo <a href="https://github.com/maxstrauch/wator-traffic-simulation" target="_blank">here</a> contains also the source for this application.</b> In fact it is directly integrated into the Wa-Tor simulation. Some screenshots are:</p>
+
+<div class="gallery-box">
+  <a href="screenshots/traffic-1.png" data-simplbox="gallery1"><img src="screenshots/traffic-1.jpg" alt="Simulation of a simple street which allows the usage of traffic lights and cars." /></a>
+
+  <a href="screenshots/traffic-2.png" data-simplbox="gallery1"><img src="screenshots/traffic-2.jpg" alt="Also multi-lane streets are implemented with overtake behaviour of the cars (faster cars will overtake slower cars)." /></a>
+</div>
+
+
+
+    </main>
+    </div>
+        <footer id="site-footer">
+            <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
+            <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72191716-1', 'auto');
+            ga('send', 'pageview');
+            </script>
+        </footer>
+    </body>
+</html>

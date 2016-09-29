@@ -12,6 +12,90 @@
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
         <title>IEEE 802.11p performance issue fix</title>
         <link href="../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../assets/simplbox.min.js"></script>
+        <script type="text/javascript">
+            /**
+             * See http://genert.laal.ee/demo/simplbox/ for further information.
+             */
+            var preLoadIconOn = function () {
+                var newE = document.createElement("div"),
+                    newB = document.createElement("div");
+                    newE.setAttribute("id", "simplbox-loading");
+                    newE.appendChild(newB);
+                document.body.appendChild(newE);
+            },
+            preLoadIconOff = function () {
+                var elE = document.getElementById("simplbox-loading");
+                elE.parentNode.removeChild(elE);
+            },
+            overlayOn = function () {
+                var newA = document.createElement("div");
+                newA.setAttribute("id", "simplbox-overlay");
+                document.body.appendChild(newA);
+            },
+            overlayOff = function () {
+                var elA = document.getElementById("simplbox-overlay");
+                elA.parentNode.removeChild(elA);
+            },
+            closeButtonOn = function (base) {
+                var newE = document.createElement("div");
+                newE.setAttribute("id", "simplbox-close");
+                document.body.appendChild(newE);
+                newE = document.getElementById("simplbox-close");
+                base.API_AddEvent(newE, "click touchend", function () {
+                    base.API_RemoveImageElement();
+                    return false;
+                });
+            },
+            closeButtonOff = function () {
+                var elA = document.getElementById("simplbox-close");
+                elA.parentNode.removeChild(elA);
+            },
+            captionOn = function (base) {
+                var element = document.getElementById("simplbox-caption"),
+                    documentFragment = document.createDocumentFragment(),
+                    newElement = document.createElement("div"),
+                    newText = document.createTextNode(base.m_Alt);
+
+                if (element) {
+                    element.parentNode.removeChild(element);
+                }
+
+                newElement.setAttribute("id", "simplbox-caption");
+                newElement.appendChild(newText);
+                documentFragment.appendChild(newElement);
+                document.getElementsByTagName("body")[0].appendChild(documentFragment);
+            },
+            captionOff = function () {
+                var element = document.getElementById("simplbox-caption");
+                element.parentNode.removeChild(element);
+            };
+
+            // Init app
+            window.onload = function() {
+                var E = new SimplBox(document.querySelectorAll("[data-simplbox='gallery1']"), {
+                    quitOnDocumentClick: false,
+                    onStart: function () {
+                        overlayOn();
+                        closeButtonOn(E);
+                    },
+                    onEnd: function () {
+                        overlayOff();
+                        closeButtonOff();
+                        captionOff();
+                    },
+                    onImageLoadStart: function () {
+                        preLoadIconOn();
+                        captionOn(E);
+                    },
+                    onImageLoadEnd: function () {
+                        preLoadIconOff();
+                    }
+                });
+                E.init();
+            };
+        </script>
             </head>
     <body>
         <div id="content-wrap">

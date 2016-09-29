@@ -1,0 +1,173 @@
+/***
+* SimplBox - v1.0.0 - 2014.08.04
+* Author: (c) Dendrochronology - @Dendrochronolo - http://genert.laal.ee/
+* Available for use under the MIT License.
+***/
+
+html {
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+#simplbox {
+  z-index: 10000;
+  ms-touch-action: none;
+  touch-action: none;
+  /*-moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);*/
+}
+
+#simplbox-loading {
+  position: fixed;
+  z-index: 10003;
+  top: 50%;
+  left: 50%;
+}
+
+#simplbox-loading:before {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: #ccc;
+  content: "";
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-animation: loader 1s linear infinite;
+  -webkit-animation: loader 1s linear infinite;
+  animation: loader 1s linear infinite;
+  -moz-transform-origin: 8px 8px;
+  -ms-transform-origin: 8px 8px;
+  -webkit-transform-origin: 8px 8px;
+  transform-origin: 8px 8px;
+}
+
+@-moz-keyframes loader {
+  0% {
+    opacity: 1;
+    -moz-transform: rotate(360deg) scale(1.5);
+    transform: rotate(360deg) scale(1.5);
+  }
+
+  50% {
+    opacity: 0.5;
+    -moz-transform: rotate(180deg) scale(1);
+    transform: rotate(180deg) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    -moz-transform: rotate(0deg) scale(1.5);
+    transform: rotate(0deg) scale(1.5);
+  }
+}
+
+@-webkit-keyframes loader {
+  0% {
+    opacity: 1;
+    -webkit-transform: rotate(360deg) scale(1.5);
+    transform: rotate(360deg) scale(1.5);
+  }
+
+  50% {
+    opacity: 0.5;
+    -webkit-transform: rotate(180deg) scale(1);
+    transform: rotate(180deg) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: rotate(0deg) scale(1.5);
+    transform: rotate(0deg) scale(1.5);
+  }
+}
+
+@keyframes loader {
+  0% {
+    opacity: 1;
+    -moz-transform: rotate(360deg) scale(1.5);
+    -ms-transform: rotate(360deg) scale(1.5);
+    -webkit-transform: rotate(360deg) scale(1.5);
+    transform: rotate(360deg) scale(1.5);
+  }
+
+  50% {
+    opacity: 0.5;
+    -moz-transform: rotate(180deg) scale(1);
+    -ms-transform: rotate(180deg) scale(1);
+    -webkit-transform: rotate(180deg) scale(1);
+    transform: rotate(180deg) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    -moz-transform: rotate(0deg) scale(1.5);
+    -ms-transform: rotate(0deg) scale(1.5);
+    -webkit-transform: rotate(0deg) scale(1.5);
+    transform: rotate(0deg) scale(1.5);
+  }
+}
+
+#simplbox-close {
+  width: 2.3em;
+  height: 2.3em;
+  text-align: center;
+  background-color: #F4F4F4;
+  border-radius: 50%;
+  position: fixed;
+  z-index: 10002;
+  top: 2em;
+  right: 2em;
+  cursor: pointer;
+}
+
+#simplbox-close:before, #simplbox-close:after {
+  width: 2px;
+  background-color: #404040;
+  content: "";
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  left: 50%;
+  margin-left: -1px;
+}
+
+#simplbox-close:after {
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#simplbox-close:before {
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+#simplbox-overlay {
+  background-color: #F4F4F4;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#simplbox-caption {
+  text-align: center;
+  color: #404040;
+  font-size: 18px;
+  background-color: #F4F4F4;
+  position: fixed;
+  z-index: 10001;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 13px;
+  font-weight: bold;
+}

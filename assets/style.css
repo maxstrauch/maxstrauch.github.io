@@ -433,7 +433,6 @@ ul#list .list-item a h1 {
 	color: #333;
 }
 
-
 ul#list .list-item a p {
 	display: block;
 	margin: 0;
@@ -515,6 +514,84 @@ ul#list .list-item a:hover hr {
     font-size: 28px;
     line-height: 1;
 	font-weight: 400;
+}
+
+
+/* Gallery */
+
+.gallery-box {
+    width: 66.6667%;
+    margin-left: 16.6667%;
+    text-align: center;
+    padding: 21px;
+}
+
+.gallery-box a, .gallery-box a:hover, .gallery-box a:visited, .gallery-box a:focus {
+	border: none;
+	margin: 10px !important;
+	display: inline-block;
+}
+
+.gallery-box a img {
+	border: solid 1px #ccc;
+	padding: 5px;
+	border-radius: 3px;
+	margin: 0;
+	display: inline-block;
+}
+
+/* TOC */
+
+ul.toc {
+	border: solid 1px red;
+	float: right;
+	margin: 0% 16.6667% 0% 0%;
+	width: 21%;
+	border: solid 1px #ccc;
+	border-radius: 3px;
+	padding: 14px;
+	list-style: none;
+}
+
+ul.toc li.header {
+	font-weight: bold;
+	padding-bottom: 7px;
+	border-bottom: solid 1px #ccc;
+	text-align: center;
+}
+
+ul.toc li.anchor a:before {
+	content: '\e809';
+	font-family: 'fontello';
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+ul.toc li.git a:before {
+	content: '\e800';
+	font-family: 'fontello';
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+ul.toc li a {
+	display: block;
+	padding: 5px;
+	border-bottom: solid 1px #ccc;
+}
+
+ul.toc li.git a {
+	display: block;
+	padding: 10px 5px 0 5px;
+	border: none;
+	border-top: solid 1px #ccc;
+	margin-top: 2px;
+}
+
+ul.toc li.git.second a {
+	margin-top: 8px;
 }
 
 /* Footer */
