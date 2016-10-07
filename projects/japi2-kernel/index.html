@@ -8,12 +8,12 @@
         <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
         <meta name="robots" content="index,follow" />
         <meta name="author" content="Maximilian Strauch" />
-        <link rel="icon" type="image/png" href="assets/favicon.png">
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-        <title>Projects</title>
-        <link href="assets/style.css" rel="stylesheet" media="screen" />
-        <link href="assets/simplbox.css" rel="stylesheet" media="screen" />
-        <script type="text/javascript" src="assets/simplbox.min.js"></script>
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>Japi 2</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
         <script type="text/javascript">
             /**
              * See http://genert.laal.ee/demo/simplbox/ for further information.
@@ -103,12 +103,12 @@
             <!-- Main header with menu -->
             <header id="sh">
                 <div class="row">
-                    <h1><a href="index.html"><img src="assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
 
                     <ul>
-                    						<li class="active"><a href="index.html"><span>Projects</span></a></li>
-						<li><a href="articles.html"><span>Articles</span></a></li>
-						<li><a href="about.html"><span>About</span></a></li>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -118,7 +118,7 @@
             <header class="ph">
                 <div class="row">
                     <div class="ph-headline">
-                        <h1 id="h1-page">Projects</h1>
+                        <h1 id="h1-page">The Japi 2 Kernel</h1>
                         <hr />
                     </div>
                 </div>
@@ -126,42 +126,48 @@
 
                     </div>
         <main id="site-body" class="row">
-<ul id="grid">	<li class="grid-item"><a href="projects/backstage/index.html">
-	    <span style="background: url('projects/backstage/bs-title.jpg');"></span>
-	    <h1>backstage</h1>
-	    <p>A music organizer for a custom purpose with inventory management.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/neptune/index.html">
-	    <span style="background: url('projects/neptune/title.jpg');"></span>
-	    <h1>neptune</h1>
-	    <p>A network variant of the SameGame with the purpose of practicing software development.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/bert/index.html">
-	    <span style="background: url('projects/bert/bert-title.jpg');"></span>
-	    <h1>Bert downloads it!</h1>
-	    <p>A nifty little download manager written entirely in NodeJS.</p>
-	</a></li>
-	<li class="grid-item"><a href="articles/nuthatch.html">
-	    <span style="background: url('articles/nuthatch-logo.jpg');"></span>
-	    <h1>Tree-walk put in a Nutshell</h1>
-	    <p>A different approach to traversing trees implemented in the gorgeous language Haskell.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/japi2-kernel/index.html">
-	    <span style="background: url('projects/japi2-kernel/title.jpg');"></span>
-	    <h1>Japi 2 kernel</h1>
-	    <p>A GUI &raquo;toolkit&laquo; based on Java SWING for simple GUI creation in C programs.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/mod-sim/index.html">
-	    <span style="background: url('projects/mod-sim/title.jpg');"></span>
-	    <h1>Cute simulations</h1>
-	    <p>Newton Fractal, WaTor and Nagel-Schreckenberg traffic simulation applications.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/media-center/index.html">
-	    <span style="background: url('projects/media-center/media-center-title.jpg');"></span>
-	    <h1>OpenELEC Media Center</h1>
-	    <p>Experiences of turing a Raspberry Pi A+ into a media center.</p>
-	</a></li>
-</ul>    </main>
+<p><p><span class="letterb">T</span>he <a href="http://www.Japi.de">Japi</a> library is a free GUI toolkit which allows for easy creation of platform independent GUI applications using the C programming language. Since the result is a C library other non-object oriented languages can load this library (when compiled with the GNU compiler collection) and utilize the <a href="http://www.Japi.de">Japi</a> library. Those languages (actually supported by the project) are: Fortran, Pascal and even Basic. Check out more on the project page at <a href="http://www.Japi.de">http://www.Japi.de</a>!</p>
+
+<p>Back in 2015 my college classmates Vera Christ and Daniel Vivas Estevao and I developed a new version of the <em>Japi kernel</em> as a project. The &raquo;kernel&laquo; of the Japi library (written in Java) is the part which handles the GUI requests from the library (written in C). The principle of operation is comparable to the X server which receives requests for placing GUI elements (&raquo;Japi Calls&laquo;) and drawing them.</p>
+
+<p>But in the original version of the Japi library the kernel is implemented using the AWT GUI toolkit of Java which is by now very old and not very usable (anymore). Therefore our project goal was the recreation of the Japi kernel by retaining full compatibility to the Japi library but migrating the kernel to use Java SWING instead of AWT. It provides much better GUI capabilities although it is also very old and has some bugs here and there.</p>
+
+
+<p><b>If you are intereseted, go checkout the Git repository <a href="https://github.com/maxstrauch/Japi2-kernel" target="_blank">here</a>. There you'll find the source code along with an extensive documentation of the entire project.</b></p>
+
+<h1>Screenshots</h1>
+
+<p>In the following only some exemplary screenshots of some features of the Japi 2 kernel are shown.</p>
+
+<div class="gallery-box">
+  <a href="screenshots/01-menu.png" data-simplbox="gallery1"><img src="screenshots/01-menu.jpg" alt="The Japi 2 kernel integrates itself into the system tray giving control over its features." /></a>
+
+  <a href="screenshots/02-about.png" data-simplbox="gallery1"><img src="screenshots/02-about.jpg" alt="The about dialog." /></a>
+
+  <a href="screenshots/03-debug.png" data-simplbox="gallery1"><img src="screenshots/03-debug.jpg" alt="Once debugging is enabled all Japi calls are shown in the console log to trace any errors." /></a>
+
+  <a href="screenshots/04-vumeter.png" data-simplbox="gallery1"><img src="screenshots/04-vumeter.jpg" alt="A custom Japi component: a volt meter." /></a>
+
+  <a href="screenshots/05-filedialog.png" data-simplbox="gallery1"><img src="screenshots/05-filedialog.jpg" alt="Japi provides also file access on the local machine." /></a>
+
+  <a href="screenshots/06-slider.png" data-simplbox="gallery1"><img src="screenshots/06-slider.jpg" alt="Sliders are supported as well." /></a>
+
+  <a href="screenshots/07-graphics.png" data-simplbox="gallery1"><img src="screenshots/07-graphics.jpg" alt="The Japi library provides many drawing primitives to create custom graphics." /></a>
+
+  <a href="screenshots/08-layout.png" data-simplbox="gallery1"><img src="screenshots/08-layout.jpg" alt="This is one of the integrated layout managers to organize GUI elements inside a frame." /></a>
+
+  <a href="screenshots/09-radio.png" data-simplbox="gallery1"><img src="screenshots/09-radio.jpg" alt="Different states of buttons are supported as well." /></a>
+
+  <a href="screenshots/10-rubberband.png" data-simplbox="gallery1"><img src="screenshots/10-rubberband.jpg" alt="Custom mouse listeners allow interactive modification of custom drawn canvas elements (here: a rubber band)." /></a>
+
+  <a href="screenshots/11-graphic-labels.png" data-simplbox="gallery1"><img src="screenshots/11-graphic-labels.jpg" alt="Images as labels are also supported." /></a>
+
+  <a href="screenshots/12-digits.png" data-simplbox="gallery1"><img src="screenshots/12-digits.jpg" alt="A seven segment and LED display are also supported by Japi." /></a>
+</div>
+
+
+
+    </main>
     </div>
         <footer id="site-footer">
             <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.

@@ -8,12 +8,12 @@
         <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
         <meta name="robots" content="index,follow" />
         <meta name="author" content="Maximilian Strauch" />
-        <link rel="icon" type="image/png" href="assets/favicon.png">
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-        <title>Projects</title>
-        <link href="assets/style.css" rel="stylesheet" media="screen" />
-        <link href="assets/simplbox.css" rel="stylesheet" media="screen" />
-        <script type="text/javascript" src="assets/simplbox.min.js"></script>
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>Neptune</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
         <script type="text/javascript">
             /**
              * See http://genert.laal.ee/demo/simplbox/ for further information.
@@ -103,12 +103,12 @@
             <!-- Main header with menu -->
             <header id="sh">
                 <div class="row">
-                    <h1><a href="index.html"><img src="assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
 
                     <ul>
-                    						<li class="active"><a href="index.html"><span>Projects</span></a></li>
-						<li><a href="articles.html"><span>Articles</span></a></li>
-						<li><a href="about.html"><span>About</span></a></li>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -118,7 +118,7 @@
             <header class="ph">
                 <div class="row">
                     <div class="ph-headline">
-                        <h1 id="h1-page">Projects</h1>
+                        <h1 id="h1-page">Neptune</h1>
                         <hr />
                     </div>
                 </div>
@@ -126,42 +126,51 @@
 
                     </div>
         <main id="site-body" class="row">
-<ul id="grid">	<li class="grid-item"><a href="projects/backstage/index.html">
-	    <span style="background: url('projects/backstage/bs-title.jpg');"></span>
-	    <h1>backstage</h1>
-	    <p>A music organizer for a custom purpose with inventory management.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/neptune/index.html">
-	    <span style="background: url('projects/neptune/title.jpg');"></span>
-	    <h1>neptune</h1>
-	    <p>A network variant of the SameGame with the purpose of practicing software development.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/bert/index.html">
-	    <span style="background: url('projects/bert/bert-title.jpg');"></span>
-	    <h1>Bert downloads it!</h1>
-	    <p>A nifty little download manager written entirely in NodeJS.</p>
-	</a></li>
-	<li class="grid-item"><a href="articles/nuthatch.html">
-	    <span style="background: url('articles/nuthatch-logo.jpg');"></span>
-	    <h1>Tree-walk put in a Nutshell</h1>
-	    <p>A different approach to traversing trees implemented in the gorgeous language Haskell.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/japi2-kernel/index.html">
-	    <span style="background: url('projects/japi2-kernel/title.jpg');"></span>
-	    <h1>Japi 2 kernel</h1>
-	    <p>A GUI &raquo;toolkit&laquo; based on Java SWING for simple GUI creation in C programs.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/mod-sim/index.html">
-	    <span style="background: url('projects/mod-sim/title.jpg');"></span>
-	    <h1>Cute simulations</h1>
-	    <p>Newton Fractal, WaTor and Nagel-Schreckenberg traffic simulation applications.</p>
-	</a></li>
-	<li class="grid-item"><a href="projects/media-center/index.html">
-	    <span style="background: url('projects/media-center/media-center-title.jpg');"></span>
-	    <h1>OpenELEC Media Center</h1>
-	    <p>Experiences of turing a Raspberry Pi A+ into a media center.</p>
-	</a></li>
-</ul>    </main>
+
+<ul class="toc">
+<li class="header">Table of Contents</li>
+<li class="anchor"><a href="#details">Details of Neptune</a></li>
+<li class="anchor"><a href="#screenshots">Screenshots</a></li>
+<li class="git"><a href="https://github.com/maxstrauch/neptune" target="_blank">Neptune Git repo</a></li>
+</ul>
+
+<p><span class="letterb">F</span>rom the time on when I first got my hands on networking in general, Ethernet and especially the Java Net API I was really fascinated by the fact that this technology connects devices and allows for a hughe pile of use cases. My first experience with networking and &raquo;social-networking&laquo; <i class="icon-emo-sunglasses"></i> was the good old <code>net send</code> command on a Windows 2000 network. It was a huge fun to hound my classmates.</p>
+
+<p>When I got introduced to Java I really wanted to create my own network protocol like SMTP or POP3 and send messages over the network. The only missing thing was a rather interesting scenario. I eventually selected the famous SameGame and thought it would be a nice experiment to create a variant which consists of a speed run between participants which can thus compete against each other.</p>
+
+<h1><a name="details"></a>Details</h1>
+
+<p>The architecture of Neptune is fairly simple: a server allows users to register or <em>login into</em>. The connected clients can then participate at a game. But only between two and four clients (players) can play a game. As soon as all clients are ready the game starts. The game is finished if no further draw is possible. The player with the highest point count wins - every removed set of blocks yields a specific amount of points (see <code>com.neptune.model.DefaultGameCounter</code> class for details).</p>
+
+<p>During development of Neptune I spend special attention to the architectural design of the application. I used a modified MVC design pattern along with interfaces and abstract classes to organize the code in a neat and orderly way. The <a href="https://github.com/maxstrauch/neptune" target="_blank">source code repository</a> of Neptune provides also the protocol specification.
+
+<p>Recapitulating I can say that I learned a lot about structuring source code back then (2009). It was a fun project but the most satisfying part was the fact that my computer science teacher dedicated a lesson to this project and all my classmates &raquo;tested&laquo; Neptune. <em>That was a fun lesson for everyone.</em></p>
+
+
+<h1><a name="screenshots"></a>Screenshots of Neptune</h1>
+
+<div class="gallery-box">
+  <a href="screenshots/01.png" data-simplbox="gallery1"><img src="screenshots/01.jpg" alt="The initial window allows the selection of the program mode: it can be started as server or client." /></a>
+
+  <a href="screenshots/02-client.png" data-simplbox="gallery1"><img src="screenshots/02-client.jpg" alt="In client mode Neptune needs the IP address and TCP port of the Neptune server to connect to ..." /></a>
+
+  <a href="screenshots/03-server.png" data-simplbox="gallery1"><img src="screenshots/03-server.jpg" alt="... or in server mode Neptune only needs to know on which port to listen. By default it's 6666." /></a>
+
+  <a href="screenshots/04-server.png" data-simplbox="gallery1"><img src="screenshots/04-server.jpg" alt="The server GUI is pretty simple: it shows all client connections and the history of the current or last game (if any). Furthermore clients can be disconnected ;-)" /></a>
+
+  <a href="screenshots/05-participate.png" data-simplbox="gallery1"><img src="screenshots/05-participate.jpg" alt="On the client side one starts a game by entering a nickname ..." /></a>
+
+  <a href="screenshots/06-ready.png" data-simplbox="gallery1"><img src="screenshots/06-ready.jpg" alt="... and one then gets the ready screen. If all participants clicked the PLAY button the game starts." /></a>
+
+  <a href="screenshots/07-game.png" data-simplbox="gallery1"><img src="screenshots/07-game.jpg" alt="A typical view of a competition between two players." /></a>
+
+  <a href="screenshots/08-finished.png" data-simplbox="gallery1"><img src="screenshots/08-finished.jpg" alt="The finish screen shows the results of the match." /></a>
+
+  <a href="screenshots/09-another.png" data-simplbox="gallery1"><img src="screenshots/09-another.jpg" alt="Neptue allows for a maximum of four players." /></a>
+</div>
+
+
+    </main>
     </div>
         <footer id="site-footer">
             <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
