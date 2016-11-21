@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Vote! - Neu</title>
+	<link type="text/css" rel="stylesheet" media="screen" href="style.css" />
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="neu.js"></script>
+</head>
+<body>
+
+
+	<div id="topbar">
+		<ul>
+			<li>Vote! - Verwaltung</li>
+
+			<!--
+			<li class="right"><a href="" id="thisElem" onclick="$('thisElem').toggleClass('selected'); $('dropdown').toggleClass('show-dropdown'); return false;">Anmelden</a></li>-->
+
+
+
+			<li class="right"><a href="index.html#logout">Logout</a></li>
+			<li class="right text">Howdy, John Doe!</li>
+			<li class="right separator"></li>
+
+
+
+			<li class="right"><a href="#" class="active">DE</a></li>
+			<li class="right"><a href="#">EN</a></li>
+			
+		</ul>
+		<div class="clearfix"></div>
+		<!--<div id="dropdown">
+		</div>-->
+	</div>
+
+
+
+
+
+	<div id="wrapper">
+
+<p class="danger" id="jscheck">
+	<strong>Javascript wird benötigt</strong>
+	Bitte aktivieren Sie Javascript!
+</p>
+
+		<h1>Neue Wahl anlegen</h1>
+		<p>Mit diesem Formular können Sie eine neue Wahl anlegen. Fahren Sie über die "<a class="tooltip">(?)<span>Hinweise zu den Feldern.</span></a>", um weitere Informationen zu erhalten. Außerdem muss Javascript aktiviert sein, um dieses Formular richtig verwenden zu können.</p>
+
+		<form class="form" method="get" action="admin.html">
+			<h1>Allgemeine Daten</h1>
+
+			<div>
+				<label for="textFeld">Titel
+					<a class="tooltip">(?)<span>Hier steht Hilfe zum Feld mit
+						einiger Erklärung der Möglichkeiten.</span>
+					</a>
+				</label>
+				<input type="text" class="large" id="textFeld" />
+			</div>
+
+			<div>
+				<label for="startDate">Startdatum
+				<a class="tooltip">(?)<span>Format: TT.MM.JJJJ SS:MM</span>
+					</a>
+				</label>
+				<input type="text" class="small" id="startDate" value="14.06.2014 12:15" />
+			</div>
+
+			<div>
+				<label for="endDate">Enddatum
+				<a class="tooltip">(?)<span>Format: TT.MM.JJJJ SS:MM</span>
+					</a>
+				</label>
+				<input type="text" class="small" id="endDate" value="19.06.2014 12:15" />
+			</div>
+
+
+
+			<div>
+				<label for="tracking">Tracking aktivieren
+				</label>
+				<!--<div class="group">
+					<input type="checkbox" name="tracking" />
+					<p class="notice">Durch das Aktivieren dieser Option, können Sie später die Teilnahmen an der Wahl verfolgen und Teilnehmer auf versäumte Teilnahmen innerhalb der Laufzeit der Wahl hinweisen.
+						<br/>
+						<br/>
+
+						<label for="tracking1">
+							<input type="checkbox" id="tracking1" name="tracking1" />
+							E-Mail Erinnerung versenden, wenn noch nicht gewählt nach:
+						</label>
+
+					
+
+					</p>
+				</div>-->
+
+					<select class="large">
+								<option>Nicht verwenden</option>
+								<option>Verwenden und Nichtwähler nach 60% der Zeit erinnern</option>
+								<option>Verwenden und Nichtwähler nach 70% der Zeit erinnern</option>
+								<option>Verwenden und Nichtwähler nach 80% der Zeit erinnern</option>
+								<option>Verwenden und Nichtwähler nach 90% der Zeit erinnern</option>
+							</select>
+			</div>
+
+			<div>
+				<label for="textare">Beschreibung
+				<a class="tooltip">(?)<span>Langes Textfeld.</span>
+					</a>
+				</label>
+				<textarea id="textarea" class="large" rows="7">Hallo Welt!</textarea>
+			</div>
+
+
+	<h1>Fragen</h1>
+
+
+	<div class="ignore" id="questionplace">
+
+
+
+	</div>
+
+	
+
+	<div class="ctrl">
+		<button id="addQuestion" class="slim">+</button>
+		<script>
+			var old = window.onload;
+			window.onload = function() {
+				old();
+				document.getElementById("addQuestion").onclick();
+			};
+		</script>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<h1>Teilnehmer</h1>
+
+			<div>
+				<label for="participants">Teilnehmerliste
+				<a class="tooltip">(?)<span>Teilnehmer, die einen Wahlschein bekommen. Doppelte Adressen werden später herausgefiltert.</span>
+					</a>
+				</label>
+				
+<div class="group">
+
+
+				<select size="10" multiple="multiple" class="total" id="participants" name="participants">
+				</select>
+
+
+
+<hr class="silent-half" />
+<div class="tabpane inv">
+	<ul>
+		<li><a href="#" class="selected">Alte Wahlen</a></li>
+		<li><a href="#">Einzelauswahl</a></li>
+		<li><a href="#">E-Mail Liste</a></li>
+		<li><button onclick="return false;" class="drop" id="removeParticipants">Teilnehmer entfernen</button></li>
+	</ul>
+	<div class="tab">
+		
+				<span>Alle Teilnehmer einer vergangenen Wahl hinzufügen:</span>
+				<select id="participantGroups">
+			      <option value="foo@foobar.en">Bundestagswahlvorumfrage (22 Teilnehmer)</option>
+			       <option value="anon@ara.org;foobar@foo.de">Dies und Das? (11 Teilnehmer)</option>
+			       <option value="anon@ara.org;foobar@foo.de;42@4.de;mail@mail.de;123123anon1@ara.org;foobar11221@foo.de;42123123@4.de;mail123123@mail.de;">Veganes und Co. (8 Teilnehmer)</option>
+			       <option value="42@42.org">...</option>
+				</select>
+				
+				<div class="ctrl">
+
+					<button onclick="return false;" id="addParticipantGroup">
+					Alle Teilnehmer hinzufügen
+				</button>
+
+			</div>
+
+
+
+	</div>
+	<div class="tab hidden">
+
+
+				<span>Einzelne Teilnehmer einer vergangenen Wahl hinzufügen:</span>
+				<select id="participantList">
+			        <option value="anna@mail.de">Anna</option>
+			        <option value="achim@mail.de">Achim</option>
+			        <option value="august@mail.de">August</option>
+			        <option value="berta@mail.de">Berta</option>
+			        <option value="barbara@mail.de">Barbara</option>
+			        <option value="bernhard@mail.de">Bernhard</option>
+			        <option value="caesar@mail.de">Caesar</option>
+			        <option value="christiane@mail.de">Christiane</option>
+			        <option value="christian@mail.de">Christian</option>
+				</select>
+				
+				<div class="ctrl">
+
+					<button onclick="return false;" id="addParticipant">
+					Teilnehmer hinzufügen
+				</button>
+				</div>
+
+
+	</div>
+	<div class="tab hidden">
+		
+<span>Fügen Sie eine Teilnehmerliste von E-Mail-Adressen in das Textfeld. Es wird dann versucht diese automagisch zu erkennen:</span>
+
+
+		<textarea rows="6" id="rawParticipants">KLIPS CSV Export;;;;
+			Name;Vorname;Matrikelnr;E-Mail;
+			Düsentrib;Daniel;1235553;daniel@duesentrib.de;
+			Micky;Mouse;345211232;mouse@disney.com;
+
+
+    biscuits@demo.sympa.org
+
+Biscuits
+
+    blargh@demo.sympa.org
+
+A test list.
+
+    bob@demo.sympa.org
+
+What about bob?
+
+    boletin_noticias@demo.sympa.org
+
+Boletin noticias
+
+    chancecoxtest@demo.sympa.org
+
+test
+
+    cisco@demo.sympa.org
+
+Cisco Router
+
+    cms@demo.sympa.org
+
+Tourismus im Glarnerland
+
+    colca-1@demo.sympa.org
+
+Colca
+
+    cp4ouest@demo.sympa.org
+
+Conseil de Parents du 4ème (Secteur Ouest)
+
+    ctxtest@demo.sympa.org
+
+test
+
+    cupcake@demo.sympa.org
+		</textarea>
+
+
+				<div class="ctrl">
+
+					<button onclick="return false;" id="addParticipantsFromText">
+					E-Mail Adressen erkennen & hinzufügen
+				</button>
+				</div>
+
+	</div>
+</div>
+
+</div>
+
+
+
+
+			</div>
+
+
+
+			<h1>Organisatoren</h1>
+
+
+			<div>
+				<label for="participants">Organisatoren
+				<a class="tooltip">(?)<span></span>
+					</a>
+				</label>
+				
+<div class="group">
+
+
+				<select size="5" multiple="multiple" class="total" id="organisators" name="organisators">
+					<option disabled="disabled" value="0">Ich</option>
+				</select>
+
+<p>
+	<select id="organisatorsAll" class="small">
+		<option value="1">Peter</option>
+		<option value="2">Friederich</option>
+		<option value="3">Bud</option>
+	</select>
+<button id="addOrga">Hinzufügen</button>
+<button id="removeOrga" class="drop">Entfernen</button>
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+			<div class="ctrl">
+				<a href="admin.html">Abbrechen</a>&nbsp;oder
+				<input type="submit" name="button2" value="Speichern" />
+				&nbsp;oder
+				<input type="submit" name="button" value="Speichern & veröffentlichen" />
+			</div>
+		</form>
+
+
+		<p id="footer">
+			Vote! Version 42.42 &copy; 2014 Daniel Vivas Estevao, Maximilian Strauch
+		</p>
+
+	</div>
+
+</body>
+</html>

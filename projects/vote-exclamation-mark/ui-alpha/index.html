@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Vote! - Willkommen</title>
+	<link type="text/css" rel="stylesheet" media="screen" href="style.css" />
+		
+	<script type="text/javascript" src="script.js"></script>
+
+	<script type="text/javascript">
+
+
+		var old = window.onload;
+		window.onload = function() {
+			old();
+			
+			if (window.location.href.indexOf('okay') > -1) {
+				document.getElementById("prepre").style.display = "block";
+			} else {
+				document.getElementById("prepre").style.display = "none";
+			}
+
+			if (window.location.href.indexOf('logout') > -1) {
+				document.getElementById("prepre1").style.display = "block";
+			} else {
+				document.getElementById("prepre1").style.display = "none";
+			}
+		};
+	</script>
+</head>
+<body>
+
+
+	<div id="topbar">
+		<ul>
+			<li>Vote!</li>
+
+			<li class="right"><a href="" id="thisElem" onclick="$('thisElem').toggleClass('selected'); $('dropdown').toggleClass('show-dropdown'); return false;">Anmelden</a></li>
+
+			<li class="right separator"></li>
+
+
+
+			<li class="right"><a href="#" class="active">DE</a></li>
+			<li class="right"><a href="#">EN</a></li>
+			
+		</ul>
+		<div class="clearfix"></div>
+		<div id="dropdown"><!-- class="show-dropdown"-->
+			<h1>Anmelden</h1>
+
+			<p>Melden Sie sich an, um neue Abstimmungen zu erzeugen oder vorhandene zu bearbeiten. Sofern Sie über einen administrativen Zugang verfügen, können Sie sich auch als Administrator anmelden.<br/><b>Click on &raquo;Anmelden&laquo; to login!</b></p>
+
+		<form class="block-form" action="admin.html" method="get">
+			<label for="username">
+				Benutzername: 
+			</label>
+			<input id="username" type="text" />
+
+			<label for="passwd">
+				Kennwort: 
+			</label>
+			<input id="passwd" type="password" />
+
+			<!--
+			<label for="cbs">
+				<input type="checkbox" value="SSS" id="cbs" />
+				Als Administrator
+			</label>-->
+			
+			<input type="submit" value="Anmelden" />
+
+			&nbsp;oder&nbsp;
+
+			<button onclick="window.location.href = 'sysmin.html'; return false;" class="drop">Als Administrator Anmelden</button>
+
+
+
+		</form>
+
+
+		</div>
+	</div>
+
+
+
+
+
+	<div id="wrapper">
+
+
+		<blockquote>
+			<img src="icon-large.png" />
+			<h1>Vote!</h1>
+			<p>
+				Vote ist ein modernes, freies und schönes Tool, um Wahlen durchzuführen. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+		</blockquote>
+
+<p class="danger" id="jscheck">
+	<strong>Javascript wird benötigt</strong>
+	Bitte aktivieren Sie Javascript!
+</p>
+
+<p class="info" id="prepre">
+	<strong>Vielen Dank für Ihre Teilnahme</strong>
+	Vielen Dank, dass Sie sich an der Wahl beteiligt haben. Ihre Stimme wurde erfolgreich gespeochert und dem Ergebnis hinzugeüft.
+</p>
+
+<p class="info" id="prepre1">
+	<strong>Abmeldung erfolgreich</strong>
+	Sie wurden erfolgreich aus dem System abgemeldet!
+</p>
+
+		<p>
+Wenn Sie zu einer Wahl eingeladen wurden, dann können Sie hier teilnehemen durch Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+		</p>
+
+		<p>
+Geben Sie dazu einfach die TAN ein oder folgen Sie dem Link aus der E-Mail.
+		</p>
+
+<hr class="silent" />
+		
+		<form class="condensed-form center" action="vote.html" method="get">
+			<input id="username" type="text" />
+			<input type="submit" value="Jetzt wählen!" />
+		</form>
+
+<hr class="silent" />
+
+		<p id="footer">
+			Vote! Version 42.42 &copy; 2014 Daniel Vivas Estevao, Maximilian Strauch
+		</p>
+
+	</div>
+
+</body>
+</html>

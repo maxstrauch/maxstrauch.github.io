@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Vote! - Neu</title>
+	<link type="text/css" rel="stylesheet" media="screen" href="style.css" />
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="neu.js"></script>
+</head>
+<body>
+
+
+	<div id="topbar">
+		<ul>
+			<li>Vote! - Verwaltung</li>
+
+			<!--
+			<li class="right"><a href="" id="thisElem" onclick="$('thisElem').toggleClass('selected'); $('dropdown').toggleClass('show-dropdown'); return false;">Anmelden</a></li>-->
+
+
+
+			<li class="right"><a href="index.html#logout">Logout</a></li>
+			<li class="right text">Howdy, John Doe!</li>
+			<li class="right separator"></li>
+
+
+
+			<li class="right"><a href="#" class="active">DE</a></li>
+			<li class="right"><a href="#">EN</a></li>
+			
+		</ul>
+		<div class="clearfix"></div>
+		<!--<div id="dropdown">
+		</div>-->
+	</div>
+
+
+
+
+
+	<div id="wrapper">
+
+<p class="danger" id="jscheck">
+	<strong>Javascript wird benötigt</strong>
+	Bitte aktivieren Sie Javascript!
+</p>
+
+		<h1>Veröffentlichte Wahl bearbeiten</h1>
+		<p>Mit diesem Formular können Sie eine neue Wahl bearbeiten. Da die Wahl veröffentlicht ist, können nicht mehr alle Details geändert werden!</p>
+
+
+<p class="info">
+<strong>Wahl bereits veröffentlicht</strong>
+Diese Wahl wurde am XX.XX.XXXX um XX:XX Uhr veröffentlicht und ist daher nur eingeschränkt bearbeitbar.
+</p>
+
+		<form class="form" method="get" action="admin.html">
+			<h1>Allgemeine Daten</h1>
+
+			<div>
+				<label for="textFeld">Titel
+					<a class="tooltip">(?)<span>Hier steht Hilfe zum Feld mit
+						einiger Erklärung der Möglichkeiten.</span>
+					</a>
+				</label>
+				<input type="text" class="large" id="textFeld" disabled="disabled" value="Titel der Wahl ist hier eingesetzt" />
+			</div>
+
+
+			<div>
+				<label for="endDate">Enddatum
+				<a class="tooltip">(?)<span>Format: TT.MM.JJJJ SS:MM</span>
+					</a>
+				</label>
+				<input type="text" class="small" id="endDate" value="19.06.2014 12:15" />
+			</div>
+
+
+
+			<div>
+				<label for="tracking">Tracking aktivieren
+				</label>
+				<!--<div class="group">
+					<input type="checkbox" name="tracking" />
+					<p class="notice">Durch das Aktivieren dieser Option, können Sie später die Teilnahmen an der Wahl verfolgen und Teilnehmer auf versäumte Teilnahmen innerhalb der Laufzeit der Wahl hinweisen.
+						<br/>
+						<br/>
+
+						<label for="tracking1">
+							<input disabled="disabled" type="checkbox" id="tracking1" name="tracking1" />
+							E-Mail Erinnerung versenden, wenn noch nicht gewählt nach:
+						</label>
+-->
+					<select class="large" disabled="disabled">
+								<option>Nicht verwenden</option>
+								<option>Verwenden und Nichtwähler nach 60% der Zeit erinnern</option>
+								<option>Verwenden und Nichtwähler nach 70% der Zeit erinnern</option>
+								<option>Verwenden und Nichtwähler nach 80% der Zeit erinnern</option>
+								<option>Verwenden und Nichtwähler nach 90% der Zeit erinnern</option>
+							</select>
+
+
+
+					<!--</p>
+				</div>-->
+			</div>
+
+
+			<div>
+				<label for="imm">Sofortige Erinnerung
+				</label>
+				<div class="group">
+					<input type="checkbox" id="imm">
+					<p>Nach dem Speichern sofort eine E-Mail Benachrichtigung an alle Teilnehmer senden, die noch nicht gewählt haben.</participants>
+				</div>
+			</div>
+
+<!--
+			<div>
+				<label for="textare">Beschreibung
+				<a class="tooltip">(?)<span>Langes Textfeld.</span>
+					</a>
+				</label>
+				<textarea id="textarea" disabled="disabled" class="large" rows="7">Hallo Welt!</textarea>
+			</div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<h1>Teilnehmer</h1>
+
+			<div>
+				<label for="participants">Teilnehmerliste
+				<a class="tooltip">(?)<span>Teilnehmer, die einen Wahlschein bekommen. Doppelte Adressen werden später herausgefiltert.</span>
+					</a>
+				</label>
+				
+<div class="group">
+
+
+				<select disabled="disabled" size="10" multiple="multiple" class="total" id="participants" name="participants">
+					<option>Fritzchen</option>
+				</select>
+
+</div>
+</div>
+
+			<h1>Organisatoren</h1>
+
+
+			<div>
+				<label for="participants">Organisatoren
+				<a class="tooltip">(?)<span></span>
+					</a>
+				</label>
+				
+<div class="group">
+
+
+				<select size="5" multiple="multiple" class="total" id="organisators" name="organisators">
+					<option disabled="disabled" value="0">Ich</option>
+				</select>
+
+<p>
+	<select id="organisatorsAll" class="small">
+		<option value="1">Peter</option>
+		<option value="2">Friederich</option>
+		<option value="3">Bud</option>
+	</select>
+<button id="addOrga">Hinzufügen</button>
+<button id="removeOrga" class="drop">Entfernen</button>
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+			<div class="ctrl">
+				<a href="admin.html">Abbrechen</a>&nbsp;oder
+				<input type="submit" name="button2" value="Speichern" />
+			</div>
+		</form>
+
+
+		<p id="footer">
+			Vote! Version 42.42 &copy; 2014 Daniel Vivas Estevao, Maximilian Strauch
+		</p>
+
+	</div>
+
+</body>
+</html>

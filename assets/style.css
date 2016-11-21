@@ -99,6 +99,31 @@ h1 code {
 	font-size: inherit !important;
 }
 
+blockquote {
+	background-color: #F1F7F0;
+	border-left: solid 7px #31AB21;
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
+	width: 66.6667%;
+	margin-left: 16.6667%;
+}
+blockquote:before {
+	color: #ccc;
+	content: open-quote;
+	font-family: 'Times New Roman', serif;
+	font-size: 4em;
+	line-height: 0;
+	margin-right: 0.25em;
+	color: #31AB21;
+	vertical-align: -0.5em;
+}
+
+blockquote p {
+	display: block;
+	width: 100% !important;
+	margin-left: 0 !important;
+}
+
 .clearfix { clear: both; }
 
 .row {
@@ -367,7 +392,7 @@ ul#grid .grid-item a span {
 	padding: 0;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: top center;
 	border-radius: 3px;
 }
 
@@ -551,6 +576,7 @@ ul.toc {
 	border-radius: 3px;
 	padding: 14px;
 	list-style: none;
+	background-color: white;
 }
 
 ul.toc li.header {
@@ -673,3 +699,5 @@ footer#site-footer a:hover, footer#site-footer a:focus {
 .icon-emo-happy:before { content: '\e80e'; } 
 .icon-cc:before { content: '\e80f'; } 
 .icon-download:before { content: '\e810'; } 
+
+.icon-size-fix { font-size: 80%; }

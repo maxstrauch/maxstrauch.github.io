@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Vote! - Wählen ...</title>
+	<link type="text/css" rel="stylesheet" media="screen" href="style.css" />
+
+<script type="text/javascript" src="script.js"></script>
+
+
+</head>
+<body>
+
+
+	<div id="topbar">
+		<ul>
+			<li>Vote!</li>
+
+			<li class="right"><a href="" id="thisElem" onclick="$('thisElem').toggleClass('selected'); $('dropdown').toggleClass('show-dropdown'); return false;">Anmelden</a></li>
+
+			<li class="right separator"></li>
+
+
+
+			<li class="right"><a href="#" class="active">DE</a></li>
+			<li class="right"><a href="#">EN</a></li>
+			
+		</ul>
+		<div class="clearfix"></div>
+		<div id="dropdown">
+			<h1>Anmelden</h1>
+
+			<p>Melden Sie sich an, um neue Abstimmungen zu erzeugen oder vorhandene zu bearbeiten. Sofern Sie über einen administrativen Zugang verfügen, können Sie sich auch als Administrator anmelden.</p>
+
+		<form class="inline-form" onsubmit="return confirm('Aktive Wahl verwerfen und wirklich anmelden?');" action="admin.html" method="get">
+			<label for="username">
+				Benutzername: 
+			</label>
+			<input id="username" type="text" />
+
+			<label for="passwd">
+				Kennwort: 
+			</label>
+			<input id="passwd" type="password" />
+
+			<!--
+			<label for="cbs">
+				<input type="checkbox" value="SSS" id="cbs" />
+				Als Administrator
+			</label>-->
+			
+			<input type="submit" value="Anmelden" />
+
+			&nbsp;oder&nbsp;
+
+			<button onclick="window.location.href = 'sysmin.html'; return false;" class="drop">Als Administrator Anmelden</button>
+
+		</form>
+
+
+		</div>
+	</div>
+
+
+
+
+
+	<div id="wrapper">
+
+
+		<h1>Wahl XYZ, Codename: Redmond</h1>
+
+		<p>
+Der nachfolgende Text stellt die Beschreibung dar: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.
+		</p>
+
+
+<form name="vote" action="index.html#okay" method="get">
+
+<hr class="silent-half" />
+
+<div class="vote">
+	<h1>
+		Welche Partei soll gewählt werden bei der nächsten Wahl?
+		<strong class="notice">Für eine gültige Stimme muss genau eine Option oder 
+			die Option "ungültig" gewählt werden. Ansonsten wird die Wahl als ungültig angenommen!</strong>
+	</h1>
+	<ul>
+		<li><input id="female4" type="radio" name="gender" value="female">  
+        <label for="female4">
+        	<strong>Die Einen</strong>
+        	<!--
+        	<strong class="desc">Eine sehr spezielle Partei, die man lieber nicht alleine
+        		regieren lassen sollte!</strong>-->
+        </label></li>
+        <li><input id="female3" type="radio" name="gender" value="memale">  
+        <label for="female3">
+        	<strong>Reiner &amp; Co.</strong>
+        	<strong class="desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</strong>
+        </label></li>
+        <li><input id="female2" type="radio" name="gender" value="dimale">  
+        <label for="female2">
+        	<strong>HSP</strong>
+        	<strong class="desc">Eine sehr spezielle Partei, die man lieber nicht alleine
+        		regieren lassen sollte!</strong>
+        </label></label></li>
+        <li><input id="female1" type="radio" name="gender" value="dimale">  
+        <label for="female1">
+        	<strong class="void">Ungültig</strong>
+        </label></label></li>
+	</ul>
+</div>
+
+
+<hr class="silent-half" />
+
+<div class="vote"> <!-- minoptions="1" maxoptions="1" voidid="f4"> -->
+	<h1>
+		Suchen Sie sich einige Optionen aus!
+
+<strong class="notice">Für eine gültige Stimme müssen genau zwei Optionen oder 
+			die Option "ungültig" gewählt werden. Ansonsten wird die Wahl als ungültig angenommen!</strong>
+
+		<!--<span>1 Optionen muss gewählt werden!</span>
+		<strong class="validation danger">Es müssen genau 1 Optionen gewählt werden, sonst ist die Wahl ungültig.</strong>-->
+	</h1>
+	<ul>
+		<li><input id="f1" type="checkbox" name="gender1" value="female">  
+        <label for="f1">
+        	<strong>Die SciFi Freunde</strong>
+        	<!--
+        	<strong class="desc">Eine sehr spezielle Partei, die man lieber nicht alleine
+        		regieren lassen sollte!</strong>-->
+        </label></li>
+        <li><input id="f2" type="checkbox" name="gender1" value="memale">  
+        <label for="f2">
+        	<strong>Zen</strong>
+        	<strong class="desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy <a href="#top">eirmod</a> tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</strong>
+        </label></li>
+        <li><input id="f3" type="checkbox" name="gender1" value="dimale">  
+        <label for="f3">
+        	<strong>HSP</strong>
+        	<strong class="desc">Eine sehr spezielle Partei, die man lieber nicht alleine
+        		regieren lassen sollte!</strong>
+        </label></label></li>
+        <li><input id="f4" type="checkbox" name="gender1" value="dimale">  
+        <label for="f4">
+        	<strong class="void">Ungültig</strong>
+        </label></label></li>
+	</ul>
+</div>
+
+
+<hr class="silent-half" />
+
+<div class="vote" minoptions="2" maxoptions="2" voidid="f41">
+	<h1>
+		Was mögen Sie gerne?
+		<span>2 Optionen müssen gewählt werden</span>
+		<!--<strong class="validation danger">Es müssen genau 2 Optionen gewählt werden, sonst ist die Wahl ungültig.</strong>-->
+	</h1>
+
+	<ul>
+		<li><input id="f11" type="checkbox" name="pizza" value="female">  
+        <label for="f11">
+        	<strong>Pizza</strong>
+        	<strong class="desc">
+        		Typ ist egal; Magarita, FooBar, BarFoo, Funghi, Dungi, Mungi, Mundo, Daniel 
+        		<a href="#" class="tooltip">(?)
+        			<span>Neu im Programm und nur noch begrenzt verfügbar.</span></a>.
+        	</strong>
+        </label></li>
+        <li><input id="f21" type="checkbox" name="pizza" value="memale">  
+        <label for="f21">
+        	<strong>Wurst</strong>
+        </label></li>
+        <li><input id="f31" type="checkbox" name="pizza" value="dimale">  
+        <label for="f31">
+        	<strong>Salat</strong>
+        	<strong class="desc">Eisberg-Salat, gemischter Salat, Nudelsalat (vegan), FooBar salat, Barfoo salat, Dings Salat, Feldsalat, Kabelsalat, Datensalat, Krakensalat, Wartsalat, Martsalat...</strong>
+        </label></label></li>
+        <li><input id="f41" type="checkbox" name="pizza" value="dimale">  
+        <label for="f41">
+        	<strong class="void">Ungültig</strong>
+        </label></label></li>
+	</ul>
+</div>
+
+<hr class="silent-half" />
+
+
+		<p class="notice">
+			<strong>Wahlhinweis!</strong>
+			Ob die einzelnen Wahlen ungültig sind bleibt Ihnen überlassen. Wird das Formular mit Fehlern abgeschickt, wird wie bei einer echten Wahl, auf Ungültigkeit geprüft und nicht nochmal nachgefragt und der Walschein ungültig gemacht (keine weitere Wahl möglich).
+		</p>
+
+<div class="right">
+
+	<a href="index.html" class="tooltip">Abbrechen und nichts tun
+		<span>Keine Daten werden gespeichert und der Wahlschein wird 
+			auch nicht entwertet.</span></a>
+	&nbsp;
+	<em>oder</em>
+	&nbsp;
+	<input type="submit" value="Komplett ungültig wählen & Wahlschein entwerten" />
+	&nbsp;
+	<em>oder</em>
+	&nbsp;
+	<input type="submit" value="Wählen & Wahlschein entwerten" />
+
+</div>
+<div class="clearfix"></div>
+
+<hr class="silent-half" />
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<p id="footer">
+			Vote! Version 42.42 &copy; 2014 Daniel Vivas Estevao, Maximilian Strauch
+		</p>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Layout Übersicht</title>
+	<link type="text/css" rel="stylesheet" media="screen" href="../style.css" />
+	<script type="text/javascript" src="../script.js"></script>
+</head>
+<body>
+
+
+	<div id="topbar">
+		<ul>
+			<li>Vote!</li>
+
+			<li class="right"><a href="" id="thisElem" onclick="$('thisElem').toggleClass('selected'); $('dropdown').toggleClass('show-dropdown'); return false;">Anmelden</a></li>
+
+<li class="right text">Howdy Administrator!</li>
+
+			<li class="right separator"></li>
+
+
+
+			<li class="right"><a href="#" class="active">DE</a></li>
+			<li class="right"><a href="#">EN</a></li>
+			
+		</ul>
+		<div class="clearfix"></div>
+		<div id="dropdown">
+			<h1>Anmelden</h1>
+
+			<p>Melden Sie sich an, um neue Abstimmungen zu erzeugen oder vorhandene zu bearbeiten. Sofern Sie über einen administrativen Zugang verfügen, können Sie sich auch als Administrator anmelden.</p>
+
+		<form class="inline-form">
+			<label for="username">
+				Benutzername: 
+			</label>
+			<input id="username" type="text" />
+
+			<label for="passwd">
+				Kennwort: 
+			</label>
+			<input id="passwd" type="password" />
+
+			
+			<label for="cbs">
+				<input type="checkbox" value="SSS" id="cbs" />
+				Als Organisator
+			</label>
+			
+			<input type="submit" value="Anmelden" />
+
+		</form>
+
+
+		</div>
+	</div>
+
+
+
+
+
+	<div id="wrapper">
+
+
+		<blockquote>
+			<img src="../icon-large.png" />
+			<h1>Vote!</h1>
+			<p>
+				Vote ist ein modernes, freies und schönes Tool, um Wahlen durchzuführen. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+		</blockquote>
+
+
+
+		<h1>Überschrift 1</h1>
+		<h2>Überschrift 2</h2>
+		<h3>Überschrift 3</h3>
+		<h4>Überschrift 4</h4>
+
+
+		<p class="info">
+			<strong>Anmelden abgeschlossen</strong>
+			Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+		<p class="danger"><strong>Sie konnten nicht angemeldet werden</strong>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+		<p class="notice"><strong>Da ist einfach was passiert ...</strong>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+
+
+		<p>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+		</p>
+
+
+<hr/>
+
+
+<div class="tabpane">
+	<ul>
+		<li><a href="#" class="selected">Tab 1</a></li>
+		<li><a href="#">Tab 2</a></li>
+		<li><a href="#">Tab 3</a></li>
+	</ul>
+	<div class="tab">
+		Hallo Welt! (1)
+	</div>
+	<div class="tab hidden">
+		Hallo Welt! (2)
+	</div>
+	<div class="tab hidden">
+		Hallo Welt! (3)
+	</div>
+</div>
+
+
+
+
+<hr/>
+
+
+		<h1>Überschrift 1 <span>Ein Beitext steht hier!</span></h1>
+
+
+
+		<form class="condensed-form  center">
+			<input id="username" type="text" />
+			<input type="submit" value="Anmelden" />
+		</form>
+
+
+		<p>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+		</p>
+
+<hr/>
+
+		<form class="form" method="get" action="foobar.html">
+			<h1>Titel des formulars</h1>
+
+			<div>
+				<label for="textFeld">Namen
+					<a class="tooltip">(?)<span>Hier steht Hilfe zum Feld mit
+						einiger Erklärung der Möglichkeiten.</span>
+					</a>
+				</label>
+				<div class="group">
+					<input type="text" class="small" id="textFeld" />
+					oder
+					<input type="text" class="small" id="textFeld22" />
+				</div>
+			</div>
+
+			<div>
+				<label for="textFeld2">Uhrzeit von heute
+				<a class="tooltip">(?)<span>Bitte die aktuelle Uhrzeit eintragen.</span>
+					</a>
+				</label>
+				<input type="text" class="medium" id="textFeld2" />
+			</div>
+
+			<div>
+				<label for="textFeld23">Viel Eingabe
+				<a class="tooltip">(?)<span>Langes Textfeld.</span>
+					</a>
+				</label>
+				<input type="text" class="large" id="textFeld23" />
+			</div>
+
+			<div>
+				<label for="textare">Eine Textarea
+				<a class="tooltip">(?)<span>Langes Textfeld.</span>
+					</a>
+				</label>
+				<textarea id="textare">Hallo Welt!</textarea>
+			</div>
+
+			<div class="ctrl">
+				<a href="das eine">Abbrechen</a> oder
+				<input type="submit" name="button" value="An Daniel Senden" />
+			</div>
+		</form>
+
+
+<hr/>
+
+<form name="vote">
+
+<div class="vote">
+	<h1>
+		Welche Partei soll gewählt werden bei der nächsten Wahl?
+		<span>1 aus n muss gewählt werden!</span>
+	</h1>
+	<ul>
+		<li><input id="female4" type="radio" name="gender" value="female">  
+        <label for="female4">
+        	<strong>Die HSP (Horst Schlämmer Partei)</strong>
+
+        </label></li>
+        <li><input id="female3" type="radio" name="gender" value="memale">  
+        <label for="female3">
+        	<strong>Lorem ipsum dolor</strong>
+        	<strong class="desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</strong>
+        </label></li>
+        <li><input id="female2" type="radio" name="gender" value="dimale">  
+        <label for="female2">
+        	<strong>SciFi Fanboys</strong>
+        	<strong class="desc">Eine sehr spezielle Partei, die man lieber nicht alleine
+        		regieren lassen sollte!</strong>
+        </label></label></li>
+        <li><input id="female1" type="radio" name="gender" value="dimale">  
+        <label for="female1">
+        	<strong class="void">Ungültig</strong>
+        </label></label></li>
+	</ul>
+</div>
+
+
+<hr/>
+
+<div class="vote">
+	<h1>
+		Suchen Sie sich einige Optionen aus!
+		<span>m aus n müssen gewählt werden!</span>
+	</h1>
+	<ul>
+		<li><input id="f1" type="checkbox" name="gender1" value="female">  
+        <label for="f1">
+        	<strong>ACDC</strong>
+        	<!--
+        	<strong class="desc">Eine sehr spezielle Partei, die man lieber nicht alleine
+        		regieren lassen sollte!</strong>-->
+        </label></li>
+        <li><input id="f2" type="checkbox" name="gender1" value="memale">  
+        <label for="f2">
+        	<strong>SciFi Fanboys</strong>
+        	<strong class="desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy <a href="#top">eirmod</a> tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</strong>
+        </label></li>
+        <li><input id="f3" type="checkbox" name="gender1" value="dimale">  
+        <label for="f3">
+        	<strong>Others</strong>
+        	<strong class="desc">Eine sehr spezielle Partei, die man lieber nicht alleine
+        		regieren lassen sollte!</strong>
+        </label></label></li>
+        <li><input id="f4" type="checkbox" name="gender1" value="dimale">  
+        <label for="f4">
+        	<strong class="void">Ungültig</strong>
+        </label></label></li>
+	</ul>
+</div>
+
+
+
+<hr/>
+
+
+</form>
+
+
+
+
+
+
+<table class="table table-hover">
+   <thead>
+      <tr>
+         <th>Name</th>
+         <th>City</th>
+         <th>Pincode</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>P&auml;ffgen</td>
+         <td>New York</td>
+         <td>560001</td>
+      </tr>
+      <tr>
+         <td>Maier</td>
+         <td>Paris</td>
+         <td>400003</td>
+      </tr>
+      <tr>
+         <td>M&uuml;ller</td>
+         <td>Berlin</td>
+         <td>411027</td>
+      </tr>
+   </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<p id="footer">
+			Vote! Version 42.42 &copy; 2014 Daniel Vivas Estevao, Maximilian Strauch
+		</p>
+
+	</div>
+
+</body>
+</html>

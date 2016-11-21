@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Vote! - Verwaltung</title>
+	<link type="text/css" rel="stylesheet" media="screen" href="style.css" />
+	<script type="text/javascript" src="script.js"></script>
+
+	<script type="text/javascript">
+		var old = window.onload;
+		var fooBar2 = function() {
+			if (window.location.href.indexOf('drop') > -1) {
+				document.getElementById("prepre").style.display = "block";
+			} else {
+				document.getElementById("prepre").style.display = "none";
+			}
+
+			if (window.location.href.indexOf('cancel') > -1) {
+				document.getElementById("prepre1").style.display = "block";
+			} else {
+				document.getElementById("prepre1").style.display = "none";
+			}
+		};
+		var fooBar = function() {
+			//window.refresh();
+		};
+		window.onload = function() {
+			old();
+			fooBar2();
+		};
+	</script>
+
+</head>
+<body>
+
+
+	<div id="topbar">
+		<ul>
+			<li>Vote! - Verwaltung</li>
+
+			<!--
+			<li class="right"><a href="" id="thisElem" onclick="$('thisElem').toggleClass('selected'); $('dropdown').toggleClass('show-dropdown'); return false;">Anmelden</a></li>-->
+
+
+
+			<li class="right"><a href="index.html#logout">Logout</a></li>
+			<li class="right text">Howdy, John Doe!</li>
+			<li class="right separator"></li>
+
+
+
+			<li class="right"><a href="#" class="active">DE</a></li>
+			<li class="right"><a href="#">EN</a></li>
+			
+		</ul>
+		<div class="clearfix"></div>
+		<!--<div id="dropdown">
+		</div>-->
+	</div>
+
+
+
+
+
+	<div id="wrapper">
+
+<p class="danger" id="jscheck">
+	<strong>Javascript wird benötigt</strong>
+	Bitte aktivieren Sie Javascript!
+</p>
+
+
+<p class="info" id="prepre">
+	<strong>Löschen der Wahl 'FooBar' erfolgreich</strong>
+	Die Wahl wurde samt Daten und Teilnehmerlisten gelöscht.
+</p>
+
+<p class="info" id="prepre1">
+	<strong>Wahl 'FooBar' abgebrochen</strong>
+	Die Wahl 'FooBar wurde abgebrochen' und ist jetzt unter dem Reiter "Geschlossene Wahlen" zu finden.
+</p>
+
+		<h1>Dashboard</h1>
+
+<div class="tabpane">
+	<ul>
+		<li><a href="#" class="selected">Veröffentlichte Wahlen (2)</a></li>
+		<li><a href="#">Unveröffentlichte Wahlen (1)</a></li>
+		<li><a href="#">Geschlossene Wahlen (1)</a></li>
+		<li><form method="get" action="neu.html"><button><strong>+</strong> Neue Wahl</button></form></li>
+	</ul>
+	<div class="tab">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Titel</th>
+					<th>Veröffentlicht am</th>
+					<th>Läuft bis zum</th>
+					<th>Aktionen</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<strong>Vorabstimmung zur Bundestagswahl 1491</strong>
+						<br/>
+						Wahlbeteilgung: 42% (6,3 von 15 Personen haben teilgenommen), Tracking deaktiviert
+					</td>
+					<td>01.03.1491 12:13</td>
+					<td>31.03.1491 00:00</td>
+					<td>
+						<a target="new" href="vote.html" class="tooltip">Ansehen
+							<span>Zeigt eine Vorschau an.</span></a>,
+						<a href="bearbeiten.html" class="tooltip">Bearbeiten
+							<span>Zeigt eine Vorschau an.</span></a>, 
+						<a href="admin.html#drop" onclick="fooBar();" class="tooltip">Löschen
+							<span>Vernichtet die Wahl und alle Daten für immer.</span></a>,
+						<a href="admin.html#cancel" onclick="fooBar();" class="tooltip">Abbrechen
+							<span>Bricht die Wahl ab.</span></a>
+					</td>
+				</tr>
+				<tr class="note">
+					<td>
+						<strong>Antrag auf Frührente mit 13 Jahren</strong>
+						<br/>
+						Wahlbeteilgung: 42% (42 von 100 Personen haben teilgenommen), Tracking aktiv
+					</td>
+					<td>15.06.2014 13:13</td>
+					<td>18.06.2014 42:42</td>
+					<td>
+						<a target="new" href="vote.html" class="tooltip">Ansehen
+							<span>Zeigt eine Vorschau an.</span></a>, 
+						<a href="bearbeiten.html" class="tooltip">Bearbeiten
+							<span>Zeigt eine Vorschau an.</span></a>, 
+						<a href="admin.html#drop" onclick="fooBar();" class="tooltip">Löschen
+							<span>Vernichtet die Wahl und alle Daten für immer.</span></a>,
+						<a href="admin.html#cancel" onclick="fooBar();" class="tooltip">Abbrechen
+							<span>Bricht die Wahl ab.</span></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="tab hidden">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Titel</th>
+					<th>Aktionen</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Foo Bar 101 Companies Wahl</strong><br/>
+						101 Teilnehmer bisher hinzugefügt.</td>
+					<td>
+						<a href="neu.html" class="tooltip">Bearbeiten
+							<span>Bearbeitung wird fortgesetzt, inkl. der Möglichkeit zum Veröffentlichen.</span></a>, <a target="new" href="vote.html" class="tooltip">Vorschau ansehen
+							<span>Zeigt eine Vorschau an.</span></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="tab hidden">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Titel</th>
+					<th>Veröffentlicht am</th>
+					<th>Geschlossen am</th>
+					<th>Aktionen</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>Meine lieblings Band</strong><br/>
+						Walbeteiligung: 21% (15 von 100 Teilnehmer)</td>
+					<td>01.03.2014 01:23</td>
+					<td>34.03.2014 22:42</td>
+					<td>
+						<a href="result.html" class="tooltip">Ergebnis ansehen
+							<span>Zeigt die Ergebnisse der Wahl an.</span></a>,
+						<a href="admin.html#drop" class="tooltip">Wahl löschen
+							<span>Löscht die Wahl mit allen Daten für immer.</span></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>	
+		<p id="footer">
+			Vote! Version 42.42 &copy; 2014 Daniel Vivas Estevao, Maximilian Strauch
+		</p>
+
+	</div>
+
+</body>
+</html>
