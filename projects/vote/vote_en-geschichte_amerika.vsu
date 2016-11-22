@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<umfrage id="4">
+<title>History of the United States of America</title>
+<fragen>
+<frage id="0" singlechoice="true">
+<title>Barack Obama (first legislative period) was the ... president of the US.</title>
+<antworten length="7">
+<antwort id="0">40</antwort>
+<antwort id="1">30</antwort>
+<antwort id="2">45</antwort>
+<antwort id="3">34</antwort>
+<antwort id="4">44</antwort>
+<antwort id="5">43</antwort>
+<antwort id="6">40</antwort>
+</antworten>
+</frage>
+<frage id="1" singlechoice="true">
+<title>Who was the first US president?</title>
+<antworten length="6">
+<antwort id="0">George Washington</antwort>
+<antwort id="1">Benjamin Franklin</antwort>
+<antwort id="2">Thomas Jefferson</antwort>
+<antwort id="3">Thomas Eddison</antwort>
+<antwort id="4">Abraham Lincoln</antwort>
+<antwort id="5">None of the listed persons</antwort>
+</antworten>
+</frage>
+<frage id="2" singlechoice="true">
+<title>Abraham Lincoln was the ... president of the US.</title>
+<antworten length="7">
+<antwort id="0">1st</antwort>
+<antwort id="1">2nd</antwort>
+<antwort id="2">10</antwort>
+<antwort id="3">11</antwort>
+<antwort id="4">12</antwort>
+<antwort id="5">13</antwort>
+<antwort id="6">3rd</antwort>
+</antworten>
+</frage>
+</fragen>
+</umfrage>

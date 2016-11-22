@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<umfrage id="11">
+<title>Film</title>
+<fragen>
+<frage id="0" singlechoice="false">
+<title>Gehen Sie oft ins Kino?</title>
+<antworten length="3">
+<antwort id="0">1-2 mal im Monat</antwort>
+<antwort id="1">mehr als 2 mal im Monat</antwort>
+<antwort id="2">Nie</antwort>
+</antworten>
+</frage>
+<frage id="1" singlechoice="false">
+<title>Welche der folgenden Filme kennen Sie?</title>
+<antworten length="5">
+<antwort id="0">Fluch der Karibik</antwort>
+<antwort id="1">Mission Impossible</antwort>
+<antwort id="2">Sehensucht</antwort>
+<antwort id="3">The Rock</antwort>
+<antwort id="4">Mrs. Smillers gespuer fuer Schnee</antwort>
+</antworten>
+</frage>
+<frage id="2" singlechoice="false">
+<title>Filme aus ... gefallen mir am Besten.</title>
+<antworten length="10">
+<antwort id="0">Deutschland</antwort>
+<antwort id="1">England</antwort>
+<antwort id="2">Amerika</antwort>
+<antwort id="3">China</antwort>
+<antwort id="4">Russland</antwort>
+<antwort id="5">Spanien</antwort>
+<antwort id="6">Italien</antwort>
+<antwort id="7">Frankreich</antwort>
+<antwort id="8">Mexiko</antwort>
+<antwort id="9">Sonstige</antwort>
+</antworten>
+</frage>
+<frage id="3" singlechoice="false">
+<title>Welche Generes moegen Sie?</title>
+<antworten length="6">
+<antwort id="0">Komoedie</antwort>
+<antwort id="1">Action</antwort>
+<antwort id="2">Thriller</antwort>
+<antwort id="3">Liebesfilm</antwort>
+<antwort id="4">Dokumentation</antwort>
+<antwort id="5">Show</antwort>
+</antworten>
+</frage>
+</fragen>
+</umfrage>

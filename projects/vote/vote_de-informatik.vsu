@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<umfrage id="3">
+<title>Informatik</title>
+<fragen>
+<frage id="0" singlechoice="true">
+<title>Fuer welche Themen interessieren Sie sich?</title>
+<antworten length="4">
+<antwort id="0">Kryptographie</antwort>
+<antwort id="1">Netzwerke</antwort>
+<antwort id="2">Datenbanken</antwort>
+<antwort id="3">Algorithmen</antwort>
+</antworten>
+</frage>
+<frage id="1" singlechoice="false">
+<title>Welche Programmiersprachen kennen Sie?</title>
+<antworten length="18">
+<antwort id="0">C</antwort>
+<antwort id="1">C++</antwort>
+<antwort id="2">Java</antwort>
+<antwort id="3">PHP</antwort>
+<antwort id="4">JavaScript</antwort>
+<antwort id="5">HTML</antwort>
+<antwort id="6">XHTML</antwort>
+<antwort id="7">XML</antwort>
+<antwort id="8">Basic</antwort>
+<antwort id="9">Altair Basic</antwort>
+<antwort id="10">Visual Basic</antwort>
+<antwort id="11">Pascal</antwort>
+<antwort id="12">Turbo Pascal</antwort>
+<antwort id="13">Delphi</antwort>
+<antwort id="14">C-Sharp</antwort>
+<antwort id="15">Phyton</antwort>
+<antwort id="16">Ruby</antwort>
+<antwort id="17">Whitespace</antwort>
+</antworten>
+</frage>
+<frage id="2" singlechoice="true">
+<title>Ist der Informatikunterricht interessant?</title>
+<antworten length="5">
+<antwort id="0">Ja</antwort>
+<antwort id="1">Manchmal</antwort>
+<antwort id="2">Nie</antwort>
+<antwort id="3">Immer</antwort>
+<antwort id="4">Nein</antwort>
+</antworten>
+</frage>
+<frage id="3" singlechoice="true">
+<title>Was ist keine objektorientierte Programmiersprache?</title>
+<antworten length="5">
+<antwort id="0">Java</antwort>
+<antwort id="1">C</antwort>
+<antwort id="2">C++</antwort>
+<antwort id="3">PHP</antwort>
+<antwort id="4">JavaScript</antwort>
+</antworten>
+</frage>
+</fragen>
+</umfrage>
