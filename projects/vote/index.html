@@ -1,0 +1,266 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A computer scientists approach to electronics, software development, making and much more." />
+        <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="Maximilian Strauch" />
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>Vote</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
+        <script type="text/javascript">
+            /**
+             * See http://genert.laal.ee/demo/simplbox/ for further information.
+             */
+            var preLoadIconOn = function () {
+                var newE = document.createElement("div"),
+                    newB = document.createElement("div");
+                    newE.setAttribute("id", "simplbox-loading");
+                    newE.appendChild(newB);
+                document.body.appendChild(newE);
+            },
+            preLoadIconOff = function () {
+                var elE = document.getElementById("simplbox-loading");
+                elE.parentNode.removeChild(elE);
+            },
+            overlayOn = function () {
+                var newA = document.createElement("div");
+                newA.setAttribute("id", "simplbox-overlay");
+                document.body.appendChild(newA);
+            },
+            overlayOff = function () {
+                var elA = document.getElementById("simplbox-overlay");
+                elA.parentNode.removeChild(elA);
+            },
+            closeButtonOn = function (base) {
+                var newE = document.createElement("div");
+                newE.setAttribute("id", "simplbox-close");
+                document.body.appendChild(newE);
+                newE = document.getElementById("simplbox-close");
+                base.API_AddEvent(newE, "click touchend", function () {
+                    base.API_RemoveImageElement();
+                    return false;
+                });
+            },
+            closeButtonOff = function () {
+                var elA = document.getElementById("simplbox-close");
+                elA.parentNode.removeChild(elA);
+            },
+            captionOn = function (base) {
+                var element = document.getElementById("simplbox-caption"),
+                    documentFragment = document.createDocumentFragment(),
+                    newElement = document.createElement("div"),
+                    newText = document.createTextNode(base.m_Alt);
+
+                if (element) {
+                    element.parentNode.removeChild(element);
+                }
+
+                newElement.setAttribute("id", "simplbox-caption");
+                newElement.appendChild(newText);
+                documentFragment.appendChild(newElement);
+                document.getElementsByTagName("body")[0].appendChild(documentFragment);
+            },
+            captionOff = function () {
+                var element = document.getElementById("simplbox-caption");
+                element.parentNode.removeChild(element);
+            };
+
+            // Init app
+            window.onload = function() {
+                var E = new SimplBox(document.querySelectorAll("[data-simplbox='gallery1']"), {
+                    quitOnDocumentClick: false,
+                    onStart: function () {
+                        overlayOn();
+                        closeButtonOn(E);
+                    },
+                    onEnd: function () {
+                        overlayOff();
+                        closeButtonOff();
+                        captionOff();
+                    },
+                    onImageLoadStart: function () {
+                        preLoadIconOn();
+                        captionOn(E);
+                    },
+                    onImageLoadEnd: function () {
+                        preLoadIconOff();
+                    }
+                });
+                E.init();
+            };
+        </script>
+            </head>
+    <body>
+        <div id="content-wrap">
+        <div id="mh-backer">
+            <!-- Main header with menu -->
+            <header id="sh">
+                <div class="row">
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+
+                    <ul>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </header>
+
+            <!-- Header with title -->
+            <header class="ph">
+                <div class="row">
+                    <div class="ph-headline">
+                        <h1 id="h1-page">Vote - Surveys in local area networks</h1>
+                        <hr />
+                    </div>
+                </div>
+                            </header>
+
+                    </div>
+        <main id="site-body" class="row">
+
+<ul class="toc">
+<li class="header">Table of Contents</li>
+<li class="anchor"><a href="#docs-downloads">Docs &amp; Downloads</a></li>
+<li class="anchor"><a href="#screenshots-server">Screenshots VoteServer</a></li>
+<li class="anchor"><a href="#screenshots-client">Screenshots VoteClient</a></li>
+<li class="anchor last"><a href="#third-party-library">Third Party Library</a></li>
+</ul>
+
+
+<p><span class="letterb">V</span>ote (without exclamation mark) was a project which I did back in high school in the winter holidays 2008 (most of the planning and pre development) and in early 2009. This project was an opportunity, offered at my school, to replace a &raquo;normal&laquo; written exam (or &raquo;Klausur&laquo;) by a project work. The German name for this is &raquo;Facharbeit&laquo; and in English the best matching term might be <em>skilled work</em> or <em>research paper</em>. The skilled work comprised a practial project with a written document where the result is presented.</p>
+
+<p>Because my computer science teacher proposed that it would be nice to have an application to perform quick surveys in class at the computer room, I decided to implement this idea. The title of my project was:
+
+<em class="manual-quote">Entwicklung und Evaluation eines Systems zur Durchführung von Umfragen in lokalen Netzwerken und Intranets auf Basis des Client-Server-Modells<br/><br/>
+Development and evaluation of a system to perform surveys in local area networks and intranets based on the client-server-model
+</em>
+
+As expressed by the title the goal of my project was to build a two-fold application which allows to perform surveys by using sockets and a custom protocol between the different instances of the application (client and server). Since we did everything with Java back in the day at school I took this opportunity to explore the Java Networking API with this project. Since I was crazy about GUIs at this time I also required me to build a really nice looking GUI (at least at that time) using the Java SWING framework. At the end of this article (<a href="#screenshots-server">Screenshots VoteServer</a> and <a href="#screenshots-client">Screenshots VoteClient</a>) you can take a look at the result. By the way: the GUI I built is a 100-% handmade - I used no GUI desinger tool, because I really wanted to get the feel of building GUIs by hand compared to using a WYSIWYG GUI editor. Till nowadays I do most of my Java projects with SWING GUIs by hand because I got used to it.
+</p>
+
+<p>
+The UML Use Case diagram below shows all actions implemented by the Vote system through the VoteServer and VoteClient application. The VoteClient enables users to participate at surveys and the VoteServer serves these surveys, maintains them and provides a graphical editor to create surveys with questions.
+</p>
+
+
+<p class="img-container"><img src="use-case-system-vote.png" alt="UML Use Case Diagram of Vote" title="UML Use Case Diagram of Vote" /><br/><span class="caption">A UML Use Case diagram of Vote. It shows all possible actions in the Vote system (performed by VoteServer and VoteClient) which can be performed by different stakeholders. The diagram is only annotated in German.</span></p>
+
+<p>
+The main focus during development of Vote was - obviously - the GUI and the custom network protocol which was desgined by myself completely from scratch. Back in the day I experimented around with network programming (in Java) which you can see in anohter project: <a href="../neptune/">neptune - a network game</a>. And I was very satisfied when I ran Vote for the first time, on two physical distributed machines, that it worked without any problems.
+</p>
+
+<p>
+To make things more interesting, and to take care for the word &raquo;evaluation&laquo; in the title, I actually performed a full beta test of the application with test questions and evaluated them in my final paper (see <a href="#docs-downloads">next section</a>). For this purpose my computer science teacher allowed me to take a regular double lesson of computer science class (90 minutes) to let my classmates judge about Vote. The beta test asked the participants to grade how well Vote fulfills the different functional (actual functions a system has) and non-functional (how well a system fulfills a functional requirement, e.g. <em>Vote should provide an easy to use GUI</em>) requirements. The result is shown in the following picture:
+</p>
+
+
+<p class="img-container"><img src="beta-test-results.png" alt="Vote beta test results" title="Vote beta test results" /><br/><span class="caption">Shows the results of the beta test performed for Vote with 26 groups of two persons which tested the VoteClient over 90 minutes and one person which tested the VoteServer.</span></p>
+
+
+<h1><a name="docs-downloads"></a>Docs &amp; Downloads</h1>
+
+<p>The complete final skilled work submission which was examined by my supervisor and graded can be downloaded in the following. It contains a full description of the architecture and the definition of the custom network protocol for Vote (specification at the end of the document). Furthermore it shows the details of the beta test and evaluates the results.<br/><br/>
+<a href="fa_if_26-Mar-09-final.pdf" class="special-button" title="Development and evaluation of a system to perform surveys in local area networks and intranets based on the client-server-model"><i class="icon-download"></i>&nbsp;Download the PDF file (1.6 MB)</a> <span class="checksum-gadget">SHA-1 8c346ccf475dddb70f470a3e547410ad4fef6175</span>
+
+<br/><br/>
+
+The executable JAR files of Vote require at least Java 1.6 and should run with the most recent Java version (tested with Oracle Java SE <code>1.8.0_101</code>). If not, please contact me.<br/><br/>
+
+<a href="vote-server_v0.2.6.jar" class="special-button" title="VoteServer executable JAR file"><i class="icon-download"></i>&nbsp;VoteServer executable JAR file (210 KB)</a> <span class="checksum-gadget">SHA-1 c839017013a2eececd293eeea11c8f844696f851</span><br/>
+and<br/>
+<a href="vote-client_v0.2.jar" class="special-button" title="VoteClient executable JAR file"><i class="icon-download"></i>&nbsp;VoteClient executable JAR file (87 KB)</a> <span class="checksum-gadget">SHA-1 31c93583445b544a052456a9ef200f6d01dfab9e</span><br/>
+
+<br/>
+
+Furthermore you can download three sample surveys which can be loaded by the VoteServer by clicking on the little folder icon:<br/><br/>
+
+<a href="vote_de-film.vsu" class="special-button" title="Sample Vote survey (1)"><i class="icon-download"></i>&nbsp;Sample Vote survey: Movies (DE) (1.5 KB)</a> <span class="checksum-gadget">SHA-1 e22f03ddbb3c993db4aea4794aaa9a66cde9d968</span><br/><br/>
+
+<a href="vote_de-informatik.vsu" class="special-button" title="Sample Vote survey (2)"><i class="icon-download"></i>&nbsp;Sample Vote survey: Computer Science (DE) (1.8 KB)</a> <span class="checksum-gadget">SHA-1 9c69ece2b789848267f3a29c62be504f8cadd9a0</span><br/><br/>
+
+<a href="vote_en-geschichte_amerika.vsu" class="special-button" title="Sample Vote survey (3)"><i class="icon-download"></i>&nbsp;Sample Vote survey: History USA (EN) (1.3 KB)</a> <span class="checksum-gadget">SHA-1 f1bba83dfc2ee6256e28bf26832d2a246e8453f8</span>
+
+<br/><br/>
+
+The source code is not available publicly. But if you need it you might want to contact me and ask for it with a rationale.
+</p>
+
+
+<h1><a name="screenshots-server"></a>Screenshots of VoteServer</h1>
+
+
+
+<div class="gallery-box">
+  <a href="screenshots/01-vs_login.png" data-simplbox="gallery1"><img src="screenshots/01-vs_login.jpg" alt="Login screen of VoteServer where the server credentials can be altered." /></a>
+
+  <a href="screenshots/02-vs_login-list.png" data-simplbox="gallery1"><img src="screenshots/02-vs_login-list.jpg" alt="Even a blacklist or whitelist can be created either for login name or IP address based access control." /></a>
+
+  <a href="screenshots/03-vs_main.png" data-simplbox="gallery1"><img src="screenshots/03-vs_main.jpg" alt="The main window of the VoteServer with three surveys loaded. On the left all connected users are shown, on the right top the surveys are managed and on the right bottom logging data is shown." /></a>
+
+  <a href="screenshots/04-vs_props.png" data-simplbox="gallery1"><img src="screenshots/04-vs_props.jpg" alt="The VoteServer provides some configuration options." /></a>
+
+  <a href="screenshots/05-vs_about.png" data-simplbox="gallery1"><img src="screenshots/05-vs_about.jpg" alt="The mandatory about dialog (which I do for all my apps regardless how ridiculous small the app is)." /></a>
+
+  <a href="screenshots/06-vs_poll-details.png" data-simplbox="gallery1"><img src="screenshots/06-vs_poll-details.jpg" alt="More details can be shown for every survey." /></a>
+
+  <a href="screenshots/07-vs_edit-poll.png" data-simplbox="gallery1"><img src="screenshots/07-vs_edit-poll.jpg" alt="Edit window to create or edit a survey (add questions, change name and other options)." /></a>
+
+  <a href="screenshots/08-vs_new-answer.png" data-simplbox="gallery1"><img src="screenshots/08-vs_new-answer.jpg" alt="Question editor window to create or edit single- or multiple-choice survey questions." /></a>
+
+  <a href="screenshots/09-vs_users.png" data-simplbox="gallery1"><img src="screenshots/09-vs_users.jpg" alt="The main window shows also a evaluation of the most recent survey results." /></a>
+
+  <a href="screenshots/10-vs_user-msg.png" data-simplbox="gallery1"><img src="screenshots/10-vs_user-msg.jpg" alt="Vote can also be used to send messages to certain clients." /></a>
+</div>
+
+<h1><a name="screenshots-client"></a>Screenshots of VoteClient</h1>
+
+<div class="gallery-box">
+  <a href="screenshots/01-vc_login.png" data-simplbox="gallery1"><img src="screenshots/01-vc_login.jpg" alt="The VoteClient welcome dialog only asks for the IP and port of the VoteServer application." /></a>
+
+  <a href="screenshots/02-vc_main.png" data-simplbox="gallery1"><img src="screenshots/02-vc_main.jpg" alt="A minimalist main window shows all open surveys. A click on a certain survey opens the participation window (see next)." /></a>
+
+  <a href="screenshots/03-vc_poll.png" data-simplbox="gallery1"><img src="screenshots/03-vc_poll.jpg" alt="The participation window contains all questions with checkbox or radiobox controls and the submit button." /></a>
+
+  <a href="screenshots/04-vc_done.png" data-simplbox="gallery1"><img src="screenshots/04-vc_done.jpg" alt="After finishing a survey the list can be updated since surveys can have a limited number of participants." /></a>
+
+  <a href="screenshots/05-vc_msg.png" data-simplbox="gallery1"><img src="screenshots/05-vc_msg.jpg" alt="Shows how a message from the VoteServer is shown to the user." /></a>
+
+</div>
+
+
+<h1><a name="third-party-library"></a>Third Party Library</h1>
+
+<p>Vote uses the Java classes <code>Server.java</code> <sup><small><a href="http://www.ac.shuttle.de/ac/euregio-kolleg/zentralabitur/clientServer/java/lib/Server.java" target="_blank">(source)</a></small></sup>, <code>Client.java</code> <sup><small><a href="http://www.ac.shuttle.de/ac/euregio-kolleg/zentralabitur/clientServer/java/lib/Client.java" target="_blank">(source)</a></small></sup> and <code>Connection.java</code> <sup><small><a href="http://www.ac.shuttle.de/ac/euregio-kolleg/zentralabitur/clientServer/java/lib/Connection.java" target="_blank">(source)</a></small></sup> developed by <em>Horst Hildebrecht</em> in version 1.0 (16.08.2006) since we got introduced to networking with this classes during the computer science lessons. We needed to know the API for the &raquo;Zentralabitur&laquo; <em>(might not be possible to translate to English)</em> - our absolutely final examination before graduating.
+</p>
+
+<p>Since I did not like the fact that Vote depends on third party code and thought that I really should get to the bare basics with sockets I decided only a couple of months later to write my own networking classes. But I never ported Vote to my own classes. Anyway: you can download them here (CC BY-SA 4.0 license).<br/><br/>
+<a href="JAVA_NET_API.zip" class="special-button" title="Java networking classes"><i class="icon-download"></i>&nbsp;JAVA_NET_API.zip (5 KB)</a> <span class="checksum-gadget">SHA-1 ed65c836dc3a2f7f4f2023bd8823915eee387e28</span>
+</p>
+
+
+
+    </main>
+    </div>
+        <footer id="site-footer">
+            <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
+            <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72191716-1', 'auto');
+            ga('send', 'pageview');
+            </script>
+        </footer>
+    </body>
+</html>
