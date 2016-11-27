@@ -250,7 +250,6 @@ blockquote p {
 	float: right;
 	display: block;
 	vertical-align: bottom;
-
 	margin: 0;
 }
 
@@ -281,6 +280,49 @@ blockquote p {
 
 #sh ul li.active {
 	border-bottom: solid 1px #258118;
+}
+
+@media screen and (max-width: 650px) {
+	#sh ul {
+		display: block;
+		float: none;
+	}
+
+	#sh ul {
+		float: none;
+		display: block;
+		vertical-align: bottom;
+		margin: 0;
+		border-top: solid 1px #ccc;
+		margin: 75px 0 0 0 !important;
+		padding: 0 !important;
+	}
+
+	#sh ul li {
+		display: block;
+		list-style: none;
+		margin: 0;
+		padding: 7px 21px;
+		font-size: 20px;
+		border-bottom: solid 1px #ccc;
+		background-color: rgba(255, 255, 255, 0.6);
+	}
+
+	#sh ul li a:hover {
+		color: black;
+		border: none;
+	}
+
+	#sh ul li.active {
+		border-bottom: solid 1px #eee;
+		background-color: rgba(52, 171, 33, 0.84);
+		
+	}
+
+	#sh ul li.active a {
+		color: white !important;
+	}
+
 }
 
 .ph .ph-headline {
@@ -726,3 +768,162 @@ footer#site-footer a:hover, footer#site-footer a:focus {
 .icon-download:before { content: '\e810'; } 
 
 .icon-size-fix { font-size: 80%; }
+
+/*
+ * Bottom information bar (main page)
+ */
+
+#other-projects-infobar-wrapper { text-align: center; }
+
+#other-projects-infobar-hr {
+	border-top: solid 1px #efefef;
+	margin-top: 21px;
+}
+
+#other-projects-infobar {
+	margin-top: 21px;
+	display: inline-block;
+	cursor: url('cursor.png'), auto;	
+	opacity: 0.6;
+	transition: 0.42s;
+}
+
+#other-projects-infobar:hover { opacity: 1; }
+
+#other-projects-infobar #image-container {
+	background: transparent url('mascot.png') no-repeat center;
+	width: 312px;
+	height: 180px;
+	float: left;
+	background-position: center;
+	background-size: cover;
+}
+
+#speech-bubble-question, #speech-bubble-answer {
+	position: relative;
+	padding: 15px 30px;
+	margin: 0;
+	color: #000;
+	border-radius: 21px;
+	background-color: #eee;
+	background:linear-gradient(#fcfcfc, #eee);
+	margin: 20px 0 10px 100px;
+}
+
+#speech-bubble-question:before, #speech-bubble-answer:before {
+	content: "";
+	position: absolute;
+	bottom: -30px;
+	left: 80px;
+	border-width: 0 0 30px 50px;
+	border-style: solid;
+	border-color: transparent #eee;
+	display: block;
+	width: 0;
+}
+
+#speech-bubble-answer:before {
+	bottom: -30px;
+	right: 80px;
+	left: inherit;
+	border-width: 0 0 30px 50px;
+}
+
+#speech-bubble-question p {
+	font-weight: bold;
+	font-size: 150%;
+	color: #888;
+	text-align: left;
+}
+
+#speech-bubble-answer {
+	float: right;
+	margin: 14px 0 0 0;
+	padding: 14px;
+	text-align: center;
+}
+
+#speech-bubble-answer p {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+#answer-container h1 {
+	float: right;
+	text-align: right;
+	margin: 42px 0 0 0;
+	color: #555;
+}
+
+#answer-container h1 small {
+	font-weight: 200;
+	font-size: 60%;
+}
+
+@media screen and (max-width: 1000px) {
+	#speech-bubble-question, #speech-bubble-answer {
+		font-size: 12px !important;
+	}
+
+	#speech-bubble-answer p {
+		font-size: 16px !important;
+	}
+
+	#other-projects-infobar {
+		cursor: default;
+		opacity: 1;
+		transition: none;
+	}
+
+	#answer-container h1 {
+		font-size: 21px;
+	}
+
+	#other-projects-infobar-wrapper {
+		padding: 0 3%;
+	}
+
+	#other-projects-infobar #image-container {
+		width: 250px;
+		height: 144px;
+	}
+
+	#speech-bubble-question, #speech-bubble-answer {
+		margin: 20px 0 10px 60px;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	#speech-bubble-question, #speech-bubble-answer {
+		font-size: 10px !important;
+	}
+
+	#speech-bubble-answer p {
+		font-size: 14px !important;
+	}
+
+	#other-projects-infobar {
+		cursor: default;
+		opacity: 1;
+		transition: none;
+	}
+
+	#answer-container h1 {
+		font-size: 18px;
+	}
+
+	#other-projects-infobar-wrapper {
+		padding: 0 4%;
+	}
+
+	#other-projects-infobar #image-container {
+		width: 180px;
+		height: 104px;
+	}
+
+	#speech-bubble-question, #speech-bubble-answer {
+		margin: 14px 0 7px 25px;
+	}
+}
