@@ -8,12 +8,12 @@
         <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
         <meta name="robots" content="index,follow" />
         <meta name="author" content="Maximilian Strauch" />
-        <link rel="icon" type="image/png" href="assets/favicon.png">
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-        <title>About</title>
-        <link href="assets/style.css" rel="stylesheet" media="screen" />
-        <link href="assets/simplbox.css" rel="stylesheet" media="screen" />
-        <script type="text/javascript" src="assets/simplbox.min.js"></script>
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>RainRadar</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
         <script type="text/javascript">
             /**
              * See http://genert.laal.ee/demo/simplbox/ for further information.
@@ -96,20 +96,19 @@
                 E.init();
             };
         </script>
-        		<script type="text/javascript" src="assets/nomail.js"></script>
-    </head>
+            </head>
     <body>
         <div id="content-wrap">
-        <div id="mh-backer-dark-bg" class="with-about" style="background-image: url('assets/about-bg.jpg');">
+        <div id="mh-backer">
             <!-- Main header with menu -->
             <header id="sh">
                 <div class="row">
-                    <h1><a href="index.html"><img src="assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
 
                     <ul>
-                    						<li><a href="index.html"><span>Projects</span></a></li>
-						<li><a href="articles.html"><span>Articles</span></a></li>
-						<li class="active"><a href="about.html"><span>About</span></a></li>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -119,32 +118,35 @@
             <header class="ph">
                 <div class="row">
                     <div class="ph-headline">
-                        <h1 id="h1-page">About me</h1>
+                        <h1 id="h1-page">RainRadar</h1>
                         <hr />
                     </div>
                 </div>
                             </header>
 
-            <div id="my-face"></div>        </div>
+                    </div>
         <main id="site-body" class="row">
 
+<p><span class="letterb">R</span>ainRadar is a viewer of recent RADAR images of Germany, displayed in front of a map of Germany. I worte this program for a friend who wanted to know if it is going to rain when he wants to drive back home after work with his motorcycle.
+</p>
 
-<p><span class="letterb">Hi</span>, my name is Max and I’m a <s>BSc</s> <i class="icon-graduation-cap"></i> MSc computer scientist, software developer, web designer and maker from Germany. <s>I’m currently working on my MSc degree - in particular on my Master thesis - in computer science with emphasis on Mobile Systems Engineering</s>. <s>Beside my studies</s> I really like to make (e.g.<em>build</em>) things like electronics or furniture and doing woodworking in general. Beneath that I adore, like, love movies.</p>
+<p>The application is not that complicated: it downloads the RADAR overlay images from wetter.info and displays them on top of the map of Germany (which I created using Inkscape and the <a href="https://openclipart.org/" target="_blank">OpenClipart library</a>). Every 15 minutes the program checks if a new image is available and appends it to the list of shown images. All collected images are displayed in a &raquo;movie&laquo; which looks like:</p>
 
-<p>The intend of this <i>"online-project-place-thingy"</i> i.e. webpage has multiple layers: first of all I wanted to start a blog since 2010 (six years of prep time - beat that!) and I also wanted to practice my written English to improve it. Furthermore my thought was that someone could get a use out of my experiences and projects. So I really hope that <i>you</i> get any use out of this page.</p>
+<p class="img-container"><img src="animation.gif" alt="Animated RainRadar application" title="Animated RainRadar application" /><br/><span class="caption">Animated GIF file which shows the look and feel of the RainRadar application.</span></p>
 
-<p>Cheers!</p>
+<p>
+My friend has often opened RainRadar on his second screen when I'm visiting him at work. You can checkout the source files and get a running copy of RainRadat at the <a href="https://github.com/maxstrauch/rainradar" target="_blank"><i class="icon-github"></i> RainRadar Git repo</a>.
+</p>
 
-<h1 id="contact">Get in contact</h1>
+<h1><a name="goes-pi"></a>RainRadar goes Pi</h1>
 
-<p>If you have a question or you found an error you can mail me: <span class="magic" data-str="moc.liamel42goog@hcuar42tsx42am">(sorry: Javascript disabled)</span>. I'm happy to answer and respond as quickly as possible.</p>
+<p>To make things more interesting I recently created a self-contained SD card image for the Raspberry Pi to make a &raquo;RainRadar kiosk&laquo;. The vision is to create a small unit which can be wall-mounted at a public place at my friend's workplace the let all employees participate.</p>
 
-<p>In the meantime you can also checkout my profiles at:</p>
+<p>To keep the image as small as possible I experimented at first with <a href="https://buildroot.org/" target="_blank">buildroot</a> but eventually switched over to a Raspbian Jessie image which I striped down. The kiosk mode is simply done by installing only the XServer and using tools like <code>xstart</code> to launch the application and <code>xdotool</code> to make it fullscreen. The unit looks like:</p>
 
-<ul class="content">
-	<li><a href="https://github.com/maxstrauch/" target="_blank"><i class="icon-github"></i> GitHub: @maxstrauch</a> - obviously</li>
-	<li><a href="http://www.thingiverse.com/maxstrauch/about" target="_blank">MakerBot Thingiverse</a> - I recently got my hands on a 3D printer and now I'm experimenting with it</li>
-</ul>
+<p class="img-container"><img src="rainradar-on-pi.jpg" alt="RainRadar app running on Pi in kiosk mode" title="RainRadar app running on Pi in kiosk mode" /><br/><span class="caption">RainRadar application running on Pi in kiosk mode.</span></p>
+
+<p class="img-container"><img src="screenshot.png" alt="Screenshot of RainRadar" title="Screenshot of RainRadar" /><br/><span class="caption">Screenshot of RainRadar.</span></p>
 
     </main>
     </div>

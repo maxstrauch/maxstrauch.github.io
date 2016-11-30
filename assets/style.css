@@ -776,7 +776,8 @@ footer#site-footer a:hover, footer#site-footer a:focus {
 #other-projects-infobar-wrapper { text-align: center; }
 
 #other-projects-infobar-hr {
-	border-top: solid 1px #efefef;
+	/*border-top: solid 1px #efefef;*/
+	border: none;
 	margin-top: 21px;
 }
 
