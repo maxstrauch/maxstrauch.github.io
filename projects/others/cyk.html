@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html><head><title>CYK Algorithm</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<script>
+function run() {
+  var rules = document.getElementById("rules").value.split(/\r?\n/);
+  var startSym = document.getElementById("start").value;
+  var word = document.getElementById("word").value;
+  var n = word.length;
+
+  var map = new Array();
+  for (var i = 0; i < rules.length; i++) {
+    var str = rules[i].replace(/\s*/g, "");
+    str = str.split(/->/g);
+    if (str.length == 2)
+      str[1] = str[1].split(/\W*\|\W*/g);
+    map.push(str);
+  }
+
+  var tab = new Array(n);
+  for (var i = 0; i < tab.length; i++)
+    tab[i] = new Array(n);
+
+  function getRuleFor(car, mp) {
+    var result = new Array();
+    for (var i = 0; i < map.length; i++) {
+      if (map[i].length != 2)
+        continue;
+      for (var j = 0; j < map[i][1].length; j++) {
+        if (map[i][1][j] == car) {
+          result.push(map[i][0]);
+        }
+      }
+    }
+    return result;
+  }
+
+  for (var i = 0; i < n; i++)
+    tab[i][i] = getRuleFor(word.charAt(i), map);
+
+  for (var h = 1; h < n; h++) {
+    for (var i = 0; i < n-h; i++) {
+      var ress = new Array();
+      for (var j = i; j < i+h; j++) {
+        var tmpA = tab[j][i];
+        var tmpB = tab[i+h][j+1];
+        for (var k = 0; k < tmpA.length; k++) {
+          for (var l = 0; l < tmpB.length; l++) {
+            var r = getRuleFor(tmpA[k] + tmpB[l]);
+              if (r.length > 0)
+                for (var a = 0; a < r.length; a++) {
+                  var contined = false;
+                  for (var b = 0; b < ress.length; b++) {
+                    if (ress[b] == r[a]) {
+                      contined = true;
+                      break;
+                    }
+                  }
+                  if (!contined) {
+                    ress.push(r[a]);
+                    if (i+h == n-1 && i == 0 && r[a] == startSym) {
+                      startSym = true;
+                    }
+                  }
+                }
+            }
+          }
+        tab[i+h][i] = ress.length < 1 ? "&#8709;" : ress;
+      }
+    }
+
+  // Output
+  var myTable = document.createElement("table");
+  var mytablebody = document.createElement("tbody");
+  
+  var mycurrent_row = document.createElement("tr");   
+  for (var i = 0; i <= n; i++) {
+      mycurrent_cell = document.createElement("th"); 
+      if (i > 0) {
+         currenttext = document.createTextNode(word.charAt(i-1));
+         mycurrent_cell.appendChild(currenttext);
+      }
+      mycurrent_row.appendChild(mycurrent_cell);
+    }
+    mytablebody.appendChild(mycurrent_row);
+  }
+
+  for (var i = 0; i < tab.length; i++) {
+    mycurrent_row = document.createElement("tr");
+    mycurrent_cell = document.createElement("th");   
+    currenttext = document.createTextNode(word.charAt(i));
+    mycurrent_cell.appendChild(currenttext);
+    mycurrent_row.appendChild(mycurrent_cell);
+    for (var j = 0; j < tab[i].length; j++) {
+      mycurrent_cell = document.createElement("td");
+      mycurrent_cell.innerHTML = tab[i][j] == undefined ? "" : tab[i][j];
+      mycurrent_row.appendChild(mycurrent_cell);
+    }
+    str += "</tr>";
+    mytablebody.appendChild(mycurrent_row);
+  }
+  myTable.appendChild(mytablebody);
+
+  var stdout = document.getElementById("stdout");
+  stdout.innerHTML = '';
+  var p = document.createElement("p");
+  p.innerHTML = '<i>w</i> ' + (startSym == true ? '&#8712;' : '&#8713;') + '<i>L(G)</i>.';
+  stdout.appendChild(p);
+  stdout.appendChild(myTable);
+}
+</script>
+<style type="text/css">
+body { background: #DEEEA5; font-family: Helvetica,Arial,sans-serif; margin: 0; }
+.c { background-color: white; margin: 0 auto; width: 960px; }
+.ic { padding: 1.5em; }
+h1 { font-family: Helvetica,Arial,sans-serif; font-size: 64px; }
+input[type="text"], textarea { font-size: 10pt; padding: 2px; width: 90%; }
+.iex { margin: 2em 0 0 0; }
+.iexl { float: left; width: 30%; margin-right: 1em; background: #F6F6F6; padding: 1em 0 1em 1em; }
+label { color: #555; font-size: .8em;}
+table { border: 2px solid #ccc; border-collapse: collapse; border-spacing: 0; }
+table th { border: 1px solid #ccc; padding: .1em .25em; background-color: #eee; }
+table td { border: 1px solid #ccc; padding: .1em .25em; }
+</style>
+</head><body>
+<div class="c">
+<div class="ic">
+<h1>CYK Algorithm</h1>
+<div class="iex">
+<div class="iexl">
+<form>
+<label>Grammar <i>G</i> in CNF:</label><br/>
+<textarea id="rules" rows="10" cols="20">
+S -> AB | CD | ED
+A -> b
+B -> CS | AE | a
+C -> a
+D -> AS | CF | b
+E -> BB
+F -> DD
+</textarea><br/>
+<br/>
+<label>Word <i>w</i>:</label><br/>
+<input type="text" id="word" value="baaabb" /><br/>
+<br/>
+<label>Start symbol:</label><br/>
+<input type="text" id="start" value="S" /><br/>
+<br/>
+<input type="button" onclick="run();" value="Run" />
+</form>
+</div>
+<div id="stdout"></div>
+<div style="clear: both;"></div>
+</div>
+</div>
+</div>
+</body></html>
