@@ -30,12 +30,12 @@
     font-family: 'Fira Sans';
     font-weight: 200;
     font-style: normal;
-    src: url('FiraSans-Ultralight.woff') format('woff');
-    src: url('FiraSans-Ultralight.eot?#iefix') format('embedded-opentype'),
-         url('FiraSans-Ultralight.woff2') format('woff2'),
-         url('FiraSans-Ultralight.woff') format('woff'),
-         url('FiraSans-Ultralight.ttf') format('truetype'),
-         url('FiraSans-Ultralight.svg#fira_sansultralight') format('svg');
+    src: url('FiraSans-UltraLight.woff') format('woff');
+    src: url('FiraSans-UltraLight.eot?#iefix') format('embedded-opentype'),
+         url('FiraSans-UltraLight.woff2') format('woff2'),
+         url('FiraSans-UltraLight.woff') format('woff'),
+         url('FiraSans-UltraLight.ttf') format('truetype'),
+         url('FiraSans-UltraLight.svg#fira_sansultralight') format('svg');
 }
 
 @font-face {
