@@ -971,3 +971,7 @@ footer#site-footer a:hover, footer#site-footer a:focus {
     margin-bottom: 20px;
     border-radius: 4px;
 }
+
+p.yt-embed {
+	text-align: center !important;
+}
