@@ -1,0 +1,397 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A computer scientists approach to electronics, software development, making and much more." />
+        <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="Maximilian Strauch" />
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>Apple ][ Emulator</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
+        <script type="text/javascript">
+            /**
+             * See http://genert.laal.ee/demo/simplbox/ for further information.
+             */
+            var preLoadIconOn = function () {
+                var newE = document.createElement("div"),
+                    newB = document.createElement("div");
+                    newE.setAttribute("id", "simplbox-loading");
+                    newE.appendChild(newB);
+                document.body.appendChild(newE);
+            },
+            preLoadIconOff = function () {
+                var elE = document.getElementById("simplbox-loading");
+                elE.parentNode.removeChild(elE);
+            },
+            overlayOn = function () {
+                var newA = document.createElement("div");
+                newA.setAttribute("id", "simplbox-overlay");
+                document.body.appendChild(newA);
+            },
+            overlayOff = function () {
+                var elA = document.getElementById("simplbox-overlay");
+                elA.parentNode.removeChild(elA);
+            },
+            closeButtonOn = function (base) {
+                var newE = document.createElement("div");
+                newE.setAttribute("id", "simplbox-close");
+                document.body.appendChild(newE);
+                newE = document.getElementById("simplbox-close");
+                base.API_AddEvent(newE, "click touchend", function () {
+                    base.API_RemoveImageElement();
+                    return false;
+                });
+            },
+            closeButtonOff = function () {
+                var elA = document.getElementById("simplbox-close");
+                elA.parentNode.removeChild(elA);
+            },
+            captionOn = function (base) {
+                var element = document.getElementById("simplbox-caption"),
+                    documentFragment = document.createDocumentFragment(),
+                    newElement = document.createElement("div"),
+                    newText = document.createTextNode(base.m_Alt);
+
+                if (element) {
+                    element.parentNode.removeChild(element);
+                }
+
+                newElement.setAttribute("id", "simplbox-caption");
+                newElement.appendChild(newText);
+                documentFragment.appendChild(newElement);
+                document.getElementsByTagName("body")[0].appendChild(documentFragment);
+            },
+            captionOff = function () {
+                var element = document.getElementById("simplbox-caption");
+                element.parentNode.removeChild(element);
+            };
+
+            // Init app
+            window.onload = function() {
+                var E = new SimplBox(document.querySelectorAll("[data-simplbox='gallery1']"), {
+                    quitOnDocumentClick: false,
+                    onStart: function () {
+                        overlayOn();
+                        closeButtonOn(E);
+                    },
+                    onEnd: function () {
+                        overlayOff();
+                        closeButtonOff();
+                        captionOff();
+                    },
+                    onImageLoadStart: function () {
+                        preLoadIconOn();
+                        captionOn(E);
+                    },
+                    onImageLoadEnd: function () {
+                        preLoadIconOff();
+                    }
+                });
+                E.init();
+            };
+        </script>
+        		<script type="text/javascript" src="../../projects/bsc-thesis/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="../../projects/bsc-thesis/jquery.reel.js"></script>
+    </head>
+    <body>
+        <div id="content-wrap">
+        <div id="mh-backer-dark-bg" style="background-image: url('../../projects/bsc-thesis/top-bg.jpg');">
+            <!-- Main header with menu -->
+            <header id="sh">
+                <div class="row">
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+
+                    <ul>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </header>
+
+            <!-- Header with title -->
+            <header class="ph">
+                <div class="row">
+                    <div class="ph-headline">
+                        <h1 id="h1-page">Apple ][ Emulation on an AVR Microcontroller</h1>
+                        <hr />
+                    </div>
+                </div>
+                            </header>
+
+                    </div>
+        <main id="site-body" class="row">
+
+<p class="alert alert-default">
+<strong>Hot <i class="icon-emo-thumbsup"></i>&nbsp;:</strong> make sure to checkout the <a href="#yt-video">YouTube video <i class="icon-youtube-play"></i></a> and the <a href="#360">interactive 360° panorama</a> of the portable Apple ][ emulator I built down below!</a>
+</p>
+
+<ul class="toc">
+<li class="header">Table of Contents</li>
+<!--<li class="anchor"><a href="#360">360° view of the prototype</a></li>-->
+<li class="anchor"><a href="#demo">Demonstration: <i class="icon-youtube-play"></i> &amp; 360° view</a></li>
+<li class="anchor"><a href="#docs">Documents</a></li>
+<li class="anchor"><a href="#background">Background story</a></li>
+<li class="anchor"><a href="#images">Visual impressions</a></li>
+<li class="anchor"><a href="#future">Future development</a></li>
+<li class="anchor"><a href="#conclusion">Conclusion</a></li>
+<li class="anchor last"><a href="#annex-ooorg">Appendix: OpenOffice?</a></li>
+</ul>
+
+
+<p><span class="letterb">T</span>he Apple ][ personal computer was one of the first three completely assembled systems on the market. It was sold several million times from April 1977 till 1993. This 8 bit home computer was developed by <a href="https://en.wikipedia.org/wiki/Steve_Wozniak" target="_blank">Steve &raquo;The Woz&laquo; Wozniak</a> and evolved together with <a href="https://en.wikipedia.org/wiki/Steve_Jobs" target="_blank">Steve Jobs</a>. They paved the way for the Apple Macintosh computer and the nowadays well known brand Apple with its products.
+</p>
+
+<p>Back in 2014 I wrote my Bachelor thesis about emulating a complete Apple ][ (&raquo;two&laquo;) on an Atmel AVR microcontroller. The thesis describes the implementation of a software emulator for the complete Apple ][ computer system on a single Atmel AVR microcontroller unit (MCU).</p>
+
+<p>Although the microcontroller runs at 20 MHz and the Apple ][ runs at roughly 1 MHz it is quite a challenge to get this working. The microcontroller not only emulates the original processor of the Apple ][ computer - the famous MOS 6502 - but also performs other tasks like display output and keyboard input. This requires an efficient emulation of the 6502 and memory management since the resources of a microcontroller are very limited when intending such challenging operations. The thesis shows the development of the processor emulation software and examines different design patterns of reaching the goal of a fast processor emulation. For every different approach the strenghts and weaknesses are scientifically evaluated.</p> 
+
+<p>The final product is a highly improved emulation of the MOS 6502 CPU, written in AVR assembler, which is then used on an AVR ATMega 1284p microcontroller together with other electronic parts to create a portable and battery powered Apple ][ (emu­lator) handheld prototype.</p>
+
+<h1><a name="demo"></a><i class="icon-youtube-play"></i> Demonstration</h1>
+
+<p>The follwing 360° slide panorama shows the result of my thesis: a fully functional, battery powered and portable Apple ][ emulator. <strong>You can use the mouse to rotate the panorama to view the emulator from different angles - otherwise it will spin by itself.</strong></p>
+
+<a name="360"></a>
+
+<style type="text/css">
+#image-reel {
+	border: solid 1px green;
+	margin: 0 auto;
+    border: solid 1px #ccc;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+</style>
+
+<p class="im1">
+    <img src="360pan/01.jpg" width="520" height="693"
+      class="reel"
+      id="image"
+      data-images="360pan/##.jpg"
+      data-frames="15"
+      data-frame="14"
+      data-rows="1"
+      data-row="1"
+      data-speed="0.05">
+</p>
+
+<p>
+To demonstrate the behaviour of the emulator and see some old programs executed by the emulated Apple ][ I created the following embedded YouTube video. It shows the final (third) prototype in action and demonstrates most of it's features. Enjoy it!
+</p>
+
+<a name="yt-video"></a>
+
+<p><em>YT video forthcomming.</em></p>
+
+
+<h1><a name="docs"></a> Documents</h1>
+
+<p>If you are interested in the topic and my thesis you can download the complete PDF file in the following. The thesis describes the MOS 6502 architecture, the development of a fast emulation of it and the hardware and software design of other parts of the handheld unit in glorious detail. The following sections are very interesting and worth taking a look at:</p>
+
+<ul class="content">
+<li>Section &raquo;2.1.1 MOS Technology 6502&laquo; (p. 12) explains the principle of operation of the famous 6502 processor and especially the section about the addressing modes explains the different modes very extensively.</li>
+<li>Section &raquo;2.3 Different architectures&laquo; (p. 27) compares the Von Neumann architecture (used by almost every modern computer and by the Apple ][) against the Harvard architecture (used by the used microcontroller).</li>
+<li>At the beginning of chapter three different approaches to emulate the MOS 6502 processor are presented (p. 32 and following) and analyzed why they are not fast enough.</li>
+<li>With the knowledge of the previous attempts section 3.2.8 (p. 44 - 52) presents the solution which is to implement the MOS 6502 processor emulation directly in AVR assembler and utilize the status register of the AVR processor to set the status flags of the emulated processor since it turned out that calculating the status flags in high level languages (or generally in software) takes a huge effort which causes the slowdown.</li>
+<li>Later, in chapter three, the structure of the entire firmware of the final handheld emulator is presented (see figure six, p. 54 <em>or</em> figures below) and structure of Apple floppy images is presented (see figure seven, p. 59) to let the emulator later load software from floppy disk images.</li>
+<li>The thesis is concluded with chapter five taking a look at the initial requirements and the results. It finally also answers the initial question whether it is possible to emulate an 8-bit computer system on an 8-bit microcontroller with only a slightly higher system clock (see p. 80 and following).</li>
+</ul>
+
+<p>
+<a href="thesis-strauch_final.pdf" class="special-button" title="Apple ][ Emulation on an AVR Microcontroller thesis document (full)"><i class="icon-download"></i>&nbsp;Download the full thesis (PDF, 2.3 MB)</a> <span class="checksum-gadget">SHA-1 2b9d935b56545472f4c6571f5a03d5f96a15effb</span>
+</p>
+
+<p>
+Additionally I held a presentation for my supervisors, colleagues and everybody interested in the topic. Despite the fact that it is mostly in German it might be worth to take a look at since the keynote gives a short (visual) overview about what I did.
+<br/>
+<a href="a2emuavr.pdf" class="special-button" title="Keynote for Apple ][ Emulation on an AVR Microcontroller thesis"><i class="icon-download"></i>&nbsp;Download the full keynote (PDF file, 8.3 MB)</a> <span class="checksum-gadget">SHA-1 bf95f44947552ac241673e02d29fa3826a43a95b</span>
+</p>
+
+<p>
+You can also download the full schematic for the Apple ][ emulator developed during my thesis. I created the schematic using CADSoft's Eagle.
+<br/>
+<a href="a2e_rev3.pdf" class="special-button" title="Schematic for the Apple ][ emulator"><i class="icon-download"></i>&nbsp;Download the schematic (PDF file, 97 KB)</a> <span class="checksum-gadget">SHA-1 facdf8265d150fc5ce796bb9fd16ad89a2c31383</span>
+</p>
+
+
+
+
+<h1><a name="background"></a> Background story</h1>
+
+<p class="alert alert-warning">
+If  you are interested in how I developed, created and build the portable Apple ][ emulator you might want to take a look at the complete thesis which can be downloaded in the section <a href="#docs">Documents</a> above. This section only gives some meta information since everything about the emulator is obviously written down in the thesis. <i class="icon-emo-happy"></i>
+</p>
+
+<p>
+Initially I planned to create a portable NES console (by emulating the 6502 processor on an AVR) for my thesis since my supervisor teaches a course where he builds a DIY, self-developed game console (by him) with the students based on an ATMega 1284p. I then started to implement a <em>prototype NES emulator</em> in Java and then did the math and came to the conclusion that the PPU (picture processing unit) is way to complicated to be emulated easily with a 20 MHz AVR along with a 6502 processor and I/O (display, game controller) emulation.
+</p>
+
+<p>
+Then we thought about another alternative and came to the Apple ][ since it uses the same processor and mainly consists of the processor (no other complex parts) and might be easy to emulate. The goal of a portable unit seemed reachable with it.
+</p>
+
+<p>
+The final product is - as you can see in the <a href="#360">360° view</a> at the top - is a real portable device. The emulation of the MOS 6502 makes only a little part of the around 9.000 lines of code (LOC). The following figure shows the layer diagram of the different modules of the emulator.
+</p>
+
+<p class="img-container"><img src="software_structure.png" alt="Layer diagram of the Apple ][ emulator" title="Layer diagram of the Apple ][ emulator" /><br/><span class="caption">Layer diagram of the Apple ][ emulator: every horizontal connection of two boxes symbolizes a &raquo;use&laquo; relation.</span></p>
+
+<p>
+The green module is the AVR assembler source code of the CPU emulation. All other modules - with except to the gray modules (SD library, C compiler and hardware) - have been developed completely from scratch over the course of my thesis by myself. They are written in C. In the following a short explanation of every module is given:
+</p>
+
+<ul class="content">
+	<li><strong>Emulator Runtime Environment (ERE)</strong> - Contains the source code which makes up the main (backend) GUI of the emulator in particular: the menus. For example the menu which lets the user choose a program to load into the Apple ][ RAM from a disk image on the SD card is generated by this module by using display functions and <em>DSK I/O</em> functions to read Apple  ][ disk image files.</li>
+	<li><strong>UI Framework / Display I/O</strong> - Some low level functions to control the LCD display (SSD 1289 controller) and functions to paint menus and backgrounds - just like the <code>display</code> TUI tool on Linux.</li>
+	<li><strong>Keyboard I/O</strong> - Accepts key presses from the separate keyboard controller (since the key matrix scanning needs too much resources to be integrated into the main controller) and provides some high-level functions to convert Apple ][ keystrokes into regular ASCII keycodes and some wait-for-keypress functions.</li>
+	<li><strong>State I/O</strong> - The emulator supports saving the current state of the entire emulation including RAM and the processor registers. Therefore the execution can be saved and reloaded later to continue at the exact same execution state. This module provides functions to help saving and loading the emulator state and relies on the module <em>TWI / EEPROM</em> which provides the <em>physical layer</em> support.</li>
+	<li><strong>TWI / EEPROM</strong> - Provides <em>physical layer</em> support to talk to an EEPROM, e.g. two functions which utilize the AVR's hardware support for I2C to talk to the 128KB I2C serial EEPROM from Microchip.</li>
+	<li><strong>DSK I/O</strong> - Contains all high-level functions to read Apple ][ floppy disk images (5 1/2 inch floppy disks, normally 140 KB in total) and list the contained programs to load them into memory. This is done since the emulated Apple ][ is the original version and lacks floppy disk support. Besides this not enough resources (no more MHz!) are available to provide this functionality. See also the section about future development <a href="#future">here</a>.</li>
+	<li><strong>SD Library (3rd party)</strong> - The emulator uses the <a href="http://elm-chan.org/fsw/ff/00index_p.html" target="_blank">Petit FAT File System Module <em>by Elm Chan</em></a> since it worked out of the box. A further improvement could be to store states to the SD card. This would allow for more states to save on the one hand and allow to eliminate the EEPROM and circuitry on the other hand. This reduces the component count, saves cost and makes everything less complex. See the section about future development <a href="#future">here</a>.</li>
+	<li><strong>6502 CPU Emulation</strong> - Advanced emulation of the MOS 6502 processor without support for illegal instructions (not originally defined) and the BCD mode. Implemented in AVR assembler using directly AVR instructions for speedup when possible.</li>
+</ul>
+
+<p>
+The used ATMega 1284p has a total of 16KB physical SRAM. Since the emulation software needs some SRAM for variables and data only 12KB remain for the emulated Apple ][. The following memory map of the Apple ][ visualizes the memory regions which are &raquo;supported&laquo; <em>or</em> have physcial memory attached - this supported regions are shaded in light brown:
+</p>
+
+<p class="img-container"><img src="a2_memory_map.png" alt="Memory map of the Apple ][ with by the emulator supported regions" title="Memory map of the Apple ][ with by the emulator supported regions" /><br/><span class="caption">Memory map of the Apple ][ with available memory regions shaded in light brown.</span></p>
+
+<p>
+One can directly see that high resolution graphics cannot be supported since the graphics memory (frame buffer) is not fully covered. So the emulator only provides standard 40x24 text mode (960 characters), or 40x48 low resolution graphics mode or mixed mode.
+</p>
+
+<p>
+It is clearly possible to connect an external 64KB SRAM module to the emulator and use the full memory map of the Apple ][ although almost all the 40 pins of the ATmega are used. But the time of the thesis was bound and not every goal can be reached in a certain time. Therefore we (my supervisors and me) decided that it would be enough - at first - to go with 12KB and get it working. And also be aware of the fact that the original Apple ][ - which is aimed here - not always came with full 64KB of RAM since back in the days SRAM was not cheap. So often only 4KB or more were populated which makes the created emulator with 12 KB of RAM into a mid-range model.
+</p>
+
+<p>
+The following figure shows the schematic of the Apple ][ emulator (third prototype) I build as presented on this page. Although this schematic looks very &raquo;simple&laquo; it took me some time to figure all components out so that everything works fine. It took around 35 Euro to build the Apple ][ emulator.
+</p>
+
+<p class="img-container"><img src="schematic.png" alt="Schematic of Apple ][ emulator" title="Schematic of Apple ][ emulator" /><br/><span class="caption">Schematic of Apple ][ emulator as shown above. Click <a href="a2e_rev3.pdf" title="Schematic for the Apple ][ emulator">here</a> to download the PDF file.</span></p>
+
+<p>
+Apart from the shown final version of the Apple ][ emulator in the <a href="#360">360° view</a> above two previous versions and a breadboard protoype have been build by me. Over this &raquo;evolution&laquo; the features and function of the emulator was refined. In the following sections some pictures of this development are shown. You can also find visual impressions of the final prototype on page 77, of the previous prototypes on page 83 and of the backend firmware on page 63 of my thesis.
+</p>
+
+
+<h1><a name="images"></a> Further visual impressions</h1>
+
+<p>
+In the following some visual impressions (aka photos) are given which show the development of the emulator in different states.
+</p>
+
+<div class="gallery-box">
+	<a href="photos/pic_0.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_0.jpg" alt="Picture of the first breadboard version with CPU debug information on the screen." /></a>
+	<a href="photos/pic_1.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_1.jpg" alt="The CPU emulation works and the Apple ][ boots to the usual boot screen. But the keyboard is missing ..." /></a>
+	<a href="photos/pic_2.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_2.jpg" alt="... I created an improvised keyboard from aluminium foil and cardboard." /></a>
+	<a href="photos/pic_3.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_3.jpg" alt="Now the Apple ][ works without problems - here a little BASIC example." /></a>
+	<a href="photos/pic_4.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_4.jpg" alt="At some time I planned to integrate the annunciator (digital I/O) outputs. Later I needed those I/O ports of the AVR. But here you can see it working." /></a>
+	<a href="photos/pic_5.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_5.jpg" alt="The first prototype on perfboard ..." /></a>
+	<a href="photos/pic_6.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_6.jpg" alt="... with horrible wiring. But hey: it was almost my first soldering job ever!" /></a>
+	<a href="photos/pic_8.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_8.jpg" alt="Hangman works ;-)" /></a>
+	<a href="photos/pic_7.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_7.jpg" alt="The second prototype with backend firmware on the screen. Obviously there are some bugs as one can see (in fact too less main memory so that data got overwritten)." /></a>
+	<a href="photos/pic_9.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_9.jpg" alt="Backsides of the prototypes of version one and version two. I got the wiring much cleaner the second time." /></a>
+	<a href="photos/pic_10.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_10.jpg" alt="Front view of the second prototype with special button (blue) for the backend menu. This device exists to this day. The first prototype got disassembled." /></a>
+	<a href="photos/pic_11.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_11.jpg" alt="I then experimented with the first prototype to add SD card support ..." /></a>
+	<a href="photos/pic_12.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_12.jpg" alt="... and hacked a 2nd 3/4 prototype by recycling the first prototpe." /></a>
+	<a href="photos/pic_13.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_13.jpg" alt="Time for the final, third prototype: almost all main components." /></a>
+	<a href="photos/pic_14.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_14.jpg" alt="The backside of the final prototype." /></a>
+	<a href="photos/pic_15.jpg" data-simplbox="gallery1"><img src="photos/thumbs/pic_15.jpg" alt="The front of the final prototype without display which covers the main microcontroller, SD card, EEPROM and some passive components." /></a>
+
+	<a href="photos/ui-1_mainmenu.jpg" data-simplbox="gallery1"><img src="photos/thumbs/ui-1_mainmenu.jpg" alt="Final backend menu of the Apple ][ emulator firmware." /></a>
+	<a href="photos/ui-2_statesave.jpg" data-simplbox="gallery1"><img src="photos/thumbs/ui-2_statesave.jpg" alt="Screen to save the current emulator state to one of ten slots." /></a>
+	<a href="photos/ui-3_dskload1.jpg" data-simplbox="gallery1"><img src="photos/thumbs/ui-3_dskload1.jpg" alt="Open an Apple ][ floppy disk image from the SD card ..." /></a>
+	<a href="photos/ui-4-dskload2.jpg" data-simplbox="gallery1"><img src="photos/thumbs/ui-4-dskload2.jpg" alt="... and select data to load." /></a>
+	<a href="photos/ui-5_backlight.jpg" data-simplbox="gallery1"><img src="photos/thumbs/ui-5_backlight.jpg" alt="Adjust the brightness of the backlight (PWM controlled)." /></a>
+</div>
+
+<h1><a name="future"></a> Future development</h1>
+
+<p>The question how this project continues is <s>not</s> easy to answer: <strong>it's finished</strong> although it misses some features and contains some bugs:
+</p>
+
+<ul class="content">
+<li>First of all it only emulates 12KB of RAM. Therfore the HiRes mode is not available but many games used it. So an expansion to an external SRAM with 64KB would be nice. Since memory is then external the mapped I/O from <code>0xc000</code> to <code>0xc07f</code> (see image above) needs to be implemented by external glue logic (to keep the speed up). Thefore I already ordered some Xilinx XC9536XL CPLDs to contain the address decoding glue logic. But I would try at first to handle the &raquo;address decoding&laquo; by software in the main ATMega and see if it works with the necessary time constraints.</li>
+<li>The keyboard is improvised with the tactile buttons and the debounce isn't adjusted right. So sometimes multiple characters appear instead of one. But this could be fixed easily. <br/>Because my supervisor absolutely didn't like the tactile keyboard I already added a connector for a PS/2 keyboard on the third prototype (right angle female headers). It is connected to the USART (RX and XCK !!) of the keyboard controller. The software is not implemented but could be at every time.</li>
+<li>Sometimes a &raquo;glitch&laquo; happens when loading data from the SD card and the data isn't loaded. I suspect that the data isn't written correctly into RAM or my calculated start location is wrong (since I &raquo;implant&laquo; the data into BASIC). So I would start by checking this first because it is most likely the culprit.</li>
+<li>States could be saved to the SD card. This would reduce the parts count and wiring of the emulator.</li>
+<li>This list could be continued with smaller feature requests but I guess that this are the most important ones.</li>
+</ul>
+
+<p>
+So you might ask why I didn't implemented those features and the answer is very simple: lack of time. So the time for my thesis was bound to a fixed time span (six months). This times includes besides writing the software and building the protoypes also writing a decent final document, creating a final presentation, printing the thesis and first of all - at the beginning - find the right topic to work on. But despite the fact that not every feature is included I think that I came to a decent result. And most people take the written thesis for granted but I can tell that it is a lot of work.
+</p>
+
+<p>
+When I think of future development and implementing those features I'm split because it was and is a really fun project and - to my best knowledge - without any competitors on the web. But: why should I invest more time if you can use a Raspberry Pi Zero and RetroPi to create such a device in the magitude of tens of minitues? And usually when I get to this point in my mind I cancel any thoughts of further development. But I thought of this several times in the past. So as long as nobody asks me to continue this project with a good reason it will continue sleeping.
+</p>
+
+<p>
+When I wrote my thesis and had the idea (in 2013) RetroPi wasn't around and it seemed that there was no decent project which provided a handheld Apple ][ emulator. Even the Raspberry Pi Zero was not around. But nowadays the only justification <em>or</em> difference to the Raspberry Pi solution is the fact that I emulated an Apple ][ - which is an 8 bit machine - on an 8 bit microcontroller which is only 20 times faster in terms of clock speed compared to e.g. the Raspberry Pi which is 700 to 1,000 times faster. You could also use a STM32F103* which runs at 72 MHz and has plenty of resources to emulate the Apple ][. But it is a 32 bit architecture.
+</p>
+
+<p>
+I'm sorry (to myself), but this wasn't justification enough to continue this project after I finished the thesis (and also the lack of time). But there is one more thing I might do in the future: now that I have a 3D printer I might print a cool enclosure. I have some ideas to make it into a handheld like the Sony Vita with the full keyboard split in half and placed on both side.
+</p>
+
+<h1><a name="conclusion"></a> Conclusion</h1>
+
+<p>
+As you can read in the final chapter of my thesis the original (100%) speed wasn't reached by the emulator since mostly the memory read slows down the execution since it is checked for too many cases although it is implemented in optimized AVR assembler.
+</p>
+
+<p>
+For me this project was a huge success. Not only because of the grade but also because it was 100% fun to work on and I learned almost as many as in the five previous semesters of the bachelor curriculum. Don't get me wrong, the knowledge and impressions of the bachelor curriculum are important but the thesis was the application of all my knowledge I learned and the soft-skills - like project and time management - which I learned. So I really think back with pleasure. 
+</p>
+
+
+<!-- //////////////////////////////////////////////////// -->
+<div class="decorativesep"></div>
+<!-- //////////////////////////////////////////////////// -->
+
+
+<h1><a name="annex-ooorg"></a> Writing the thesis with OpenOffice.org</h1>
+
+<p>
+I did an experiment with my bachelor thesis: although I really like LaTeX for creating beautiful scientific documents I wanted to try if Apache OpenOffice.org (in version four I guess) could be used to write such a complex document with images, listings, tables and references to literature. The result is: it works, but ...
+</p>
+
+<p>
+... not as smoothly as one would expect. I needed to use many workarounds to get things working and also needed to keep track of the structure in my mind to (re-)check it always. One annoying thing was that I needed to go over every page after opening the document. If I exported the document without doing this not everything was at the right place on later pages. Graphics and tables were moved and the pages were not layed out correctly and literature references were not filled. So the workaround was to scroll over all pages after opening the document, remaining on a page for less than a second and then exporting it. And it worked - as you can see.
+</p>
+
+<p>
+Another annoying thing is the kerning in the PDF which is not always beautiful. At some places the letters are to close to each other and look strange. This can be observed in the PDF you can download from this page.
+</p>
+
+<p>
+So the final judgement is that OpenOffice.org <em>can</em> be used for such large documents but it is not much fun and you'll need to inspect everything carefully. For my Master's thesis I used the good old LaTeX typesetting software and the result was much nicer and the creation was much more relaxed.
+</p>
+
+    </main>
+    </div>
+        <footer id="site-footer">
+            <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
+            <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72191716-1', 'auto');
+            ga('send', 'pageview');
+            </script>
+        </footer>
+    </body>
+</html>
