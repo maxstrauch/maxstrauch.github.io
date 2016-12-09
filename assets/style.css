@@ -975,3 +975,23 @@ footer#site-footer a:hover, footer#site-footer a:focus {
 p.yt-embed {
 	text-align: center !important;
 }
+
+.grid-item {
+    position: relative;
+}
+
+.count-badge {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    z-index: 999;
+    background-color: #fa0307;
+    color: white;
+    font-weight: 200;
+    height: 50px !important;
+    padding: 0 14px;
+    line-height: 1.4;
+    font-size: 36px;
+    text-align: center;
+    border-radius: 25px;
+}

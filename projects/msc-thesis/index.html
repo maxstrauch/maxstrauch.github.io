@@ -1,0 +1,277 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A computer scientists approach to electronics, software development, making and much more." />
+        <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="Maximilian Strauch" />
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>Master's thesis: XPB</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
+        <script type="text/javascript">
+            /**
+             * See http://genert.laal.ee/demo/simplbox/ for further information.
+             */
+            var preLoadIconOn = function () {
+                var newE = document.createElement("div"),
+                    newB = document.createElement("div");
+                    newE.setAttribute("id", "simplbox-loading");
+                    newE.appendChild(newB);
+                document.body.appendChild(newE);
+            },
+            preLoadIconOff = function () {
+                var elE = document.getElementById("simplbox-loading");
+                elE.parentNode.removeChild(elE);
+            },
+            overlayOn = function () {
+                var newA = document.createElement("div");
+                newA.setAttribute("id", "simplbox-overlay");
+                document.body.appendChild(newA);
+            },
+            overlayOff = function () {
+                var elA = document.getElementById("simplbox-overlay");
+                elA.parentNode.removeChild(elA);
+            },
+            closeButtonOn = function (base) {
+                var newE = document.createElement("div");
+                newE.setAttribute("id", "simplbox-close");
+                document.body.appendChild(newE);
+                newE = document.getElementById("simplbox-close");
+                base.API_AddEvent(newE, "click touchend", function () {
+                    base.API_RemoveImageElement();
+                    return false;
+                });
+            },
+            closeButtonOff = function () {
+                var elA = document.getElementById("simplbox-close");
+                elA.parentNode.removeChild(elA);
+            },
+            captionOn = function (base) {
+                var element = document.getElementById("simplbox-caption"),
+                    documentFragment = document.createDocumentFragment(),
+                    newElement = document.createElement("div"),
+                    newText = document.createTextNode(base.m_Alt);
+
+                if (element) {
+                    element.parentNode.removeChild(element);
+                }
+
+                newElement.setAttribute("id", "simplbox-caption");
+                newElement.appendChild(newText);
+                documentFragment.appendChild(newElement);
+                document.getElementsByTagName("body")[0].appendChild(documentFragment);
+            },
+            captionOff = function () {
+                var element = document.getElementById("simplbox-caption");
+                element.parentNode.removeChild(element);
+            };
+
+            // Init app
+            window.onload = function() {
+                var E = new SimplBox(document.querySelectorAll("[data-simplbox='gallery1']"), {
+                    quitOnDocumentClick: false,
+                    onStart: function () {
+                        overlayOn();
+                        closeButtonOn(E);
+                    },
+                    onEnd: function () {
+                        overlayOff();
+                        closeButtonOff();
+                        captionOff();
+                    },
+                    onImageLoadStart: function () {
+                        preLoadIconOn();
+                        captionOn(E);
+                    },
+                    onImageLoadEnd: function () {
+                        preLoadIconOff();
+                    }
+                });
+                E.init();
+            };
+        </script>
+            </head>
+    <body>
+        <div id="content-wrap">
+        <div id="mh-backer-dark-bg" style="background-image: url('../../projects/msc-thesis/top-bg.jpg');">
+            <!-- Main header with menu -->
+            <header id="sh">
+                <div class="row">
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+
+                    <ul>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </header>
+
+            <!-- Header with title -->
+            <header class="ph">
+                <div class="row">
+                    <div class="ph-headline">
+                        <h1 id="h1-page">GPIO-based Method for low Latency Message Interchange</h1>
+                        <hr />
+                    </div>
+                </div>
+                            </header>
+
+                    </div>
+        <main id="site-body" class="row">
+<br/>
+<ul class="toc">
+<li class="header">Table of Contents</li>
+<li class="anchor"><a href="#docs">Documents</a></li>
+<li class="anchor"><a href="#photos">Visual impressions</a></li>
+<li class="anchor last"><a href="#license">License</a></li>
+</ul>
+
+
+<p><span class="letterb">I</span>n 2012 the <a href="https://de.wikipedia.org/wiki/Raspberry_Pi" target="_blank">Raspberry Pi</a> - a single-board credit card-sized computer - was launched. It aims on promoting the acquisition of skills in computer science for a broad audience. The most recent model features a powerful quad-core processor. By combining multiple single-board computers, a low-cost distributed computation cluster can be constructed. The nodes are then interconnected via standard FastEthernet. But for small (management) messages, which are often sent in a distributed computation, the latency of Ethernet is inadequate as the diagrams in figure one indicate.
+</p>
+
+<p class="img-container"><img src="latency-ethernet.png" alt="The performance of Ethernet for small amounts of data is poor" title="The performance of Ethernet for small amounts of data is poor" /><br/><span class="caption"><strong>Figure 1:</strong> The performance of Ethernet is poor for small buffer sizes. 
+The left diagram shows the latency (half RTT or single way) of a message for a given buffer size (aka. size of the data to send). Due to the byte padding of Ethernet the latency does not differ very much for sizes of up to 64 bytes. The right diagram displays the measured throughput (calculated from the latency and buffer size) wich shows an almost perfect behaviour: 11.72 MByte/s (of theoretical max. 12.5 MByte/s) are reached.
+</span></p>
+
+<p>
+You might now think that if you use for example an ODROID - or any other single-board computer with Gigabit Ethernet - the problem is resolved since the Raspberry Pi only uses an FastEthernet controller. I thought the same and took a look at this topic at the end of my thesis in chapter five, page 113, figure 5.2. I compared the latency of Gigabit Ethernet against FastEthernet and came to the conclustion that they behave almost the same for <em>small amounts of data</em>. But as soon as the data gets bigger the latency for Gigabit Ethernet is much smaller as for FastEthernet, obviously.
+</p>
+
+
+<p>
+With this problem discovered the topic of my thesis was now to evaluate if the GPIO pins of the single-board computer could be used to establish a data connection which transferrs the data much faster than Ethernet for <em>small amounts of data</em>. There are several obstacles which must be overcome:
+</p>
+
+<ol class="content">
+<li>The GPIO pins cannot be switched very fast and interrupts triggered by the GPIO pins occure a long time after they physically happened (when using the GPIO memory mapped registers directly via C in the user space). See page 65, figure 3.13.</li>
+<li>The serial interfaces (SPI, UART, I2C) are all too slow and not suitable for the intended communication scheme: a multi-participant bus system (for example SPI and I2C are all master-slave oriented). The GPIOs are to slow for creating a custom serial protocol.</li>
+<li>It should be used as little external components as possible (requirement).</li>
+<li>The standard (Raspbian) Linux is not a realtime operating system. Therefore scheduling will soften any hard timing constraints which are necessary for any kind of data transmission protocol (which works asynchronously). Therefore means must be established to deal with the missing time reliability.</li>
+</ol>
+
+<p>Therfore the thesis describes the design and implementation of a communication protocol - the <em>eXtreme Parallel Bus</em> (XPB) - which utilizes GPIO pins to create a synchronous and parallel 16-bit data bus. Because of the slow GPIO pins I implemented the XPB driver as a loadable kernel module (LKM) which creates a device file under <code>/dev/xpb</code> for communication. So I learned to write code for the Linux kernel.
+</p>
+
+<p>
+Using the GPIO pins from within the kernel really speeds up the operation: for example it takes an average of 20 usec to arrive in the interrupt service routine after the edge on a GPIO pin was changed compared to around 200 usec from the user space application. So this step was really worth it.
+</p>
+
+<p>
+The following figure two shows the architecture of the XPB bus and the additionally developed library to interface the kernel module and send data over the bus. The library has been developed and evaluated to perform the communication during distributed computations and combine the advantages of Ethernet and XPB: small amounts of data are transferred with the faster XPB bus and bigger amounts with standard Ethernet (hybrid method) to get the best performance.
+</p> 
+
+
+
+<p class="img-container"><img src="xpb-arch.png" alt="Architecture of the XPB bus and library" title="Architecture of the XPB bus and library" /><br/><span class="caption"><strong>Figure 2:</strong> Architecture of the XPB bus (left) and programming library (right). The XPB bus uses 25 GPIO pins to transmit data according to the XPB protocol. A central arbiter controls the bus access. The <code>xpblib</code> is a C user-space libray which utilizes the XPB bus and Ethernet (hybrid method) to transfer data. The library abstracts from physical connections to a single logical connection.
+</span></p>
+
+
+<p>
+Empirical evaluations are finally carried out to compare the latency of developed XPB protocol against the latency of Ethernet to answer the question whether it is possible to use the GPIO pins, create a custom protocol and overcome the poor performance of Ethernet for small amounts of data (packages). Additionally the developed library <code>xpblib</code> has also been evaluated on a real distributed computation of the Mandelbrot set to see the behaviour of XPB in real applications. All evaluations and tests have been done on a small cluster or <em>testbed</em> of five Raspberry Pi Model 3 single-board computers. In a later section (<a href="#photos">here</a>) some visual impressions of the cluster are given.
+</p>
+
+<p>
+The final result is that XPB is able to overcome the performance of Ethernet for small amounts of data - for data sizes up to around 256 bytes. But since the architecture is a shared bus congestion arises if too many messages are send too quickly resulting in a performance drop. This drop obviously depends on the application of XPB. <br/>
+But the target was to evaluate whether it is possible to establish a second communication way besides Ethernet. And this goal has been successfully reached with the presented XPB protocol. 
+<br/>
+The developed XPB protocol could also be useful for connecting Raspberry Pi Zeros (lack of Ethernet) and microcontrollers in general. Whether it is worth it depents totally on the application of XPB.
+</p>
+
+<p>The thesis features also a chapter with a rough overview over the topic of distributed computation with is a little bit detached from the rest. This chapter presents the current state of the supercomputer section, with a look into the <a href="www.top500.org" target="_blank">TOP500</a> list, explains some basics of distributed computing like Flynn's law and Moore's law and closes with an interesting case study on the <a href="http://www.infinibandta.org/" target="_blank">InfiniBand<sup>TM</sup></a> communication environment for high-performance applications. InfiniBand<sup>TM</sup> can transmit data with up to 39 GByte per second (EDR with twelve channels). It is a really powerful communication mean.</p>
+
+
+<h1><a name="docs"></a> Documents</h1>
+
+<p>
+In the following you can download the full thesis document (I corrected some typos). Please respect the terms and conditions under which I released this document. You can find them in the <a href="#license">license section</a> of this page (below).
+<br/> 
+<br/> 
+<a href="https://docs.google.com/uc?authuser=0&id=0B2GJ7Uy8BdCTd0RXY0VwbW56NW8&export=download" class="special-button" title="GPIO-based Method for low Latency Message Interchange thesis document (full)"><i class="icon-download"></i>&nbsp;Download the full thesis (PDF, 2.6 MB)</a> <span class="checksum-gadget">SHA-1 42232f33e767be5535b3f05584c55b5444546634</span>
+<br/>- or alternatively <a href="https://drive.google.com/file/d/0B2GJ7Uy8BdCTd0RXY0VwbW56NW8/view?usp=sharing" target="_blan">click here to view it in the browser (new window)</a>.
+</p>
+
+<p>
+The thesis has been created completely with LaTeX. For the (control) flow diagrams (e.g. see p. 53 / 54) I learned to used TikZ and PGF. The diagrams are created with PGFPlots. The only photos in this thesis are the photo of the testbed and of the arbitration unit. All other images are vector graphics. <i class="icon-emo-happy"></i>
+</p>
+
+<p>
+If you want to link to this document you can download an &raquo;advertising&laquo; image <a href="title-big.png" target="_blank">here</a>.
+</p>
+
+<h1><a name="photos"></a> Visual impressions</h1>
+
+<p>The following figures three and four show the small testbed I built to test and develop XPB on. Figure five shows the final prototype of the arbitration unit for XPB which is based on the idea of the PCI arbitration unit (see page 49).</p>
+
+<p class="img-container"><img src="cluster1.jpg" alt="Front view of the testbed" title="Front view of the testbed" /><br/><span class="caption"><strong>Figure 3:</strong> Front of the testbed. The five Raspberry Pi 3 Model B single-board computers are interconnected with a 40-pin ribbon cable (some connections NC) and are connected to the arbitration unit. They are also connected together via Ethernet and get power from an USB power supply with 2.4A per slot.</span></p>
+
+<p class="img-container"><img src="cluster2.jpg" alt="Back view of the testbed" title="Back view of the testbed" /><br/><span class="caption"><strong>Figure 4:</strong> The backside shows that every Pi has two connections (REQ and GRANT) to the arbitration unit.
+</span></p>
+
+<p class="img-container"><img src="arbitration1.jpg" alt="Architecture of the XPB bus and library" title="Architecture of the XPB bus and library" /><br/><span class="caption"><strong>Figure 5:</strong> The arbitration unit mainly consists of an AVR microcontroller which watches the REQ line and GRANTs the bus to only one bus participant at any time. The schematic is shown on page 58 and an explanation of the arbitration unit is shown in section 3.3 (p. 57 following).
+</span></p>
+
+
+
+
+
+
+
+
+
+<!-- //////////////////////////////////////////////////// -->
+<div class="decorativesep"></div>
+<!-- //////////////////////////////////////////////////// -->
+
+<h1><a name="license"></a> License</h1>
+
+<p class="alert alert-warning">
+<strong>Important:</strong> The documents presented on this page, my Master's thesis and other related documents and images are <u><strong>not</strong></u> licensed under the terms of the <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc"></i> BY-SA 4.0</a> license like the rest of this website.
+</p>
+
+<p>
+I am the exclusive copyright owner of <u><strong>all</strong></u> the documents related to my Master's thesis presented on my page or otherwhere. This page, the information on it and my thesis document is released under the terms and conditions of the <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/"><i class="icon-cc"></i> BY-NC-SA 4.0</a> license. That means that you can:
+</p>
+
+<ul class="content">
+<li>Read the information, copy it, share it and <em>link</em> to it.</li>
+</ul>
+
+<p>
+But you are not allowed to:
+</p>
+
+<ul class="content">
+<li>To use, publish or sell it commercially.</li>
+<li>To remix, transform, or build upon the material and publish it.</li>
+</ul>
+
+<p>
+In every case you must give appropriate credit to the author of the document (me). If you need more rights, want to use it or have any other question you might want to contact me.
+</p>
+
+
+    </main>
+    </div>
+        <footer id="site-footer">
+            <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
+            <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72191716-1', 'auto');
+            ga('send', 'pageview');
+            </script>
+        </footer>
+    </body>
+</html>
