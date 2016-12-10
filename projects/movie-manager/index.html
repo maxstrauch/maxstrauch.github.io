@@ -1,0 +1,266 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A computer scientists approach to electronics, software development, making and much more." />
+        <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
+        <meta name="robots" content="index,follow" />
+        <meta name="author" content="Maximilian Strauch" />
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>MovieManager</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
+        <script type="text/javascript">
+            /**
+             * See http://genert.laal.ee/demo/simplbox/ for further information.
+             */
+            var preLoadIconOn = function () {
+                var newE = document.createElement("div"),
+                    newB = document.createElement("div");
+                    newE.setAttribute("id", "simplbox-loading");
+                    newE.appendChild(newB);
+                document.body.appendChild(newE);
+            },
+            preLoadIconOff = function () {
+                var elE = document.getElementById("simplbox-loading");
+                elE.parentNode.removeChild(elE);
+            },
+            overlayOn = function () {
+                var newA = document.createElement("div");
+                newA.setAttribute("id", "simplbox-overlay");
+                document.body.appendChild(newA);
+            },
+            overlayOff = function () {
+                var elA = document.getElementById("simplbox-overlay");
+                elA.parentNode.removeChild(elA);
+            },
+            closeButtonOn = function (base) {
+                var newE = document.createElement("div");
+                newE.setAttribute("id", "simplbox-close");
+                document.body.appendChild(newE);
+                newE = document.getElementById("simplbox-close");
+                base.API_AddEvent(newE, "click touchend", function () {
+                    base.API_RemoveImageElement();
+                    return false;
+                });
+            },
+            closeButtonOff = function () {
+                var elA = document.getElementById("simplbox-close");
+                elA.parentNode.removeChild(elA);
+            },
+            captionOn = function (base) {
+                var element = document.getElementById("simplbox-caption"),
+                    documentFragment = document.createDocumentFragment(),
+                    newElement = document.createElement("div"),
+                    newText = document.createTextNode(base.m_Alt);
+
+                if (element) {
+                    element.parentNode.removeChild(element);
+                }
+
+                newElement.setAttribute("id", "simplbox-caption");
+                newElement.appendChild(newText);
+                documentFragment.appendChild(newElement);
+                document.getElementsByTagName("body")[0].appendChild(documentFragment);
+            },
+            captionOff = function () {
+                var element = document.getElementById("simplbox-caption");
+                element.parentNode.removeChild(element);
+            };
+
+            // Init app
+            window.onload = function() {
+                var E = new SimplBox(document.querySelectorAll("[data-simplbox='gallery1']"), {
+                    quitOnDocumentClick: false,
+                    onStart: function () {
+                        overlayOn();
+                        closeButtonOn(E);
+                    },
+                    onEnd: function () {
+                        overlayOff();
+                        closeButtonOff();
+                        captionOff();
+                    },
+                    onImageLoadStart: function () {
+                        preLoadIconOn();
+                        captionOn(E);
+                    },
+                    onImageLoadEnd: function () {
+                        preLoadIconOff();
+                    }
+                });
+                E.init();
+            };
+        </script>
+            </head>
+    <body>
+        <div id="content-wrap">
+        <div id="mh-backer">
+            <!-- Main header with menu -->
+            <header id="sh">
+                <div class="row">
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+
+                    <ul>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </header>
+
+            <!-- Header with title -->
+            <header class="ph">
+                <div class="row">
+                    <div class="ph-headline">
+                        <h1 id="h1-page">MovieManager<br/><small><em>or how I organize my movies</em></small></h1>
+                        <hr />
+                    </div>
+                </div>
+                            </header>
+
+                    </div>
+        <main id="site-body" class="row">
+
+<ul class="toc">
+<li class="header">Table of Contents</li>
+<li class="anchor"><a href="#sidestory">Sidestory with Pi</a></li>
+<li class="anchor"><a href="#history">Previous versions</a></li>
+<li class="anchor"><a href="#mm">MovieManager</a></li>
+<li class="anchor"><a href="#features">Features</a></li>
+<li class="anchor last"><a href="#screenshots">Screenshots</a></li>
+</ul>
+
+<p><span class="letterb">I</span> barely can tell how much I like, love, appreciate, prefer movies and watching (good) movies. &raquo;Watching and collecting movies&laquo; is more than a hobby for me for - at least - the last decade. I do not collect DVDs or Blu-rays but I collect records of movies broadcasted by the public and freely (besides the mandatory fee for <a href="http://www.rundfunkbeitrag.de/" target="_blank">Der Rundfunkbeitrag</a>, previously GEZ) available (or receivable) televion networks (&ouml;ffentlich-rechtliche as well as private) via DVB-S (DVB-S2) or DVB-T (<a href="http://www.dvb-t2-portal.de/DVB-T2-HD-Empfangsgebiete/4/" target="_blank">DVB-T2</a>).</p>
+
+<p>But if you think that I have a huge collection of 1080p FHD movies with Dolby 5.1 audio and other bells and whistles you are wrong. The drawback of TV recordings is that they contain a broadcast network logo (usually in the top right edge) and contain ads which I need to cut out. I also do not store the movies in FHD. For a long time (until mid 2015) I stored the files as 360p MPEG4 videos before I ramped up the quality to 576p H264 video. In return to this drawback my movie collection counts 4,500 movies and I do not want to know the size for it if all movies would be in FHD.</p>
+
+<h1><a name="sidestory"></a> Sidestory: a Raspberry Pi recording solution</h1>
+
+<p>Quite some time ago I built a single personal recording station using a Raspberry Pi and a DVB-T USB 2.0 device to record movies automagically. I even planned and built a device to manage a cluster of multiple Pis to record whithout any direct user interaction. The following photo shows the finished prototype. The operation is quite simple: the microcontroller controls the five MOSFETs. Every Raspberry Pi is powered from a screw terminal. The microcontroller has a serial (UART) connection to the master of the recording cluster. The master can then send commands to the microcontroller to switch the different ports. Furthermore the microcontroller has the ability to cut the power to the master Pi and switch it on after a specific amount of time. Therefore the whole cluster can be turned off when no action has to be performed and the master can wakeup from time to time to check for any pending actions. So the power consumption is reduced to the absolute minimum to operate the cluster.
+</p>
+
+
+<p class="img-container"><img src="recorder-unit.jpg" alt="Intelligent multi-load switch" title="Intelligent multi-load switch" /><br/><span class="caption">The intelligent multi-load switch which was intended to switch multiple Raspberry Pis (arranged in a cluster) on and off. The MOSFETs are driven by an Atmel AVR ATtiny2313 microcontroller and the whole board is 5V based.</span></p>
+
+
+<p>
+I really was glad to have the opportunity to build such a &raquo;complex&laquo; system. It is a lot of fun to connect different (hardware) components together and create a system (software) which can work autonomous and perform the recordings and can decide by itself to turn on different devices to fulfil all the actions. For example: if two telecasts are scheduled and overlap each other the master has to decide to turn on a second unit to record it. I also planned to create a file server to which the recorded movies are copied after recording. Those files can than be post processed (e.g. removing ads) and finally watched. But I got dragged away from this project at the beginning of 2016 and had to work on other important projects (e.g. <a href="../msc-thesis/index.html">MSc thesis</a>) so that only the plans are left in my head by now.
+</p>
+
+
+<h1><a name="history"></a> A short historical review</h1>
+
+<p>
+A long time ago I realized that I need a way to organize all my movies in a better way than storing them in a folder and looking through them if a new movie is already in my collection. And now where I have almost 4,500 movies it is even more important for me to keep track of them. In the following a screenshot for both of my (old) two main systems for organizing movies and serials is shown:
+</p>
+
+
+<p class="img-container"><img src="old-filmindex.png" alt="Film index list as HTML page" title="Film index list as HTML page" /><br/><span class="caption">A list of all movies as single HTML file generated by a custom index program (Java).</span></p>
+
+<p class="img-container"><img src="old-system-collage.png" alt="Old serial management web-based system" title="Old serial management web-based system" /><br/><span class="caption">Three screenshots stiched together to show the control flow for organizing serial recordings: first one can choose between different serials (left), then the episode list is shown with management options (center) and for every episode the broadcast dates are listed (right) and possible existing recordings.</span></p>
+
+<p>
+The Java program, which scans all my movie folders and generates the movie index HTML file from the screenshot above, is really simple: a list-file and System.out.println-single-class solution. I wrote this a long time ago (maybe in 2011) and updated the style some times. (You might find that it looks similar to <a href="../bert/index.html">Bert</a>) But with so many movies the Javascript search function got really slow and also &raquo;dummy&laquo; files (like <code>Thumbs.db</code> or <code>.DS_Store</code>) show up in the results. Eventually this tool was not suitable anymore.
+</p>
+
+<p>
+It would be totally possible to use the serial manager further since it only looks ugly but works fine. But I thought, as I developed MovieManager, that it would be nice to integrate the serials into the movie list in order to assign the episodes directly to the files to have a more direct overview over which episodes are already available as movie files and for which I have to look if they are broadcasted in the future to record them. Eventually I kicked the serial manager - together with the movie index generator - into the trash bin. With the serial manager I did the mistake of assigning a database <em>for every</em> serial. So if I wanted to add a serial now I had to create a new database. This is a 100% impractical and really bad design. I guess at the time when I made this system I did not anticipate to use it for more than one serial so I did not plan for this feature. (And before that I used Excel or Calc spreadsheets.)
+</p>
+
+
+<h1><a name="mm"></a> MovieManager</h1>
+
+<p>
+As described in the last section the need for MovieManager arised from the size of my movie collection and additionally I really wanted to create a web application after dealing for so long with Linux kernel programming <a href="../msc-thesis/index.html">during my Master's thesis</a> this year.
+</p>
+
+<p>
+Therefore I started without hesitation on this some weeks ago. The plan is not to make a finished software application rather than create a basic software to let me survive. Later I plan to add features as I need them. I started with creating the database model which is shown in the following picture:
+</p>
+
+<p class="img-container"><img src="mm-dbmodel.png" alt="Database model of MovieManager" title="Database model of MovieManager" /><br/><span class="caption">The database model of MovieManager, created with MySQL Workbench.</span></p>
+
+<p>
+There are some minor design flaws in the database model but besides those the model is pretty final. For example I replaced the <code>movie.note</code> and <code>serial.note</code> field with a dedicated note table since I wanted to provide a feature like Post-It notes where multiple notes are related to one object (either a movie or an entire serial). Besides this the DB model does the trick.
+</p>
+
+<p>
+The general architecture and the data flow of the MovieManager is a bit more complicated and shown by the following figure:
+</p>
+
+<p class="img-container"><img src="movie-manager-structure.gif" alt="Architecture of MovieManager" title="Architecture of MovieManager" /><br/><span class="caption">Architecture of MovieManager, created with yEd.</span></p>
+
+<p>
+Besides the web application there are two independent applications which are written in Java: one application is a file scanner which simply scans all files in my movie folders and updates their entries in the database. This application is stored on the harddrive where I keep the movies. After I changed something I double click the JAR and the database gets updated. The Java application communicates through the web application with the database over a simple REST API which speaks JSON (one of my favorites!). <br/>
+The other application is responsible for scanning the web for new broadcast dates and extracting them. It uses JDBC to directly connect to the database. Since this task is a bit more complicated and involves techniques like pattern recognition I figured that it would be best to implement it as a Java application rather than trying to jam it into a PHP script which is then called via HTTP. Furthermore this application already existed and was used for my old serial manager. So I only had to do a little rework.
+</p>
+
+<p>
+By now the MovieManager is a neat little application which I really enjoy to use. All people always ask me first how long I worked on it. But for private (necessary) projects I do not track the time. To satisfy everyone I estimate that I worked around 25 - 35 hours on this project up to now.
+</p>
+
+<h1><a name="features"></a> Features of MovieManager</h1>
+
+<p>In the following a short list of all the features of MovieManager is presented (by far not complete or final):</p>
+
+<ul class="content">
+<li>Stores movies in a central place with additional information: resolution, bitrate, audio, size and duration.</li>
+<li>Files are recognized by a hash which is generated by combining the filesize and the creation date of the file. In case the file path or file name changes it is still recognized.</li>
+<li>Changed file path or name are updated automatically. Removed files are detected and also updated.</li>
+<li>MovieManager provides a controlled way of deleting the data for removed entries from the database (rather than directly deleting them) via a dedicated user interface.</li>
+<li>Manages serials:</li>
+<ul>
+<li>Copy&amp;Past episode name generation for quick file naming.</li>
+<li>Assinging movies to episodes to keep track of the &raquo;collection&laquo; state of the serial: automatic and manually.</li>
+<li>Provides broadcast dates for episodes.</li>
+<li>Serials are enriched with artwork to make the eye proud.</li>
+<li>Can scan for new episodes of serials to keep on with the serial as new seasons or broadcast dates are published.</li>
+</ul>
+<li>Intelligent search field which makes suggestions and is completely controllable with the keyboard to speed up the operation.</li>
+<li>Allows notes (Post-It) to keep track of important things related to the movies and serials.</li>
+<li>Shows meta informations about movies, the collection or serials.</li>
+<li>Created with Bootstrap 3 and jQuery for a nice and responsive GUI.</li>
+<li><em style="color: gray;">To be continued.</em></li>
+</ul>
+
+<h1><a name="screenshots"></a> Impressions of MovieManager</h1>
+
+<div class="gallery-box">
+  <a href="screenshots/01_main_screen.png" data-simplbox="gallery1"><img src="screenshots/01_main_screen.jpg" alt="The main page shows a list of all serials and below (not shown here) the list of all movies is shown with paging so that only a hundred movies are visible at any time." /></a>
+
+  <a href="screenshots/02_serial.png" data-simplbox="gallery1"><img src="screenshots/02_serial.jpg" alt="Default view of a (my favorite) serial. If available, and already assigned, the movie file is shown for every episode. The state can be used to remember information (like: needs advertisements removed)." /></a>
+
+  <a href="screenshots/03_serial_note.png" data-simplbox="gallery1"><img src="screenshots/03_serial_note.jpg" alt="The Post-It feature. Currently no controls for adding / removing are available so that I do it directly in the database. Simple Markdown is supported." /></a>
+
+  <a href="screenshots/04_assing episodes.png" data-simplbox="gallery1"><img src="screenshots/04_assing episodes.jpg" alt="Dialog to assign (physical) movies to the episodes. Besides this feature a auto-detect function is available as well. It tries to match the file names." /></a>
+
+  <a href="screenshots/05_broadcast_dates.png" data-simplbox="gallery1"><img src="screenshots/05_broadcast_dates.jpg" alt="View of the broadcast dates for an episode." /></a>
+
+  <a href="screenshots/06_search.png" data-simplbox="gallery1"><img src="screenshots/06_search.jpg" alt="The movie list for a search query. And yes, I've the entire marriage of Prince William and Kate on tape ;-)" /></a>
+
+  <a href="screenshots/07_intelligent_search.png" data-simplbox="gallery1"><img src="screenshots/07_intelligent_search.jpg" alt="The search field is smart and gives suggestions. The keys can be used to navigate through and the enter key can be used to jump to the item directly. This makes up for a super fast control." /></a>
+</div>
+
+
+    </main>
+    </div>
+        <footer id="site-footer">
+            <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
+            <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-72191716-1', 'auto');
+            ga('send', 'pageview');
+            </script>
+        </footer>
+    </body>
+</html>
