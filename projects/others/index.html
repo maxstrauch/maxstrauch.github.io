@@ -131,11 +131,14 @@
 </p>
 
 <ul class="content">
-	<li><a href="#fontresize">Fontresize plugin</a></li>
-	<li><a href="#asp-solver">Simple ASP solver</a></li>
-	<li><a href="#xml-validator">A simple XML validator</a></li>
-	<li><a href="#formlet">Formlet - PHP forms made easy</a></li>
-	<li><a href="#cyk-algorithm">Interactive Cocke-Younger-Kasami (CYK) algorithm</a></li>	
+	<li><a href="#fontresize">#1: Fontresize plugin</a></li>
+	<li><a href="#asp-solver">#2: Simple ASP solver</a></li>
+	<li><a href="#xml-validator">#3: A simple XML validator</a></li>
+	<li><a href="#formlet">#4: Formlet - PHP forms made easy</a></li>
+	<li><a href="#cyk-algorithm">#5: Interactive Cocke-Younger-Kasami (CYK) algorithm</a></li>	
+	<li><a href="#cryptbag">#6: Cryptbag</a></li>
+	<li><a href="#invendino">#7: Invendino</a></li>
+	<li><a href="#shasum-for-windows">#8: SHASUM for Windows</a></li>
 	<!-- <li><a href="#"></a></li> -->
 </ul>
 
@@ -229,6 +232,54 @@ If you are now intereseted: you can find the source code at the <a href="https:/
 </em>
 
 I implemented this alogrithm in Javascript because I was sick of doing assignments with it by hand. <a href="cyk.html" target="_blank">Click here to test it out</a>. It checkes whether a given word <code>w</code> is in a given grammar <code>G</code>. The grammar must be a context-free grammar given in Chomsky normal form (CNF).
+</p>
+
+<!-- //////////////////////////////////////////////////// -->
+<div class="decorativesep"></div>
+<!-- //////////////////////////////////////////////////// -->
+
+<h1><a name="cryptbag"></a> Cryptbag</h1>
+
+<p>
+At some point in time in the past I needed a tool to securely transport an image over the internet. Therefore I wrote two very simple Java classes, <code>AESInputStream</code> and <code>AESOutputStream</code>, which can encrypt and decrypt a data stream with a given password string. This classes are only fancy wrappers for the Java boilerplate code needed to use the Java Cryptography Architecture (JCA) (package <code>javax.crypto</code>, <a href="http://docs.oracle.com/javase/7/docs/api/javax/crypto/package-summary.html" target="_blank">see here</a>).
+</p>
+
+<p>
+Around this two classes I built a simple GUI to ask for the password and display the image. Therefore the class <code>Encrypt</code> is used to encrypt an image file with a password and get a <code>dat.raw</code> file out. This file is then placed in the default package and a JAR file is then created by calling <code>./make.sh</code> in the project root. The result is a little standalone Java application which asks for the password and then shows the image. 
+</p>
+
+<p>
+Here you can download the full project. The license for this page (CC BY-SA 4.0) applies for all files in the project.<br/><br/>
+<a href="cryptbag.zip" class="special-button" title="Cryptbag project"><i class="icon-download"></i>&nbsp;Download the project (ZIP, 249 KB)</a> <span class="checksum-gadget">SHA-1 45ffe92665d2c1c5e38808f383c33af7a73bcf1b</span>
+<br/> - P.S.: the password for the contained JAR is &raquo;demo123&laquo;.
+</p>
+
+<!-- //////////////////////////////////////////////////// -->
+<div class="decorativesep"></div>
+<!-- //////////////////////////////////////////////////// -->
+
+<h1><a name="invendino"></a> Invendino</h1>
+
+<p>
+As you might guess: I really like to experiment with electronics. Therefore I have a couple of boxes full of electronic parts and supplies. As those boxes grew I thought that it would be a neat idea to keep track of the components and also (more importantly) keep the datasheets. Therfore I planed to develop an inventory management software. Since I like web development and web applications it was clear that I create a web app for it. So I started and got this far: 
+</p>
+
+<p class="img-container"><img src="invendino.png" alt="Invendino" title="Invendino" /><br/><span class="caption">Component list and component add screen of Invendino.</span></p>
+
+<p>
+The user interface is uggly but works. The name is a blend between &raquo;<strong>Inven</strong>tory&laquo; and &raquo;Ar<strong>duino</strong>&laquo;. I have a lot of features for future development in mind (like part preview where the generic components are available as SVG file and the server generates a labled part by placing text on the generic components). But currently - or since I started the project - I have no time and use it as it is.
+</p>
+
+
+<!-- //////////////////////////////////////////////////// -->
+<div class="decorativesep"></div>
+<!-- //////////////////////////////////////////////////// -->
+
+<h1><a name="shasum-for-windows"></a> SHASUM for Windows</h1>
+
+<p>
+I exchanged some data with a friend and send him the SHA-1 sum to verify that everything has been transferred correctly. I do this by opening the Terminal and calling <code>shasum &lt;FILE&gt;</code>. But he uses Windows and getting the tool to Windows is not that easy. So I used the SHA implementations from this <a href="https://github.com/B-Con/crypto-algorithms" target="_blank">Git Repo</a> from &raquo;B-Con&laquo; and created a simple program which does the trick. I even compiled it on Mac for Windows with MinGW. Everything is in the project ZIP:<br/><br/>
+<a href="shasum.zip" class="special-button" title="Cryptbag project"><i class="icon-download"></i>&nbsp;Download the project (ZIP, 46 KB)</a> <span class="checksum-gadget">SHA-1 fde6eb78fc06960d2f135645f6b1423c0c7c68fa</span><br/>- P.S.: But how could you verify the SHA-1 of the downloaded ZIP before you unzip it? **recursion**
 </p>
 
 
