@@ -139,6 +139,7 @@
 	<li><a href="#cryptbag">#6: Cryptbag</a></li>
 	<li><a href="#invendino">#7: Invendino</a></li>
 	<li><a href="#shasum-for-windows">#8: SHASUM for Windows</a></li>
+	<li><a href="#texttable-python">#9: ASCII tables with Python</a></li>
 	<!-- <li><a href="#"></a></li> -->
 </ul>
 
@@ -282,6 +283,29 @@ I exchanged some data with a friend and send him the SHA-1 sum to verify that ev
 <a href="shasum.zip" class="special-button" title="Cryptbag project"><i class="icon-download"></i>&nbsp;Download the project (ZIP, 46 KB)</a> <span class="checksum-gadget">SHA-1 fde6eb78fc06960d2f135645f6b1423c0c7c68fa</span><br/>- P.S.: But how could you verify the SHA-1 of the downloaded ZIP before you unzip it? **recursion**
 </p>
 
+<!-- //////////////////////////////////////////////////// -->
+<div class="decorativesep"></div>
+<!-- //////////////////////////////////////////////////// -->
+
+<h1><a name="texttable-python"></a> ASCII tables with Python</h1>
+
+<p>When I experiment and test certain things - e.g. analyze Wikidumps and compare the word count per article against characters per word per article in a power plot - I need to quickly present the mesaured data (or a part of it) in an &raquo;orderly&laquo; way to directly see the behaviour rather than creating a diagram. <i>&raquo;Hey, show my the raw numbers, James!&laquo;</i>. Therefore I created this super simple Python class to generate such simple ASCII tables showing the data orderly and nicely:</p>
+
+<pre class="pre-like">
+$ python test-texttable.py
++------------------------------------+--------------+--------------+
+|               Movie                |  Duration / Bitrate (b/s)   |
++------------------------------------+--------------+--------------+
+|   Unstoppable - Ausser Kontrolle   |    89 min    |     2329     |
++------------------------------------+--------------+--------------+
+| Wild Island - Das pure Ueberleben  |    45 min    |     2327     |
++------------------------------------+--------------+--------------+
+| Spreewaldkrimi - Spiel mit dem Tod |    87 min    |     2303     |
++------------------------------------+--------------+--------------+
+</pre>
+
+<p>Download the <a href="texttable.py">TextTable class here</a> and the little demo above <a href="test-texttable.py">here</a>.
+</p>
 
     </main>
     </div>

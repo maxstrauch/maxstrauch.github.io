@@ -1,0 +1,20 @@
+from texttable import *
+
+xx = TextTable()
+xx.row()
+xx.cell('Movie')
+xx.cell('Duration / Bitrate (b/s)', colspan=2)
+xx.row()
+xx.cell('Unstoppable - Ausser Kontrolle')
+xx.cell('89 min')
+xx.cell('2329')
+xx.row()
+xx.cell('Wild Island - Das pure Ueberleben')
+xx.cell('45 min')
+xx.cell('2327')
+xx.row()
+xx.cell('Spreewaldkrimi - Spiel mit dem Tod')
+xx.cell('87 min')
+xx.cell('2303')
+
+print(xx.render())
