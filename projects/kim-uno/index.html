@@ -8,12 +8,12 @@
         <meta name="keywords" content="electronics, arduino, microcontroller, avr, atmega, woodworking, linux, windows, mac os, tweaking, software development">
         <meta name="robots" content="index,follow" />
         <meta name="author" content="Maximilian Strauch" />
-        <link rel="icon" type="image/png" href="assets/favicon.png">
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-        <title>Articles</title>
-        <link href="assets/style.css" rel="stylesheet" media="screen" />
-        <link href="assets/simplbox.css" rel="stylesheet" media="screen" />
-        <script type="text/javascript" src="assets/simplbox.min.js"></script>
+        <link rel="icon" type="image/png" href="../../assets/favicon.png">
+        <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+        <title>KIM Uno</title>
+        <link href="../../assets/style.css" rel="stylesheet" media="screen" />
+        <link href="../../assets/simplbox.css" rel="stylesheet" media="screen" />
+        <script type="text/javascript" src="../../assets/simplbox.min.js"></script>
         <script type="text/javascript">
             /**
              * See http://genert.laal.ee/demo/simplbox/ for further information.
@@ -99,16 +99,16 @@
             </head>
     <body>
         <div id="content-wrap">
-        <div class="" id="mh-backer-dark-bg" style="background-image: url('assets/articles-bg.jpg');">
+        <div class="dark-font" id="mh-backer-dark-bg" style="background-image: url('../../projects/kim-uno/top_bg.jpg');">
             <!-- Main header with menu -->
             <header id="sh">
                 <div class="row">
-                    <h1><a href="index.html"><img src="assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
+                    <h1><a href="../../index.html"><img src="../../assets/icon.png" title="Logo" />maxstrauch<span>.github.io</span></a></h1>
 
                     <ul>
-                    						<li><a href="index.html"><span>Projects</span></a></li>
-						<li class="active"><a href="articles.html"><span>Articles</span></a></li>
-						<li><a href="about.html"><span>About</span></a></li>
+                    						<li><a href="../../index.html"><span>Projects</span></a></li>
+						<li><a href="../../articles.html"><span>Articles</span></a></li>
+						<li><a href="../../about.html"><span>About</span></a></li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -118,7 +118,7 @@
             <header class="ph">
                 <div class="row">
                     <div class="ph-headline">
-                        <h1 id="h1-page">Article archive</h1>
+                        <h1 id="h1-page">KIM Uno</h1>
                         <hr />
                     </div>
                 </div>
@@ -126,49 +126,26 @@
 
                     </div>
         <main id="site-body" class="row">
-<ul id="list">    <li class="list-item"><a href="projects/msc-thesis/index.html" title="GPIO-based Method for low Latency Message Interchange">
-            <time>October 2016</time>
-            <h1>GPIO-based Method for low Latency Message Interchange</h1>
-            <p>Master's thesis</p>
-            <hr/>
-    </a></li>
-    <li class="list-item"><a href="articles/switching-from-blog.html" title="Switching to a project archive">
-            <time>July 2016</time>
-            <h1>Switching to a project archive</h1>
-            <p>I redesigned this homepage-thingy and moved from a blog to a project archive.</p>
-            <hr/>
-    </a></li>
-    <li class="list-item"><a href="articles/srn-2016.html" title="IEEE 802.11p MAC performance issue">
-            <time>March 2016</time>
-            <h1>IEEE 802.11p MAC performance issue</h1>
-            <p>Fixing the performance issue of the IEEE 802.11p MAC layer CSMA based broadcast protocol</p>
-            <hr/>
-    </a></li>
-    <li class="list-item"><a href="articles/nuthatch.html" title="Tree-walk put in a Nutshell">
-            <time>February 2016</time>
-            <h1>Tree-walk put in a Nutshell</h1>
-            <p>A Software Language Engineering Project: walking through a tree!</p>
-            <hr/>
-    </a></li>
-    <li class="list-item"><a href="articles/wicd-sucks.html" title="WICD sucks!">
-            <time>January 2016</time>
-            <h1>WICD sucks!</h1>
-            <p>I tried out WICD on my Pi and was not satisfied ...</p>
-            <hr/>
-    </a></li>
-    <li class="list-item"><a href="articles/writing-pi-images-osx.html" title="Writing Pi images on Mac OS X using <code>dd</code>">
-            <time>January 2016</time>
-            <h1>Writing Pi images on Mac OS X using <code>dd</code></h1>
-            <p>How to write a Pi image using <code>dd</code> on Mac OS X properly and get status information?</p>
-            <hr/>
-    </a></li>
-    <li class="list-item"><a href="projects/bsc-thesis/index.html" title="Apple ][ Emulation on an AVR Microcontroller">
-            <time>August 2014</time>
-            <h1>Apple ][ Emulation on an AVR Microcontroller</h1>
-            <p>Bachelor's thesis</p>
-            <hr/>
-    </a></li>
-</ul>    </main>
+
+<p><a href="https://github.com/maxstrauch/bert"><span class="letterb">T</span>he</a> KIM Uno is a portable, software defined dev kit to emulate (retro) microprocessors. Some time ago it came to my mind, that I wanted to build a small portable microprocessor dev kit, just like the famous <a href="https://en.wikipedia.org/wiki/KIM-1" target="_blank">KIM-1</a> from MOS Technology, Inc. and others. Therefore, I designed the KIM Uno as a portable device, which fits in one hand and is powered by two CR2032 batteries. It uses the ATMega328p ("Arduino") microcontroller running at 8 MHz to emulate (or simulate) a desired CPU. This architecture also makes sure, that the emulated CPUs are interchangeable to anything which fits inside the microcontroller's flash memory. So it is a multi-purpose device.
+</p>
+
+<p>
+Currently this project emulates an <a href="https://en.wikipedia.org/wiki/One_instruction_set_computer" target="_blank">OISC (One Instruction Set Computer)</a> with just one instruction <code>subleq</code>. The idea came to me when I watched <a href="https://www.youtube.com/watch?v=xx7Lfh5SKUQ" target="_blank">The Ultimate Apollo Guidance Computer Talk</a>.
+</p>
+
+<p class="yt-embed">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/oWd1w513VB8" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>There are already a ton of documentation available - checkout those pages:</p>
+<ul class="content">
+    <li>The GitHub repo with all source files and other support material to build a KIM Uno: <a href="https://github.com/maxstrauch/kim-uno" target="_blank">https://github.com/maxstrauch/kim-uno</a></li>
+    <li>An Instructable with detailed step on building and assembling one: <a href="https://www.instructables.com/id/The-KIM-Uno-a-5-Microprocessor-Dev-Kit-Emulator/" target="_blank">https://www.instructables.com/id/The-KIM-Uno-a-5-Microprocessor-Dev-Kit-Emulator/</a></li>
+    <li>The YouTube video to see it in action: <a href="https://youtu.be/oWd1w513VB8" target="_blank">https://youtu.be/oWd1w513VB8</a></li>
+</ul>
+
+    </main>
     </div>
         <footer id="site-footer">
             <a target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><i class="icon-cc">BY-SA 4.0.</i></a> 2016. Theme &amp; Content made with <i class="icon-heart"></i> by <a target="_blank" href="https://github.com/maxstrauch/">Maximilian Strauch</a>. Hosted by <a target="_blank" href="https://github.com/">GitHub</a>.
